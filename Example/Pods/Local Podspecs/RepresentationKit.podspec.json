@@ -1,0 +1,22 @@
+{
+  "name": "RepresentationKit",
+  "version": "1.1.4",
+  "summary": "Create representation of objects.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/averello/RepresentationKit",
+  "license": {
+    "type": "Apache 2.0",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Georges Boumis": "developer.george.boumis@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/averello/RepresentationKit.git",
+    "tag": "1.1.4"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "RepresentationKit/Classes/**/*"
+}

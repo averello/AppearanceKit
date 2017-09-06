@@ -1,0 +1,30 @@
+{
+  "name": "ContentKit",
+  "version": "1.6.5",
+  "summary": "Manage content.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/averello/ContentKit",
+  "license": {
+    "type": "Apache 2.0",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Georges Boumis": "developer.george.boumis@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/averello/ContentKit.git",
+    "tag": "1.6.5"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "ContentKit/Classes/**/*",
+  "dependencies": {
+    "Ents": [
+
+    ],
+    "RepresentationKit": [
+
+    ]
+  }
+}

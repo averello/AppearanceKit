@@ -1,0 +1,11 @@
+platform :ios, '8.0'
+use_frameworks!
+
+target 'AppearanceKit_Tests' do
+  pod 'AppearanceKit', :path => '../'
+  
+  pod 'Ents', :git => 'https://github.com/averello/Ents.git'
+  pod 'ContentKit', :git => 'https://github.com/averello/ContentKit.git'
+  pod 'RepresentationKit', :git => 'https://github.com/averello/RepresentationKit.git'
+  
+end

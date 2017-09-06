@@ -1,0 +1,6 @@
+framework module RepresentationKit {
+  umbrella header "RepresentationKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

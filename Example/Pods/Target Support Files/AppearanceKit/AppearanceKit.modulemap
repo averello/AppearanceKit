@@ -1,0 +1,6 @@
+framework module AppearanceKit {
+  umbrella header "AppearanceKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "Ents",
+  "version": "1.17",
+  "summary": "A collection of handy extensions for Swift.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/averello/Ents",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Georges Boumis": "developer.george.boumis@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/averello/Ents.git",
+    "tag": "1.17"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "Ents/Classes/**/*",
+  "xcconfig": {
+    "OTHER_SWIFT_FLAGS[config=Debug]": "-DDEBUG"
+  }
+}

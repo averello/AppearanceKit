@@ -1,0 +1,6 @@
+framework module Pods_AppearanceKit_Tests {
+  umbrella header "Pods-AppearanceKit_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

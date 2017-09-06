@@ -1,0 +1,33 @@
+{
+  "name": "AppearanceKit",
+  "version": "1.14",
+  "summary": "Change the appearance of UIKit elements.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/averello/AppearanceKit",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Georges Boumis": "developer.george.boumis@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/averello/AppearanceKit.git",
+    "tag": "1.14"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "AppearanceKit/Classes/**/*",
+  "dependencies": {
+    "Ents": [
+
+    ],
+    "ContentKit": [
+
+    ],
+    "RepresentationKit": [
+
+    ]
+  }
+}
