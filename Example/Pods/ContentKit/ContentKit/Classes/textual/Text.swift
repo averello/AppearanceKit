@@ -24,7 +24,6 @@
 
 import Foundation
 import RepresentationKit
-import Ents
 
 public protocol Text: Content, Representable, LosslessStringConvertible {
     var content: String { get }
@@ -67,7 +66,7 @@ public extension Text {
 extension String: Text {
     
     public init(content: Text) {
-        self.init(content.content)!
+        self = content.content
     }
     
     public var content: String {

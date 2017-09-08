@@ -55,7 +55,7 @@ extension AttributedText {
     
     public init(_ text: Text, attributes: [Attribute] = []) {
         self.content = text.content
-        let attrs = Dictionary<String, Attribute>(attributes.map { ($0.key, $0) })
+        let attrs = Dictionary<String, Attribute>(attributes.map { ($0.key.rawValue, $0) })
         self._attributes = attrs
     }
     
@@ -63,8 +63,8 @@ extension AttributedText {
     public init(_ string: NSAttributedString) {
         self.content = string.string
         let attrs = Dictionary<String, Attribute>(string.attributes(at: 0, effectiveRange: nil).flatMap { key,value -> (String,Attribute)? in
-            guard let attribute = AttributedText.Attribute(string: string, attribute: key, value: value) else { return nil }
-            return (key, attribute)
+            guard let attribute = AttributedText.Attribute(string: string, attribute: key.rawValue, value: value) else { return nil }
+            return (key.rawValue, attribute)
         })
         self._attributes = attrs
     }
@@ -75,7 +75,7 @@ extension AttributedText {
     ///MARK: manipulators
     
     public mutating func set(attribute: Attribute) {
-        self._attributes[attribute.key] = attribute
+        self._attributes[attribute.key.rawValue] = attribute
     }
     
     public var attributedString: NSAttributedString {
@@ -83,7 +83,7 @@ extension AttributedText {
             let string = NSMutableAttributedString(string: self.content)
             let range = NSMakeRange(0, (string.string as NSString).length)
             for attribute in self._attributes {
-                let atts = [attribute.key: attribute.value.value(withText: string)]
+                let atts = [NSAttributedStringKey(rawValue: attribute.key): attribute.value.value(withText: string)]
                 string.addAttributes(atts, range: range)
             }
             return string.copy() as! NSAttributedString
@@ -370,32 +370,32 @@ extension AttributedText.Attribute {
                  attribute: String,
                  value: Any) {
         guard let att = { () -> AttributedText.Attribute? in
-            switch attribute {
-            case NSFontAttributeName:
+            switch NSAttributedStringKey(rawValue: attribute) {
+            case NSAttributedStringKey.font:
                 let font = AnyFont(font: value as! UIFont)
                 return AttributedText.Attribute.font(font)
                 
-            case NSForegroundColorAttributeName:
+            case NSAttributedStringKey.foregroundColor:
                 let color = AnyColor(color: value as! UIColor)
                 return AttributedText.Attribute.color(color)
                 
-            case NSBackgroundColorAttributeName:
+            case NSAttributedStringKey.backgroundColor:
                 let color = AnyColor(color: value as! UIColor)
                 return AttributedText.Attribute.backgroundColor(color)
                 
-            case NSStrokeColorAttributeName:
+            case NSAttributedStringKey.strokeColor:
                 let color = AnyColor(color: value as! UIColor)
                 return AttributedText.Attribute.strokeColor(color)
                 
-            case NSStrokeWidthAttributeName:
+            case NSAttributedStringKey.strokeWidth:
                 let width = (value as! NSNumber).floatValue
                 return AttributedText.Attribute.strokeWidth(width)
                 
-            case NSShadowAttributeName:
+            case NSAttributedStringKey.shadow:
                 let shadow = AttributedText.Shadow(shadow: (value as! NSShadow))
                 return AttributedText.Attribute.shadow(shadow)
                 
-            case NSParagraphStyleAttributeName:
+            case NSAttributedStringKey.paragraphStyle:
                 let style = AttributedText.ParagraphStyle(style: (value as! NSParagraphStyle))
                 return AttributedText.Attribute.style(style)
                 
@@ -408,28 +408,28 @@ extension AttributedText.Attribute {
 
 fileprivate extension AttributedText.Attribute {
     
-    fileprivate var key: String {
+    fileprivate var key: NSAttributedStringKey {
         switch self {
         case AttributedText.Attribute.font:
-            return NSFontAttributeName
+            return NSAttributedStringKey.font
             
         case AttributedText.Attribute.color:
-            return NSForegroundColorAttributeName
+            return NSAttributedStringKey.foregroundColor
             
         case AttributedText.Attribute.backgroundColor:
-            return NSBackgroundColorAttributeName
+            return NSAttributedStringKey.backgroundColor
             
         case AttributedText.Attribute.strokeColor:
-            return NSStrokeColorAttributeName
+            return NSAttributedStringKey.strokeColor
             
         case AttributedText.Attribute.strokeWidth:
-            return NSStrokeWidthAttributeName
+            return NSAttributedStringKey.strokeWidth
             
         case AttributedText.Attribute.shadow:
-            return NSShadowAttributeName
+            return NSAttributedStringKey.shadow
             
         case AttributedText.Attribute.style:
-            return NSParagraphStyleAttributeName
+            return NSAttributedStringKey.paragraphStyle
         }
     }
     
@@ -455,15 +455,15 @@ fileprivate extension AttributedText.Attribute {
 
 
 extension AttributedText {
-    
+
     public func configure(label: UILabel) {
         label.customAttributedText = self
     }
-    
+
     public func configure(button: UIButton) {
         self.configure(button: button, forStates: [UIControlState.normal])
     }
-    
+
     public func configure(button: UIButton, forStates states: [UIControlState]) {
         let attributedString = self.attributedString
         for state in states {
@@ -473,7 +473,7 @@ extension AttributedText {
 }
 
 extension UILabel {
-    
+
     public var customAttributedText: AttributedText? {
         get {
             guard let att = self.attributedText else { return nil }
@@ -621,7 +621,7 @@ public extension AttributedText {
     
     var font: Font? {
         get {
-            guard let attr = self.attribute(name: NSFontAttributeName) else { return nil }
+            guard let attr = self.attribute(name: NSAttributedStringKey.font.rawValue) else { return nil }
             return AnyFont(font: attr.value(withText: self.attributedString) as! UIFont)
         }
         set {
@@ -632,7 +632,7 @@ public extension AttributedText {
     
     var color: Color? {
         get {
-            guard let attribute = self.attribute(name: NSForegroundColorAttributeName) else { return nil }
+            guard let attribute = self.attribute(name: NSAttributedStringKey.foregroundColor.rawValue) else { return nil }
             return AnyColor(color: attribute.value(withText: self.attributedString) as! UIColor)
         }
         set {
@@ -643,7 +643,7 @@ public extension AttributedText {
     
     var backgroundColor: Color? {
         get {
-            guard let attribute = self.attribute(name: NSBackgroundColorAttributeName) else { return nil }
+            guard let attribute = self.attribute(name: NSAttributedStringKey.backgroundColor.rawValue) else { return nil }
             return AnyColor(color: attribute.value(withText: self.attributedString) as! UIColor)
         }
         set {
@@ -654,7 +654,7 @@ public extension AttributedText {
     
     var strokeColor: Color? {
         get {
-            guard let attribute = self.attribute(name: NSStrokeColorAttributeName) else { return nil }
+            guard let attribute = self.attribute(name: NSAttributedStringKey.strokeColor.rawValue) else { return nil }
             return AnyColor(color: attribute.value(withText: self.attributedString) as! UIColor)
         }
         set {
@@ -665,7 +665,7 @@ public extension AttributedText {
 
     var strokeWidth: Float? {
         get {
-            guard let attribute = self.attribute(name: NSStrokeWidthAttributeName) else { return nil }
+            guard let attribute = self.attribute(name: NSAttributedStringKey.strokeWidth.rawValue) else { return nil }
             return (attribute.value(withText: self.attributedString) as! NSNumber).floatValue
         }
         set {
@@ -676,7 +676,7 @@ public extension AttributedText {
     
     var shadow: AttributedText.Shadow? {
         get {
-            guard let attribute = self.attribute(name: NSShadowAttributeName) else { return nil }
+            guard let attribute = self.attribute(name: NSAttributedStringKey.shadow.rawValue) else { return nil }
             return AttributedText.Shadow(shadow: (attribute.value(withText: self.attributedString) as! NSShadow))
         }
         set {
@@ -687,7 +687,7 @@ public extension AttributedText {
     
     var style: AttributedText.ParagraphStyle {
         get {
-            guard let attribute = self.attribute(name: NSParagraphStyleAttributeName) else { return AttributedText.ParagraphStyle() }
+            guard let attribute = self.attribute(name: NSAttributedStringKey.paragraphStyle.rawValue) else { return AttributedText.ParagraphStyle() }
             return AttributedText.ParagraphStyle(style: (attribute.value(withText: self.attributedString) as! NSParagraphStyle))
         }
         set {

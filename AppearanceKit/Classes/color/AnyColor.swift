@@ -47,10 +47,10 @@ public struct AnyColor: Color {
         let valid: (Float) -> Bool = { v -> Bool in v >= 0.0 && v <= 0xff }
         guard valid(red) && valid(green) && valid(blue) && valid(alpha) else { fatalError("invalid values") }
         let twoFiveFive = Float(0xff)
-        self.init(red: red.divided(by: twoFiveFive),
-                  green: green.divided(by: twoFiveFive),
-                  blue: blue.divided(by: twoFiveFive),
-                  alpha: alpha.divided(by: twoFiveFive))
+        self.init(red: red / twoFiveFive,
+                  green: green / twoFiveFive,
+                  blue: blue / twoFiveFive,
+                  alpha: alpha / twoFiveFive)
     }
     
     public init(white: Float, alpha: Float = 1.0) {

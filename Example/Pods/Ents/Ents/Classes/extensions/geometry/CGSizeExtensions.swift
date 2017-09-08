@@ -242,7 +242,7 @@ public extension CGSize {
     
     /// calculates the area of this instance
     public var area: CGFloat {
-        return self.width.multiplied(by: self.height).absolute()
+        return (self.width * self.height).absolute()
     }
 }
 

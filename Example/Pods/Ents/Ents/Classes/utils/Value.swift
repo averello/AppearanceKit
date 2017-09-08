@@ -10,8 +10,8 @@
 import Foundation
 
 
-public protocol Value: Comparable, Equatable, CustomStringConvertible {
-    associatedtype T: Comparable, Equatable
+public protocol Value: Comparable, CustomStringConvertible {
+    associatedtype T: Comparable
     var value: T { get }
     init(value: T)
 }
@@ -70,7 +70,7 @@ extension Value where T: Hashable {
 
 //MARK: Act as a IntegerArithmetic
 
-extension Value where T: IntegerArithmetic {
+extension Value where T: BinaryInteger {
 
     public static func ==(lhs: Self, rhs: T) -> Bool {
         return (lhs.value == rhs)
@@ -118,59 +118,6 @@ extension Value where T: IntegerArithmetic {
         return Self(value: lhs.value % rhs)
     }
 
-    public func toIntMax() -> IntMax {
-        return self.value.toIntMax()
-    }
-
-    public static func addWithOverflow(_ lhs: Self, _ rhs: Self) -> (Self, overflow: Bool) {
-        return Self.addWithOverflow(lhs, rhs.value)
-    }
-
-    public static func subtractWithOverflow(_ lhs: Self, _ rhs: Self) -> (Self, overflow: Bool) {
-        return Self.subtractWithOverflow(lhs, rhs.value)
-    }
-
-    public static func multiplyWithOverflow(_ lhs: Self, _ rhs: Self) -> (Self, overflow: Bool) {
-        return Self.multiplyWithOverflow(lhs, rhs.value)
-    }
-
-    public static func divideWithOverflow(_ lhs: Self, _ rhs: Self) -> (Self, overflow: Bool) {
-        return Self.divideWithOverflow(lhs, rhs.value)
-    }
-
-    public static func remainderWithOverflow(_ lhs: Self, _ rhs: Self) -> (Self, overflow: Bool) {
-        return Self.remainderWithOverflow(lhs, rhs.value)
-    }
-
-    //
-
-    public static func addWithOverflow(_ lhs: Self, _ rhs: T) -> (Self, overflow: Bool) {
-        let res = T.addWithOverflow(lhs.value, rhs)
-        return (Self(value: res.0), overflow: res.overflow)
-    }
-
-    public static func subtractWithOverflow(_ lhs: Self, _ rhs: T) -> (Self, overflow: Bool) {
-        let res = T.subtractWithOverflow(lhs.value, rhs)
-        return (Self(value: res.0), overflow: res.overflow)
-    }
-
-    public static func multiplyWithOverflow(_ lhs: Self, _ rhs: T) -> (Self, overflow: Bool) {
-        let res = T.multiplyWithOverflow(lhs.value, rhs)
-        return (Self(value: res.0), overflow: res.overflow)
-    }
-
-    public static func divideWithOverflow(_ lhs: Self, _ rhs: T) -> (Self, overflow: Bool) {
-        let res = T.divideWithOverflow(lhs.value, rhs)
-        return (Self(value: res.0), overflow: res.overflow)
-    }
-
-    public static func remainderWithOverflow(_ lhs: Self, _ rhs: T) -> (Self, overflow: Bool) {
-        let res = T.remainderWithOverflow(lhs.value, rhs)
-        return (Self(value: res.0), overflow: res.overflow)
-    }
-
-    //
-
     public static func +=(lhs: inout Self, rhs: Self) {
         lhs = lhs + rhs.value
     }
@@ -214,6 +161,37 @@ extension Value where T: IntegerArithmetic {
     }
 }
 
+extension Value where T: FixedWidthInteger {
+    //
+    
+    public static func addWithOverflow(_ lhs: Self, _ rhs: T) -> (Self, overflow: Bool) {
+        let res = lhs.value.addingReportingOverflow(rhs)
+        return (Self(value: res.0), overflow: res.overflow)
+    }
+    
+    public static func subtractWithOverflow(_ lhs: Self, _ rhs: T) -> (Self, overflow: Bool) {
+        let res = lhs.value.subtractingReportingOverflow(rhs)
+        return (Self(value: res.0), overflow: res.overflow)
+    }
+    
+    public static func multiplyWithOverflow(_ lhs: Self, _ rhs: T) -> (Self, overflow: Bool) {
+        let res = lhs.value.multipliedReportingOverflow(by: rhs)
+        return (Self(value: res.0), overflow: res.overflow)
+    }
+    
+    public static func divideWithOverflow(_ lhs: Self, _ rhs: T) -> (Self, overflow: Bool) {
+        let res = lhs.value.dividedReportingOverflow(by: rhs)
+        return (Self(value: res.0), overflow: res.overflow)
+    }
+    
+    public static func remainderWithOverflow(_ lhs: Self, _ rhs: T) -> (Self, overflow: Bool) {
+        let res = lhs.value.remainderReportingOverflow(dividingBy: rhs)
+        return (Self(value: res.0), overflow: res.overflow)
+    }
+    
+    //
+}
+
 //MARK: Act as a SignedInteger
 
 extension Value where T: SignedInteger {
@@ -250,16 +228,16 @@ extension Value where T: FloatingPoint {
 
 
     public func adding(_ other: T) -> Self {
-        return Self(value: self.value.adding(other))
+        return Self(value: self.value + other)
     }
     public func subtracting(_ other: T) -> Self {
-        return Self(value: self.value.subtracting(other))
+        return Self(value: self.value - other)
     }
     public func multiplied(by other: T) -> Self {
-        return Self(value: self.value.multiplied(by: other))
+        return Self(value: self.value * other)
     }
     public func divided(by other: T) -> Self {
-        return Self(value: self.value.divided(by: other))
+        return Self(value: self.value / other)
     }
 
 
@@ -297,7 +275,7 @@ extension Value where T: Strideable {
 
 //MARK: Operators
 
-prefix public func -<V>(x: V) -> V where V: Value, V.T : SignedNumber {
+prefix public func -<V>(x: V) -> V where V: Value, V.T : SignedNumeric {
     return V(value: -x.value)
 }
 
@@ -305,23 +283,23 @@ prefix public func +<V>(x: V) -> V where V: Value {
     return x
 }
 
-public func +<V>(lhs: V, rhs: V) -> V where V: Value, V.T: IntegerArithmetic {
+public func +<V>(lhs: V, rhs: V) -> V where V: Value, V.T: Numeric {
     return V(value: lhs.value + rhs.value)
 }
 
-public func -<V>(lhs: V, rhs: V) -> V where V: Value, V.T: IntegerArithmetic {
+public func -<V>(lhs: V, rhs: V) -> V where V: Value, V.T: Numeric {
     return V(value: lhs.value - rhs.value)
 }
 
-public func *<V>(lhs: V, rhs: V) -> V where V: Value, V.T: IntegerArithmetic {
+public func *<V>(lhs: V, rhs: V) -> V where V: Value, V.T: Numeric {
     return V(value: lhs.value * rhs.value)
 }
 
-public func /<V>(lhs: V, rhs: V) -> V where V: Value, V.T: IntegerArithmetic {
+public func /<V>(lhs: V, rhs: V) -> V where V: Value, V.T: BinaryInteger {
     return V(value: lhs.value / rhs.value)
 }
 
-public func %<V>(lhs: V, rhs: V) -> V where V: Value, V.T: IntegerArithmetic {
+public func %<V>(lhs: V, rhs: V) -> V where V: Value, V.T: BinaryInteger {
     return V(value: lhs.value % rhs.value)
 }
 

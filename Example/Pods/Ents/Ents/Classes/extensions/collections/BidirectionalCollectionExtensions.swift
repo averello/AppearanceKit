@@ -16,6 +16,6 @@ public extension BidirectionalCollection {
     ///
     /// If the set is empty, `endIndex` is equal to `startIndex`.
     public var lastIndex: Index {
-        return self.index(self.endIndex, offsetBy: Self.IndexDistance(-1.toIntMax()))
+        return self.index(self.endIndex, offsetBy: Self.IndexDistance(-1))
     }
 }

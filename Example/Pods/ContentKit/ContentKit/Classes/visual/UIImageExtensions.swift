@@ -30,9 +30,10 @@ extension UIImage: Image {
     }
     
     public func scaled(_ scale: Float) -> Image {
-        let newWidth = self.size.width.multiplied(by: CGFloat(scale))
-        let newHeight = self.size.height.multiplied(by: CGFloat(scale))
-        let newSize = CGSize(width: newWidth, height: newHeight).ceiled
+        let _scale = CGFloat(scale)
+        let newWidth = (self.size.width * _scale).rounded(FloatingPointRoundingRule.up)
+        let newHeight = (self.size.height * _scale).rounded(FloatingPointRoundingRule.up)
+        let newSize = CGSize(width: newWidth, height: newHeight)
         
         UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
         self.draw(in: CGRect(origin: CGPoint.zero, size: newSize))

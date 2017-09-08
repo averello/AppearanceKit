@@ -28,10 +28,10 @@ import Foundation
 public struct RandomColor: Color {
     public let color: UIColor
     public init() {
-        self.color = UIColor(colorLiteralRed: Float(arc4random_uniform(UInt32(255)))/255.0,
-                               green: Float(arc4random_uniform(UInt32(255)))/255.0,
-                               blue: Float(arc4random_uniform(UInt32(255)))/255.0,
-                               alpha: 0.75)
+        self.color = UIColor(red: CGFloat(arc4random_uniform(UInt32(255)))/255.0,
+                             green: CGFloat(arc4random_uniform(UInt32(255)))/255.0,
+                             blue: CGFloat(arc4random_uniform(UInt32(255)))/255.0,
+                             alpha: 0.75)
     }
 }
 

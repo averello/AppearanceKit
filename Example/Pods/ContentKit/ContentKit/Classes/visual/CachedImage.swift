@@ -29,7 +29,7 @@ public final class CachedImage: Image {
     private let _imageToCache: Image
 
     public var image: UIImage {
-        if self._image.optional {
+        if self._image == nil {
             self._image = self._imageToCache.image
         }
         return self._image!

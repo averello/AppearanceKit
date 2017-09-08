@@ -9,7 +9,7 @@
 
 import Foundation
 
-public struct AverageCollection<E>: RangeReplaceableCollection, RandomAccessCollection where E: Integer {
+public struct AverageCollection<E>: RangeReplaceableCollection, RandomAccessCollection where E: BinaryInteger {
     private let storage: [E]
     
     public init() {
@@ -37,60 +37,47 @@ public struct AverageCollection<E>: RangeReplaceableCollection, RandomAccessColl
 
 
 
-extension AverageCollection where E: SignedInteger {
+extension AverageCollection {
     
     public func average<F>() throws -> F where F: FloatingPoint {
         guard self.hasElements else { throw AverageCollection.Error.empty }
-        return self.reduce(F(0.toIntMax()), { (res, next) -> F in
-            return res + F(next.toIntMax())
-        }).divided(by: F(self.count.toIntMax()))
+        if E.isSigned {
+            return self.reduce(F(numericCast(0) as Int64), { (res, next) -> F in
+                return res + F(numericCast(next) as Int64)
+            }) / F(numericCast(self.count) as Int64)
+        }
+        else {
+            return self.reduce(F(numericCast(0) as UInt64), { (res, next) -> F in
+                return res + F(numericCast(next) as UInt64)
+            }) / F(numericCast(self.count) as UInt64)
+        }
     }
     
     public func average<I>() throws -> I where I: SignedInteger {
         guard self.hasElements else { throw AverageCollection.Error.empty }
-        return self.reduce(I(0.toIntMax()), { (res, next) -> I in
-            return res + I(next.toIntMax())
-        }).divided(by: I(self.count.toIntMax()))
+        return self.reduce(I(0), { (res, next) -> I in
+            return res + I(next)
+        }) / I(self.count)
     }
     
     public func median<F>() throws -> F where F: FloatingPoint {
         guard self.hasElements else { throw AverageCollection.Error.empty }
         let odd = self.count % 2 != 0
-        if odd {
-            return F(self.middle!.toIntMax())
+        if E.isSigned {
+            if odd {
+                return F(numericCast(self.middle!) as Int64)
+            }
+            else {
+                return F(numericCast(self.lowerMiddle! + self.upperMiddle!) as Int64) / F(2)
+            }
         }
         else {
-            return F(self.lowerMiddle!.toIntMax() + self.upperMiddle!.toIntMax())
-                .divided(by: F(2.toIntMax()))
-        }
-    }
-}
-
-extension AverageCollection where E: UnsignedInteger {
-    
-    public func average<F>() throws -> F where F: FloatingPoint {
-        guard self.hasElements else { throw AverageCollection.Error.empty }
-        return self.reduce(F(UInt(0).toUIntMax()), { (res, next) -> F in
-            return res + F(next.toUIntMax())
-        }).divided(by: F(UIntMax(self.count.toIntMax())))
-    }
-    
-    public func average<U>() throws -> U where U: UnsignedInteger {
-        guard self.hasElements else { throw AverageCollection.Error.empty }
-        return self.reduce(U(UInt(0).toUIntMax()), { (res, next) -> U in
-            return res + U(next.toUIntMax())
-        }).divided(by: U(UIntMax(self.count.toIntMax())))
-    }
-    
-    public func median<F>() throws -> F where F: FloatingPoint {
-        guard self.hasElements else { throw AverageCollection.Error.empty }
-        let odd = self.count % 2 != 0
-        if odd {
-            return F(self.middle!.toUIntMax())
-        }
-        else {
-            return F(self.lowerMiddle!.toUIntMax() + self.upperMiddle!.toUIntMax())
-                .divided(by: F(2.toIntMax()))
+            if odd {
+                return F(numericCast(self.middle!) as UInt64)
+            }
+            else {
+                return F(numericCast(self.lowerMiddle! + self.upperMiddle!) as UInt64) / F(2)
+            }
         }
     }
 }

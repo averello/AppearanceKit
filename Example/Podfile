@@ -4,8 +4,8 @@ use_frameworks!
 target 'AppearanceKit_Tests' do
   pod 'AppearanceKit', :path => '../'
   
-  pod 'Ents', :git => 'https://github.com/averello/Ents.git'
-  pod 'ContentKit', :git => 'https://github.com/averello/ContentKit.git'
-  pod 'RepresentationKit', :git => 'https://github.com/averello/RepresentationKit.git'
+  pod 'Ents', :git => 'https://github.com/averello/Ents.git', :branch => 'feature/swift4'
+  pod 'ContentKit', :git => 'https://github.com/averello/ContentKit.git', :branch => 'feature/swift4'
+  pod 'RepresentationKit', :git => 'https://github.com/averello/RepresentationKit.git', :branch => 'feature/swift4'
   
 end

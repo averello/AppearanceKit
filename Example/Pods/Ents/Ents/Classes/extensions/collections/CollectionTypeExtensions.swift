@@ -183,7 +183,7 @@ public extension Collection {
     /// - returns: the indices of elements satisfying predicate
     public func indices(where predicate: (Iterator.Element) -> Bool) -> [Index] {
         var indices: [Index] = Array<Index>()
-        indices.reserveCapacity(Int(self.count.toIntMax()))
+        indices.reserveCapacity(Int(self.count))
         
         let range: Range<Self.Index> = self.startIndex..<self.endIndex
         var index = range.lowerBound
@@ -213,7 +213,7 @@ public extension Collection {
         var filtered: [Self.Iterator.Element] = []
         var unfiltered: [Self.Iterator.Element] = []
         
-        let capacity = Int(self.count.toIntMax())/2
+        let capacity = Int(self.count/2)
         filtered.reserveCapacity(capacity)
         unfiltered.reserveCapacity(capacity)
 
@@ -266,7 +266,7 @@ public extension Collection {
     /// - Returns: An array of the elements that `includeElement` allowed.
     public func filteri(_ isIncluded: (Self.Index, Self.Iterator.Element) throws -> Bool) rethrows -> [Self.Iterator.Element] {
         var result: [Iterator.Element] = []
-        let count = Int(self.count.toIntMax())
+        let count = Int(self.count)
         result.reserveCapacity(count)
         try self.forEach { index,element in
             if try isIncluded(index,element) {
@@ -295,7 +295,7 @@ public extension Collection {
     ///   sequence.
     public func mapi<T>(_ transform: (Self.Index, Self.Iterator.Element) throws -> T) rethrows -> [T] {
         var result: [T] = []
-        let count = Int(self.count.toIntMax())
+        let count = Int(self.count)
         result.reserveCapacity(count)
         try self.forEach { i,e in
             let e1 = try transform(i, e)
@@ -306,7 +306,7 @@ public extension Collection {
 
     public func flatMapi<SegmentOfResult : Sequence>(_ transform: (Self.Index, Self.Iterator.Element) throws -> SegmentOfResult) rethrows -> [SegmentOfResult.Iterator.Element] {
         var result: [SegmentOfResult.Iterator.Element] = []
-        let count = Int(self.count.toIntMax())
+        let count = Int(self.count)
         result.reserveCapacity(count) // at least
         try self.forEach { i,e in
             let e1 = try transform(i, e)

@@ -17,11 +17,11 @@ public protocol EnumCollection: RawRepresentable, Hashable {
     static var allValues: [Self] { get }
 }
 
-public extension EnumCollection where RawValue: Integer {
+public extension EnumCollection where RawValue: BinaryInteger {
     
     static var allValues: [Self] {
-        var index: Self.RawValue = 0
-        let increment: Self.RawValue = 1
+        var index: Self.RawValue = 0 as! Self.RawValue
+        let increment: Self.RawValue = 1 as! Self.RawValue
 
         return Array(AnyIterator {
             let id: Self.RawValue = index

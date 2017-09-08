@@ -127,9 +127,11 @@ fileprivate extension UIColor {
         }
         
         guard isValid else { return nil }
-        return UIColor(colorLiteralRed: colorComponents[0],
-                       green: colorComponents[1],
-                       blue: colorComponents[2],
-                       alpha: colorComponents[3])
+        
+        let cgFloatComponents = colorComponents.map { CGFloat($0) }
+        return UIColor(red: cgFloatComponents[0],
+                       green: cgFloatComponents[1],
+                       blue: cgFloatComponents[2],
+                       alpha: cgFloatComponents[3])
     }
 }

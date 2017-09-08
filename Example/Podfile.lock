@@ -1,47 +1,49 @@
 PODS:
-  - AppearanceKit (1.14):
+  - AppearanceKit (2.0):
     - ContentKit
     - Ents
     - RepresentationKit
-  - ContentKit (1.6.5):
-    - Ents
+  - ContentKit (2.0):
     - RepresentationKit
-  - Ents (1.17)
+  - Ents (2.0)
   - RepresentationKit (1.1.4)
 
 DEPENDENCIES:
   - AppearanceKit (from `../`)
-  - ContentKit (from `https://github.com/averello/ContentKit.git`)
-  - Ents (from `https://github.com/averello/Ents.git`)
-  - RepresentationKit (from `https://github.com/averello/RepresentationKit.git`)
+  - ContentKit (from `https://github.com/averello/ContentKit.git`, branch `feature/swift4`)
+  - Ents (from `https://github.com/averello/Ents.git`, branch `feature/swift4`)
+  - RepresentationKit (from `https://github.com/averello/RepresentationKit.git`, branch `feature/swift4`)
 
 EXTERNAL SOURCES:
   AppearanceKit:
     :path: "../"
   ContentKit:
+    :branch: feature/swift4
     :git: https://github.com/averello/ContentKit.git
   Ents:
+    :branch: feature/swift4
     :git: https://github.com/averello/Ents.git
   RepresentationKit:
+    :branch: feature/swift4
     :git: https://github.com/averello/RepresentationKit.git
 
 CHECKOUT OPTIONS:
   ContentKit:
-    :commit: ef561a488f2cde6731a76a163184578ec01fb0af
+    :commit: 68f8d2d064036e63a8ef788444d23634c126a2c0
     :git: https://github.com/averello/ContentKit.git
   Ents:
-    :commit: 580e1880a334135f775b2cf1ef20f0e1a1540f1d
+    :commit: 6f47f341bad8e472b97f0f17194fd70156f49e30
     :git: https://github.com/averello/Ents.git
   RepresentationKit:
-    :commit: 13a45a3a9e3e93def7662d6f7719e9fe4920f5d3
+    :commit: 8fbcb72326485baf98d908595e159c9dbc55dc3d
     :git: https://github.com/averello/RepresentationKit.git
 
 SPEC CHECKSUMS:
-  AppearanceKit: b35c7f79bc775eb448e0b341d566728c07d9670e
-  ContentKit: b0ded7d9d57f77ca3c87261c97d606b4ea9f7bdf
-  Ents: f7469b80b3507e2bbc936c96b2cf61e79c0ce809
+  AppearanceKit: b349a3d66489b39d2f2470074e9182975205355f
+  ContentKit: 1fd3e6e87cee63cc68e728d12bf9c0b764239249
+  Ents: 20bc1cb5159647ff4dbbc089fcf7ddce6e8ebacf
   RepresentationKit: 1ae7749916ed014403db30f3d38204d7e000dbd1
 
-PODFILE CHECKSUM: 2f986ebb974d8db00b6bfc03f8330828d8dbc2c3
+PODFILE CHECKSUM: 7d033129557e9eb1e79346326a5b18681af01c89
 
 COCOAPODS: 1.2.1

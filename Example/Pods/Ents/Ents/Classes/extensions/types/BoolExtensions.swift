@@ -60,8 +60,8 @@ public extension Bool {
 
     /// Creating Bool from Integers.
     /// - parameter i: the integer. `0` means `false`. Any other value means `true`
-    public init<I>(_ i: I) where I: Integer {
-        self.init(Int(i.toIntMax()))
+    public init<I>(_ i: I) where I: BinaryInteger {
+        self.init(numericCast(i) as Int)
     }
 }
 

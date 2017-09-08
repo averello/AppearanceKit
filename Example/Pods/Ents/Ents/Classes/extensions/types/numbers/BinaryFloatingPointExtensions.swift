@@ -37,11 +37,20 @@ public extension BinaryFloatingPoint
     
     /// Returns a floating-point value that is raised to the power of `p`.
     /// - parameter p: an integer power.
-    public func power<I>(_ p: I) -> Self where I: IntegerArithmetic {
+    public func power<I>(_ p: I) -> Self where I: BinaryInteger {
         let lhs = Double(sign: self.sign,
                         exponentBitPattern: self.exponentBitPattern,
                         significandBitPattern: self.significandBitPattern)
-        let result = Foundation.pow(lhs, Double(p.toIntMax()))
+        
+        let result = { () -> Double in
+            if I.isSigned {
+                return Foundation.pow(lhs, Double(numericCast(p) as Int64))
+            }
+            else {
+                return Foundation.pow(lhs, Double(numericCast(p) as UInt64))
+            }
+            
+        }()
         return Self(sign: result.sign,
                     exponentBitPattern: result.exponentBitPattern,
                     significandBitPattern: result.significandBitPattern)
@@ -86,11 +95,20 @@ public extension BinaryFloatingPoint
     
     /// Returns a floating-point value that is raised to the power of `p`.
     /// - parameter p: an integer power.
-    public func power<I>(_ p: I) -> Self where I: IntegerArithmetic {
+    public func power<I>(_ p: I) -> Self where I: BinaryInteger {
         let lhs = Float(sign: self.sign,
                         exponentBitPattern: self.exponentBitPattern,
                         significandBitPattern: self.significandBitPattern)
-        let result = Foundation.powf(lhs, Float(p.toIntMax()))
+        
+        let result = { () -> Float in
+            if I.isSigned {
+                return Foundation.powf(lhs, Float(numericCast(p) as Int64))
+            }
+            else {
+                return Foundation.powf(lhs, Float(numericCast(p) as UInt64))
+            }
+            
+        }()
         return Self(sign: result.sign,
                     exponentBitPattern: result.exponentBitPattern,
                     significandBitPattern: result.significandBitPattern)

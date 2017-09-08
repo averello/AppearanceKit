@@ -9,7 +9,7 @@
 
 import Foundation
 
-public extension Integer {
+public extension BinaryInteger {
     
     /// Evaluates the given closure as many times as the instance represents
     /// passing the current iteration.
@@ -20,7 +20,8 @@ public extension Integer {
         precondition(self >= 0)
         guard self > 0 else { return }
         
-        var i = self-self // == 0
+        
+        var i = Self(0)
         let iterator = AnyIterator<Self> {
             defer { i = i.advanced(by: 1) }
             if i < self {
@@ -45,7 +46,7 @@ public extension Integer {
     }
 }
 
-public extension IntegerArithmetic {
+public extension BinaryInteger {
     
     /// Returns the sum of this value and the given value.
     ///
@@ -85,7 +86,7 @@ public extension IntegerArithmetic {
     }
 }
 
-public extension IntegerArithmetic {
+public extension BinaryInteger {
     
     /// Returns the difference of this value and the given value.
     ///
@@ -144,7 +145,7 @@ public extension IntegerArithmetic {
     }
 }
 
-public extension IntegerArithmetic {
+public extension BinaryInteger {
     
     /// Returns the product of this value and the given value.
     ///
@@ -184,7 +185,7 @@ public extension IntegerArithmetic {
     }
 }
 
-public extension IntegerArithmetic {
+public extension BinaryInteger {
     
     /// Returns the quotient of this value and the given value.
     ///
@@ -224,7 +225,7 @@ public extension IntegerArithmetic {
     }
 }
 
-public extension IntegerArithmetic {
+public extension BinaryInteger {
     
     /// Returns the remainder of this value divided by the given value.
     ///
@@ -284,7 +285,7 @@ public extension IntegerArithmetic {
     }
 }
 
-public extension IntegerArithmetic {
+public extension BinaryInteger {
     
     /// Returns a Boolean value indicating whether this instance is less than the
     /// given value.
@@ -366,7 +367,7 @@ public extension IntegerArithmetic {
     }
 }
 
-public extension IntegerArithmetic {
+public extension BinaryInteger {
     
     /// Returns a Boolean value indicating whether this instance is equal to the
     /// given value.
@@ -400,7 +401,7 @@ public extension IntegerArithmetic {
     }
 }
 
-public extension IntegerArithmetic {
+public extension BinaryInteger {
     
     /// Returns a Boolean value indicating whether this instance is equal to the
     /// given value.
@@ -421,7 +422,10 @@ public extension IntegerArithmetic {
     /// - Returns: `true` if `other` has the same value as this instance;
     ///   otherwise, `false`.
     public func isEqual<F>(to other: F) -> Bool where F: FloatingPoint {
-        return F(self.toIntMax()).isEqual(to: other)
+        if Self.isSigned {
+            return F(numericCast(self) as Int64).isEqual(to: other)
+        }
+        return F(numericCast(self) as UInt64).isEqual(to: other)
     }
     
     /// Returns a Boolean value indicating whether this instance is NOT equal to
@@ -430,11 +434,14 @@ public extension IntegerArithmetic {
     /// - Returns: `true` if `other` is a different value from this instance;
     ///   otherwise, `false`.
     public func isDifferent<F>(from other: F) -> Bool where F: FloatingPoint {
-        return F(self.toIntMax()).isDifferent(from: other)
+        if Self.isSigned {
+            return F(numericCast(self) as Int64).isDifferent(from: other)
+        }
+        return F(numericCast(self) as UInt64).isDifferent(from: other)
     }
 }
 
-public extension IntegerArithmetic {
+public extension BinaryInteger {
     
     /// Returns the lesser of the two given values.
     ///
@@ -485,7 +492,7 @@ public extension IntegerArithmetic {
     }
 }
 
-public extension IntegerArithmetic {
+public extension BinaryInteger {
     
     /// Returns the lesser of the two given values.
     ///
@@ -495,7 +502,10 @@ public extension IntegerArithmetic {
     /// - Parameter other: Another integer value.
     /// - Returns: The minimum of this instance and `other`.
     public func minimum<F>(_ other: F) -> F where F: FloatingPoint {
-        return F(self.toIntMax()).minimum(other)
+        if Self.isSigned {
+            return F(numericCast(self) as Int64).minimum(other)
+        }
+        return F(numericCast(self) as UInt64).minimum(other)
     }
     
     /// Returns the greater of the two given values.
@@ -506,11 +516,14 @@ public extension IntegerArithmetic {
     /// - Parameter other: Another integer value.
     /// - Returns: The greater of this instance and `other`.
     public func maximum<F>(_ other: F) -> F where F: FloatingPoint {
-        return F(self.toIntMax()).maximum(other)
+        if Self.isSigned {
+            return F(numericCast(self) as Int64).maximum(other)
+        }
+        return F(numericCast(self) as UInt64).maximum(other)
     }
 }
 
-public extension IntegerArithmetic where Self: SignedInteger {
+public extension BinaryInteger where Self: SignedInteger {
     
     /// Returns the absolute value of this instance
     public func absolute() -> Self {
@@ -548,17 +561,16 @@ public extension IntegerArithmetic where Self: SignedInteger {
     }
 }
 
-public extension Integer {
+public extension BinaryInteger {
     
     /// converts this `Integer` instance to a `NSNumber` instance.
     public var asNumber: NSNumber {
-        return NSNumber(value: self.toIntMax())
+        return NSNumber(value: numericCast(self) as Int64)
     }
 }
 
-public extension SignedInteger {
+public extension BinaryInteger {
     
-    /// create a SignedInteger from a Boolean
     public init(_ v: Bool) {
         if v {
             self.init(1)
@@ -571,40 +583,13 @@ public extension SignedInteger {
     /// Returns a integer value that is raised to the power of `p`.
     /// - parameter p: an integer power.
     public func power(_ p: Self) -> Self {
-        let result = Double(self.toIntMax()).power(p)
-        let integer = IntMax(result)
-        return Self(integer)
-    }
-    
-    /// returns the square value of this instance.
-    public var square: Self {
-        return self.power(2)
-    }
-    
-    /// returns the cube value of this instance.
-    public var cube: Self {
-        return self.power(3)
-    }
-}
-
-public extension UnsignedInteger {
-    
-    /// create a UnsignedInteger from a Boolean
-    public init(_ v: Bool) {
-        if v {
-            self.init(1)
+        if Self.isSigned {
+            let result = Double(numericCast(self) as Int64).power(p)
+            return Self(result)
         }
-        else {
-            self.init(0)
-        }
-    }
-    
-    /// Returns a integer value that is raised to the power of `p`.
-    /// - parameter p: an integer power.
-    public func power(_ p: Self) -> Self {
-        let result = Double(self.toUIntMax()).power(p)
-        let integer = UIntMax(result)
-        return Self(integer)
+        let result = Double(numericCast(self) as UInt64).power(p)
+        return Self(result)
+            
     }
     
     /// returns the square value of this instance.

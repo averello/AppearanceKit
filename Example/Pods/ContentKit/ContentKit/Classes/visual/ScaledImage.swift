@@ -23,7 +23,6 @@
 //
 
 import Foundation
-import Ents
 
 public struct ScaledImage: Image {
     public let original: Image

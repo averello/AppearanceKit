@@ -23,7 +23,6 @@
 //
 
 import Foundation
-import Ents
 
 public protocol Image: VisualContent, CustomPlaygroundQuickLookable {
     var image: UIImage { get }
