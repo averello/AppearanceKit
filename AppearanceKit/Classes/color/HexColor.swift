@@ -76,7 +76,7 @@ fileprivate extension UIColor {
         //Strip prefixed # hash
         var hexValue = hex
         if hex.hasPrefix("#") {
-            hexValue = hex.substring(from: hex.index(after: hex.startIndex))
+            hexValue = String(hex[hex.index(after: hex.startIndex)...])
         }
         
         //Determine if 3 or 6 digits
@@ -105,7 +105,7 @@ fileprivate extension UIColor {
             let lower = hexValue.index(start, offsetBy: i * componentLength)
             let upper = hexValue.index(lower, offsetBy: componentLength)
             let range = Range(uncheckedBounds: (lower: lower, upper: upper))
-            var component = hexValue.substring(with: range)
+            var component = String(hexValue[range])
             if componentLength == 1 {
                 component.append(component)
             }
