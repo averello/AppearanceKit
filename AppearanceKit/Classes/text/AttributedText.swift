@@ -25,7 +25,7 @@
 
 import Foundation
 import ContentKit
-import Ents
+//import Ents
 
 //TODO
 //public protocol _AttributedText: Text {
@@ -55,17 +55,24 @@ extension AttributedText {
     
     public init(_ text: Text, attributes: [Attribute] = []) {
         self.content = text.content
-        let attrs = Dictionary<String, Attribute>(attributes.map { ($0.key.rawValue, $0) })
+        
+        var attrs = Dictionary<String, Attribute>()
+        for (key,value) in attributes.map({ ($0.key.rawValue, $0) }) {
+            attrs[key] = value
+        }
         self._attributes = attrs
     }
     
     
     public init(_ string: NSAttributedString) {
         self.content = string.string
-        let attrs = Dictionary<String, Attribute>(string.attributes(at: 0, effectiveRange: nil).flatMap { key,value -> (String,Attribute)? in
+        var attrs = Dictionary<String, Attribute>()
+        for (key,value) in string.attributes(at: 0, effectiveRange: nil).flatMap({ key,value -> (String,Attribute)? in
             guard let attribute = AttributedText.Attribute(string: string, attribute: key.rawValue, value: value) else { return nil }
             return (key.rawValue, attribute)
-        })
+            }) {
+            attrs[key] = value
+        }
         self._attributes = attrs
     }
 }
@@ -511,10 +518,10 @@ public extension AttributedText {
     }
     
     public func debugQuickLookObject() -> AnyObject? {
-        return with(UILabel(frame: CGRect.zero)) {
-            $0.customAttributedText = self
-            $0.sizeToFit()
-        }
+        let label = UILabel(frame: CGRect.zero)
+        label.customAttributedText = self
+        label.sizeToFit()
+        return label
     }
 }
 

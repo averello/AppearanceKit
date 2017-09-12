@@ -42,8 +42,8 @@ open class ConfigurableAppearanceButton: UIButton, ConfigurableUIContent {
     final private func _loadSubviews() {
         self._requiredSubviews = self.requiredSubviews()
         self._requiredSubviews.forEach {
-            self.addSubview($0.1)
-            $0.1.sizeToFit()
+            self.addSubview($0)
+            $0.sizeToFit()
         }
         self.didLoadSubviews()
     }
@@ -57,7 +57,7 @@ open class ConfigurableAppearanceButton: UIButton, ConfigurableUIContent {
     }
     
     final public func setNeedsUpdateSubviews() {
-        self._requiredSubviews.forEach { _,subview in
+        self._requiredSubviews.forEach { subview in
             subview.removeFromSuperview()
         }
         self._loadSubviews()

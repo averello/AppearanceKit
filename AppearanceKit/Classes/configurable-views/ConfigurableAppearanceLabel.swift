@@ -24,7 +24,6 @@
 //
 
 import UIKit
-import Ents
 
 open class ConfigurableAppearanceLabel: UILabel, ConfigurableUIContent {
     public final var backgroundView: UIView?
@@ -43,8 +42,8 @@ open class ConfigurableAppearanceLabel: UILabel, ConfigurableUIContent {
     final private func _loadSubviews() {
         self._requiredSubviews = self.requiredSubviews()
         self._requiredSubviews.forEach {
-            self.addSubview($0.1)
-            $0.1.sizeToFit()
+            self.addSubview($0)
+            $0.sizeToFit()
         }
         self.didLoadSubviews()
     }
@@ -58,7 +57,7 @@ open class ConfigurableAppearanceLabel: UILabel, ConfigurableUIContent {
     }
     
     final public func setNeedsUpdateSubviews() {
-        self._requiredSubviews.forEach { _,subview in
+        self._requiredSubviews.forEach { subview in
             subview.removeFromSuperview()
         }
         self._loadSubviews()
@@ -71,8 +70,10 @@ open class ConfigurableAppearanceLabel: UILabel, ConfigurableUIContent {
             if bgView.superview == nil {
                 self.insertSubview(bgView, at: 0)
             }
-            bgView.frameSize = self.boundsSize
-            bgView.center    = self.ownCenter
+            var frame = bgView.frame
+            frame.size = self.bounds.size
+            bgView.frame  = frame
+            bgView.center = CGPoint(x: self.bounds.midX, y: self.bounds.midY)
         }
     }
 
@@ -80,7 +81,8 @@ open class ConfigurableAppearanceLabel: UILabel, ConfigurableUIContent {
         if let bgView = self.backgroundView {
             let transform = bgView.transform
             bgView.transform = .identity
-            let size = bgView.sizeThatFits(size).ceiled
+            var size = bgView.sizeThatFits(size)
+            size = CGSize(width: size.width.rounded(.up), height: size.height.rounded(.up))
             bgView.transform = transform
             return size
         }

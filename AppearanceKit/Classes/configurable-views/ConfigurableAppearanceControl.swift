@@ -24,7 +24,6 @@
 //
 
 import UIKit
-import Ents
 
 open class ConfigurableAppearanceControl: UIControl, ConfigurableUIContent {
     public final var backgroundView: UIView?
@@ -44,8 +43,8 @@ open class ConfigurableAppearanceControl: UIControl, ConfigurableUIContent {
     final private func _loadSubviews() {
         self._requiredSubviews = self.requiredSubviews()
         self._requiredSubviews.forEach {
-            self.addSubview($0.1)
-            $0.1.sizeToFit()
+            self.addSubview($0)
+            $0.sizeToFit()
         }
         self.didLoadSubviews()
     }
@@ -59,7 +58,7 @@ open class ConfigurableAppearanceControl: UIControl, ConfigurableUIContent {
     }
     
     final public func setNeedsUpdateSubviews() {
-        self._requiredSubviews.forEach { _,subview in
+        self._requiredSubviews.forEach { subview in
             subview.removeFromSuperview()
         }
         self._loadSubviews()
@@ -73,14 +72,17 @@ open class ConfigurableAppearanceControl: UIControl, ConfigurableUIContent {
             if bgView.superview == nil {
                 self.insertSubview(bgView, at: 0)
             }
-            bgView.frameSize = self.boundsSize
-            bgView.center    = self.ownCenter
+            var frame = bgView.frame
+            frame.size = self.bounds.size
+            bgView.frame  = frame
+            bgView.center = CGPoint(x: self.bounds.midX, y: self.bounds.midY)
         }
     }
 
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
         if let bgView = self.backgroundView {
-            return bgView.sizeThatFits(size).ceiled
+            let size = bgView.sizeThatFits(size)
+            return CGSize(width: size.width.rounded(.up), height: size.height.rounded(.up))
         }
         return super.sizeThatFits(size)
     }

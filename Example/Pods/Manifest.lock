@@ -1,17 +1,14 @@
 PODS:
-  - AppearanceKit (2.0):
+  - AppearanceKit (2.0.1):
     - ContentKit
-    - Ents
     - RepresentationKit
   - ContentKit (2.0):
     - RepresentationKit
-  - Ents (2.0)
-  - RepresentationKit (1.1.4)
+  - RepresentationKit (2.0)
 
 DEPENDENCIES:
   - AppearanceKit (from `../`)
   - ContentKit (from `https://github.com/averello/ContentKit.git`, branch `feature/swift4`)
-  - Ents (from `https://github.com/averello/Ents.git`, branch `feature/swift4`)
   - RepresentationKit (from `https://github.com/averello/RepresentationKit.git`, branch `feature/swift4`)
 
 EXTERNAL SOURCES:
@@ -20,9 +17,6 @@ EXTERNAL SOURCES:
   ContentKit:
     :branch: feature/swift4
     :git: https://github.com/averello/ContentKit.git
-  Ents:
-    :branch: feature/swift4
-    :git: https://github.com/averello/Ents.git
   RepresentationKit:
     :branch: feature/swift4
     :git: https://github.com/averello/RepresentationKit.git
@@ -31,19 +25,15 @@ CHECKOUT OPTIONS:
   ContentKit:
     :commit: 68f8d2d064036e63a8ef788444d23634c126a2c0
     :git: https://github.com/averello/ContentKit.git
-  Ents:
-    :commit: 6f47f341bad8e472b97f0f17194fd70156f49e30
-    :git: https://github.com/averello/Ents.git
   RepresentationKit:
-    :commit: 8fbcb72326485baf98d908595e159c9dbc55dc3d
+    :commit: fc44c427ad7ee9c41b52248fd237e63a7dc59406
     :git: https://github.com/averello/RepresentationKit.git
 
 SPEC CHECKSUMS:
-  AppearanceKit: b349a3d66489b39d2f2470074e9182975205355f
+  AppearanceKit: 0f688208b87ad7cf01aa6bae492f6f9843fc14f6
   ContentKit: 1fd3e6e87cee63cc68e728d12bf9c0b764239249
-  Ents: 20bc1cb5159647ff4dbbc089fcf7ddce6e8ebacf
-  RepresentationKit: 1ae7749916ed014403db30f3d38204d7e000dbd1
+  RepresentationKit: 13e70a642c8f6ff8ea045b76cbe7814d443e735d
 
-PODFILE CHECKSUM: 7d033129557e9eb1e79346326a5b18681af01c89
+PODFILE CHECKSUM: 25250dad3e3f1af36f4063513a6050a4e7d41062
 
 COCOAPODS: 1.2.1

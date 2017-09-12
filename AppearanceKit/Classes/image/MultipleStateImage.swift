@@ -45,13 +45,13 @@ public protocol MultipleStateImage: Image {
 public extension MultipleStateImage {
     
     public func configure(button: UIButton, forStates states: [UIControlState]) {
-        states.forEach { _,state in
+        states.forEach { state in
             button.setImage(self.image(fromState: state), for: state)
         }
     }
     
     public func configureBackground(button: UIButton, forStates states: [UIControlState]) {
-        states.forEach { _,state in
+        states.forEach { state in
             button.setBackgroundImage(self.image(fromState: state), for: state)
         }
     }

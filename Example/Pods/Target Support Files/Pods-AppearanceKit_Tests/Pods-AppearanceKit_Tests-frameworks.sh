@@ -91,13 +91,11 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/AppearanceKit/AppearanceKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ContentKit/ContentKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Ents/Ents.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RepresentationKit/RepresentationKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/AppearanceKit/AppearanceKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ContentKit/ContentKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Ents/Ents.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RepresentationKit/RepresentationKit.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

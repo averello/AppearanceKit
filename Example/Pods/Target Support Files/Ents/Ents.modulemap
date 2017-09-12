@@ -1,6 +1,0 @@
-framework module Ents {
-  umbrella header "Ents-umbrella.h"
-
-  export *
-  module * { export * }
-}
