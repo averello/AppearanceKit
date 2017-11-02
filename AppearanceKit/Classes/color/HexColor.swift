@@ -35,11 +35,11 @@ public struct HexColor: Color, CustomStringConvertible {
     public init?(hex: UInt32) {
         var string = String(hex, radix: 16)
         
-        var count = string.characters.count
+        var count = string.count
         guard count >= 3 && count <= 8 else { return nil }
         while count < 8 {
             string = "0" + string
-            count = string.characters.count
+            count = string.count
         }
         self.init(hex: string)
     }
@@ -53,7 +53,7 @@ public struct HexColor: Color, CustomStringConvertible {
         if _hex.hasPrefix("#") {
             _hex = hex.replacingOccurrences(of: "#", with: "")
         }
-        let count = _hex.characters.count
+        let count = _hex.count
         guard count >= 3 && count <= 8 else { return nil }
         guard let color = UIColor._color(fromHexString: _hex) else { return nil }
         
@@ -70,7 +70,7 @@ public struct HexColor: Color, CustomStringConvertible {
 fileprivate extension UIColor {
     
     fileprivate static func _color(fromHexString hex: String) -> UIColor? {
-        guard hex.characters.count > 1 else { return nil }
+        guard hex.count > 1 else { return nil }
         
         
         //Strip prefixed # hash
@@ -82,7 +82,7 @@ fileprivate extension UIColor {
         //Determine if 3 or 6 digits
         var componentLength = 0
         var components = 3
-        switch hexValue.characters.count {
+        switch hexValue.count {
         case 3:
             componentLength = 1
         case 6:

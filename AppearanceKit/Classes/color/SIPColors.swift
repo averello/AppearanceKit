@@ -202,4 +202,7 @@ public struct EndeavourColor: Color {
     public var color: UIColor { return UIColor(red:0.04, green:0.33, blue:0.65, alpha:1.00) }
 }
 
-
+public struct NeonGreenColor: Color {
+    public init() {}
+    public var color: UIColor { return UIColor(red:0.23, green:0.98, blue:0.22, alpha:1.00) }
+}
