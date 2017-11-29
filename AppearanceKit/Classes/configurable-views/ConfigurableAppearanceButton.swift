@@ -63,7 +63,7 @@ open class ConfigurableAppearanceButton: UIButton, ConfigurableUIContent {
         self._loadSubviews()
     }
     
-    final override public func sendAction(_ action: Selector, to target: Any?, for event: UIEvent?) {
+    open override func sendAction(_ action: Selector, to target: Any?, for event: UIEvent?) {
         if self.isHidden { return }
         if self.isUserInteractionEnabled == false { return }
         if self.alpha <= 0 { return }
