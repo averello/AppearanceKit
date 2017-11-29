@@ -54,9 +54,9 @@ public final class TintedImage: ContentKit.Image {
     final private let color: Color
     final private let blendMode: TintedImage.BlendMode
     
-    init(decorated: ContentKit.Image,
-         color: Color = TintedImage.DefaultTintColor(),
-         blendMode: TintedImage.BlendMode = TintedImage.BlendMode.sourceAtop) {
+    public init(decorated: ContentKit.Image,
+                color: Color = TintedImage.DefaultTintColor(),
+                blendMode: TintedImage.BlendMode = TintedImage.BlendMode.sourceAtop) {
         self.decorated = decorated
         self.color = color
         self.blendMode = blendMode
