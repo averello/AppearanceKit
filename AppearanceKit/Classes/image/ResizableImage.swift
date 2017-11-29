@@ -28,29 +28,60 @@ import UIKit
 import ContentKit
 
 public class ResizableImage: Image {
+    
+    public enum Mode {
+        case tile
+        case stretch
+    }
+    
+    public struct Insets {
+        public let top: Float
+        public let left: Float
+        public let bottom: Float
+        public let right: Float
+        
+        public init(top: Float,
+                    left: Float,
+                    bottom: Float,
+                    right: Float) {
+            self.top = top
+            self.left = left
+            self.bottom = bottom
+            self.right = right
+        }
+        
+        public var asUIEdgeInsets: UIEdgeInsets {
+            return UIEdgeInsets(top: CGFloat(self.top),
+                                left: CGFloat(self.left),
+                                bottom: CGFloat(self.bottom),
+                                right: CGFloat(self.right))
+        }
+    }
+    
     final private let decorated: Image
-    final fileprivate let insets: UIEdgeInsets
-    final fileprivate let mode: UIImageResizingMode
+    final fileprivate let insets: ResizableImage.Insets
+    final fileprivate let mode: ResizableImage.Mode
     
     public init(resizable image: Image,
-         withCapInsets insets: UIEdgeInsets,
-         resizingMode: UIImageResizingMode) {
+         withCapInsets insets: ResizableImage.Insets,
+         resizingMode: ResizableImage.Mode) {
         self.decorated = image
         self.insets = insets
         self.mode = resizingMode
     }
     
     public var image: UIImage {
-        return self.decorated.image.resizableImage(withCapInsets: self.insets,
-                                                   resizingMode: self.mode)
+        return self.decorated.image
+            .resizableImage(withCapInsets: self.insets.asUIEdgeInsets,
+                            resizingMode: self.mode.resizingMode)
     }
 }
 
 final public class MultipleStateResizableImage: ResizableImage, MultipleStateImage {
     final private let decorated: MultipleStateImage
     public init(resizable image: MultipleStateImage,
-         withCapInsets insets: UIEdgeInsets,
-         resizingMode: UIImageResizingMode) {
+         withCapInsets insets: ResizableImage.Insets,
+         resizingMode: ResizableImage.Mode) {
         self.decorated = image
         super.init(resizable: image,
                    withCapInsets: insets,
@@ -72,5 +103,20 @@ final public class MultipleStateResizableImage: ResizableImage, MultipleStateIma
     
     public var disabled: Image? { return self.resizable(self.decorated.disabled) }
     
-    public var original: UIImage? { return self.decorated.original?.resizableImage(withCapInsets: self.insets, resizingMode: self.mode) }
+    public var original: UIImage? {
+        return self.decorated.original?
+            .resizableImage(withCapInsets: self.insets.asUIEdgeInsets,
+                            resizingMode: self.mode.resizingMode) }
+}
+
+fileprivate extension ResizableImage.Mode {
+    
+    fileprivate var resizingMode: UIImageResizingMode {
+        switch self {
+        case ResizableImage.Mode.tile:
+            return UIImageResizingMode.tile
+        case ResizableImage.Mode.stretch:
+            return UIImageResizingMode.stretch
+        }
+    }
 }

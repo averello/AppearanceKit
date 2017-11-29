@@ -27,6 +27,7 @@ import Foundation
 import ContentKit
 
 public class RenderingModeImage: ContentKit.Image {
+    
     public enum Mode {
         case automatic
         case alwaysOriginal
@@ -49,6 +50,7 @@ public class RenderingModeImage: ContentKit.Image {
 
 
 final public class MultipleStateRenderingModeImage: RenderingModeImage, MultipleStateImage {
+    
     final private let decorated: MultipleStateImage
     
     public init(rendered image: MultipleStateImage,
