@@ -90,7 +90,7 @@ extension AttributedText {
             let string = NSMutableAttributedString(string: self.content)
             let range = NSMakeRange(0, (string.string as NSString).length)
             for attribute in self._attributes {
-                let atts = [NSAttributedStringKey(rawValue: attribute.key): attribute.value.value(withText: string)]
+                let atts = [NSAttributedStringKey(rawValue: attribute.key): attribute.value.value]
                 string.addAttributes(atts, range: range)
             }
             return string.copy() as! NSAttributedString
@@ -440,7 +440,7 @@ fileprivate extension AttributedText.Attribute {
         }
     }
     
-    fileprivate func value(withText text: NSAttributedString) -> Any {
+    fileprivate var value: Any {
         switch self {
         case let AttributedText.Attribute.font(font):
             return font.font
@@ -629,7 +629,7 @@ public extension AttributedText {
     var font: Font? {
         get {
             guard let attr = self.attribute(name: NSAttributedStringKey.font.rawValue) else { return nil }
-            return AnyFont(font: attr.value(withText: self.attributedString) as! UIFont)
+            return AnyFont(font: attr.value as! UIFont)
         }
         set {
             guard let font = newValue else { return }
@@ -640,7 +640,7 @@ public extension AttributedText {
     var color: Color? {
         get {
             guard let attribute = self.attribute(name: NSAttributedStringKey.foregroundColor.rawValue) else { return nil }
-            return AnyColor(color: attribute.value(withText: self.attributedString) as! UIColor)
+            return AnyColor(color: attribute.value as! UIColor)
         }
         set {
             guard let color = newValue else { return }
@@ -651,7 +651,7 @@ public extension AttributedText {
     var backgroundColor: Color? {
         get {
             guard let attribute = self.attribute(name: NSAttributedStringKey.backgroundColor.rawValue) else { return nil }
-            return AnyColor(color: attribute.value(withText: self.attributedString) as! UIColor)
+            return AnyColor(color: attribute.value as! UIColor)
         }
         set {
             guard let color = newValue else { return }
@@ -662,7 +662,7 @@ public extension AttributedText {
     var strokeColor: Color? {
         get {
             guard let attribute = self.attribute(name: NSAttributedStringKey.strokeColor.rawValue) else { return nil }
-            return AnyColor(color: attribute.value(withText: self.attributedString) as! UIColor)
+            return AnyColor(color: attribute.value as! UIColor)
         }
         set {
             guard let color = newValue else { return }
@@ -673,7 +673,7 @@ public extension AttributedText {
     var strokeWidth: Float? {
         get {
             guard let attribute = self.attribute(name: NSAttributedStringKey.strokeWidth.rawValue) else { return nil }
-            return (attribute.value(withText: self.attributedString) as! NSNumber).floatValue
+            return (attribute.value as! NSNumber).floatValue
         }
         set {
             guard let width = newValue else { return }
@@ -684,7 +684,7 @@ public extension AttributedText {
     var shadow: AttributedText.Shadow? {
         get {
             guard let attribute = self.attribute(name: NSAttributedStringKey.shadow.rawValue) else { return nil }
-            return AttributedText.Shadow(shadow: (attribute.value(withText: self.attributedString) as! NSShadow))
+            return AttributedText.Shadow(shadow: (attribute.value as! NSShadow))
         }
         set {
             guard let shadow = newValue else { return }
@@ -695,7 +695,7 @@ public extension AttributedText {
     var style: AttributedText.ParagraphStyle {
         get {
             guard let attribute = self.attribute(name: NSAttributedStringKey.paragraphStyle.rawValue) else { return AttributedText.ParagraphStyle() }
-            return AttributedText.ParagraphStyle(style: (attribute.value(withText: self.attributedString) as! NSParagraphStyle))
+            return AttributedText.ParagraphStyle(style: (attribute.value as! NSParagraphStyle))
         }
         set {
             self.set(attribute: AttributedText.Attribute.style(newValue))
