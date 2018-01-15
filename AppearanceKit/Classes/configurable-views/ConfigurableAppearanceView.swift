@@ -59,9 +59,10 @@ open class ConfigurableAppearanceView: UIView, ConfigurableUIContent {
     }
     
     final public func setNeedsUpdateSubviews() {
-        self._requiredSubviews.forEach { subview in
-            subview.removeFromSuperview()
-        }
+        self._requiredSubviews.forEach(UIView.removeFromSuperview)
+//        self._requiredSubviews.forEach { subview in
+//            subview.removeFromSuperview()
+//        }
         self._loadSubviews()
     }
 

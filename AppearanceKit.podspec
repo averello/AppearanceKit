@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AppearanceKit'
-  s.version          = '2.2'
+  s.version          = '2.3'
   s.summary          = 'Change the appearance of UIKit elements.'
 
 # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/averello/AppearanceKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 
   s.source_files = 'AppearanceKit/Classes/**/*'
   

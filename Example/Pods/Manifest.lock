@@ -1,5 +1,5 @@
 PODS:
-  - AppearanceKit (2.2):
+  - AppearanceKit (2.3):
     - ContentKit
     - RepresentationKit
   - ContentKit (2.0):
@@ -8,17 +8,15 @@ PODS:
 
 DEPENDENCIES:
   - AppearanceKit (from `../`)
-  - ContentKit (from `https://github.com/averello/ContentKit.git`, branch `feature/swift4`)
-  - RepresentationKit (from `https://github.com/averello/RepresentationKit.git`, branch `feature/swift4`)
+  - ContentKit (from `https://github.com/averello/ContentKit.git`)
+  - RepresentationKit (from `https://github.com/averello/RepresentationKit.git`)
 
 EXTERNAL SOURCES:
   AppearanceKit:
     :path: ../
   ContentKit:
-    :branch: feature/swift4
     :git: https://github.com/averello/ContentKit.git
   RepresentationKit:
-    :branch: feature/swift4
     :git: https://github.com/averello/RepresentationKit.git
 
 CHECKOUT OPTIONS:
@@ -30,10 +28,10 @@ CHECKOUT OPTIONS:
     :git: https://github.com/averello/RepresentationKit.git
 
 SPEC CHECKSUMS:
-  AppearanceKit: ba068bd64f395b806430bf8527af35abc8e66171
+  AppearanceKit: 563dc65444549f832e847ecd1261be21e555edce
   ContentKit: 1fd3e6e87cee63cc68e728d12bf9c0b764239249
   RepresentationKit: 13e70a642c8f6ff8ea045b76cbe7814d443e735d
 
-PODFILE CHECKSUM: 25250dad3e3f1af36f4063513a6050a4e7d41062
+PODFILE CHECKSUM: 5f0af37e4fd8a2dad8b1e492fe96f4b33e7423d8
 
 COCOAPODS: 1.3.1
