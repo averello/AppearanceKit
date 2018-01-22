@@ -34,9 +34,9 @@ open class ConfigurableAppearanceImageView: UIImageView, ConfigurableUIContent {
         set { self.image = newValue.image }
     }
     
-    public init(image: Image,
+    public init(image: Image?,
                 appearance: UIContentAppearance = DefaultUIContentAppearance()) {
-        super.init(image: image.image)
+        super.init(image: image?.image)
         self.configureContentAppearence(appearance)
         self._loadSubviews()
     }

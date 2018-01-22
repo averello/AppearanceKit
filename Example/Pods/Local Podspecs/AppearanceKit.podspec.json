@@ -1,6 +1,6 @@
 {
   "name": "AppearanceKit",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "summary": "Change the appearance of UIKit elements.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/averello/AppearanceKit",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/averello/AppearanceKit.git",
-    "tag": "2.3.1"
+    "tag": "2.3.2"
   },
   "platforms": {
     "ios": "9.0"
