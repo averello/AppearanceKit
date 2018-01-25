@@ -26,7 +26,18 @@
 import UIKit
 
 open class ConfigurableAppearanceControl: UIControl, ConfigurableUIContent {
-    public final var backgroundView: UIView?
+    public final var backgroundView: UIView? {
+        didSet {
+            if let backgroundView = self.backgroundView {
+                self.insertSubview(backgroundView, at: 0)
+            }
+            if let oldBackgroundView = oldValue {
+                oldBackgroundView.removeFromSuperview()
+            }
+            self.setNeedsLayout()
+            self.sizeToFit()
+        }
+    }
     private final var _requiredSubviews: [UIView] = []
 
     public init(frame: CGRect = CGRect.zero, appearance: UIContentAppearance = DefaultUIContentAppearance()) {
