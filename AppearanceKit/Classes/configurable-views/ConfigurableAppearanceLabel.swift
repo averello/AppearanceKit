@@ -34,8 +34,10 @@ open class ConfigurableAppearanceLabel: UILabel, ConfigurableUIContent {
             if let oldBackgroundView = oldValue {
                 oldBackgroundView.removeFromSuperview()
             }
-            self.setNeedsLayout()
-            self.sizeToFit()
+            DispatchQueue.main.async {
+                self.setNeedsLayout()
+                self.sizeToFit()
+            }
         }
     }
     private final var _requiredSubviews: [UIView] = []
