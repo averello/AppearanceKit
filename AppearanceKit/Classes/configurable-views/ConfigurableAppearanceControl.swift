@@ -63,7 +63,7 @@ open class ConfigurableAppearanceControl: UIControl, ConfigurableUIContent {
     }
     
     open func didLoadSubviews() {
-        
+        self.isExclusiveTouch = true
     }
     
     open func requiredSubviews() -> [UIView] {

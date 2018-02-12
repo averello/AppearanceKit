@@ -49,7 +49,7 @@ open class ConfigurableAppearanceButton: UIButton, ConfigurableUIContent {
     }
     
     open func didLoadSubviews() {
-        
+        self.isExclusiveTouch = true
     }
     
     open func requiredSubviews() -> [UIView] {
