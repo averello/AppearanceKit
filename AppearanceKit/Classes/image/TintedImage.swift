@@ -145,17 +145,30 @@ fileprivate extension TintedImage.BlendMode {
 fileprivate extension UIImage {
     
     fileprivate func tintedImage_blendedImage(usingColor color: UIColor, blendMode: CGBlendMode) -> UIImage? {
-        let size = self.size
-        UIGraphicsBeginImageContextWithOptions(size, false, self.scale)
-        defer {
-            UIGraphicsEndImageContext()
+        return autoreleasepool {
+            let size = self.size
+            let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            let draw = {
+                self.draw(in: rect)
+                color.set()
+            }
+            if #available(iOS 10.0,  *) {
+                let renderer = UIGraphicsImageRenderer(size: size)
+                return renderer.image(actions: { (context: UIGraphicsImageRendererContext) in
+                    draw()
+                    context.fill(rect, blendMode: blendMode)
+                })
+            }
+            else {
+                UIGraphicsBeginImageContextWithOptions(size, false, self.scale)
+                defer { UIGraphicsEndImageContext() }
+                guard let _ = UIGraphicsGetCurrentContext() else { return nil }
+                draw()
+                UIRectFillUsingBlendMode(rect, blendMode)
+                guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
+                return result
+            }
         }
-        guard let _ = UIGraphicsGetCurrentContext() else { return nil }
-        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        self.draw(in: rect)
-        color.set() // set fill & stroke
-        UIRectFillUsingBlendMode(rect, blendMode)
-        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        return result
     }
 }
+
