@@ -30,7 +30,7 @@ public struct TextColor: Color {
     public var highlighted: Color? = nil
     public var disabled: Color? = nil
     public var selected: Color? = nil
-
+    
     public init(normal: Color,
                 highlighted: Color? = nil,
                 selected: Color? = nil,
@@ -43,7 +43,35 @@ public struct TextColor: Color {
 }
 
 public extension TextColor {
+    
     public var color: UIColor {
-         return self.normal.color
+        return self.normal.color
     }
 }
+
+public extension TextColor {
+    
+    public func configure(button: UIButton,
+                          forStates states: [UIControlState]) {
+        states.forEach { state in
+            button.setTitleColor(self.color(fromState: state)?.color,
+                                 for: state)
+        }
+    }
+    
+    public func color(fromState state: UIControlState) -> Color? {
+        switch state {
+        case UIControlState.disabled:
+            return self.disabled
+        case UIControlState.normal:
+            return self
+        case UIControlState.highlighted:
+            return self.highlighted
+        case UIControlState.selected:
+            return self.selected
+        default:
+            return self.normal
+        }
+    }
+}
+

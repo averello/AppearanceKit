@@ -67,3 +67,10 @@ public extension Font {
     public var disabled: Font? { return nil }
     public var selected: Font? { return nil }
 }
+
+public extension Font {
+    
+    public func configure(button: UIButton) {
+        button.titleLabel?.font = self.font
+    }
+}
