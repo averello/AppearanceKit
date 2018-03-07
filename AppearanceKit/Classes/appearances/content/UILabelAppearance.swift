@@ -39,18 +39,24 @@ public protocol UILabelAppearance: UIContentAppearance {
 public extension UILabelAppearance {
     
     public func configure(_ content: ConfigurableUIContent) {
-        let aConfLabel = content as? ConfigurableAppearanceLabel
-        let aLabel = content as? UILabel
-        guard let aContent = aConfLabel ?? aLabel else { return }
+        if let aLabel = content as? UILabel {
+            self.configure(aLabel)
+            return
+        }
+        //assert(false)
+    }
+    
+    public func configure<L>(_ content: L) where L: UILabel {
+        let aContent = content
         
         aContent.backgroundColor = self.backgroundColor?.color
         aContent.tintColor = self.tintColor?.color
-
+        
         aContent.font = self.font?.font
         aContent.textColor = self.textColor?.color
         aContent.highlightedTextColor = self.textColor?.highlighted?.color
         aContent.shadowColor = self.shadowColor?.color
-
+        
         if let alignement = self.alignement {
             aContent.textAlignment = alignement
         }
@@ -66,6 +72,6 @@ public extension UILabelAppearance {
         if let numberOfLines = self.numberOfLines {
             aContent.numberOfLines = numberOfLines
         }
+        
     }
 }
-

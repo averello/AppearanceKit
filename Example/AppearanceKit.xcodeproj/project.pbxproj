@@ -7,20 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		61A99CCA8C06BF12AAF750AD /* Pods_AppearanceKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFD63EEEFC5517A8293CC99B /* Pods_AppearanceKit_Tests.framework */; };
+		764A218AA5C436083C9B9FC4 /* Pods_AppearanceKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCEC97BD48E5273ED2F2593 /* Pods_AppearanceKit_Tests.framework */; };
 		F8B1405D1F62BAF400285C3E /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0EF75635C7CA794064E2326E /* Pods-AppearanceKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppearanceKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppearanceKit_Tests/Pods-AppearanceKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* AppearanceKit_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppearanceKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		73A435F0A059F6822F466CA6 /* AppearanceKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AppearanceKit.podspec; path = ../AppearanceKit.podspec; sourceTree = "<group>"; };
 		7EB7D8DB96CA94A134CADAB9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		8025643EB3766DAB67548F5C /* Pods-AppearanceKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppearanceKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppearanceKit_Tests/Pods-AppearanceKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		979EDEAF339C3E81A858C794 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		9CE8DB0E0CA0E6CB49162004 /* Pods-AppearanceKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppearanceKit_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppearanceKit_Tests/Pods-AppearanceKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		EFD63EEEFC5517A8293CC99B /* Pods_AppearanceKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppearanceKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AD1D9FEB872C909F74DF870 /* Pods-AppearanceKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppearanceKit_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppearanceKit_Tests/Pods-AppearanceKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		DFCEC97BD48E5273ED2F2593 /* Pods_AppearanceKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppearanceKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,7 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61A99CCA8C06BF12AAF750AD /* Pods_AppearanceKit_Tests.framework in Frameworks */,
+				764A218AA5C436083C9B9FC4 /* Pods_AppearanceKit_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,8 +41,8 @@
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
-				9B61518C39873AC10BF66129 /* Pods */,
-				F581B505CD7FEE866F12CF80 /* Frameworks */,
+				60932F4FCBB81EB3F8E5BFF9 /* Pods */,
+				6C69E77659DE1258DEC7AE12 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,19 +81,19 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		9B61518C39873AC10BF66129 /* Pods */ = {
+		60932F4FCBB81EB3F8E5BFF9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0EF75635C7CA794064E2326E /* Pods-AppearanceKit_Tests.debug.xcconfig */,
-				9CE8DB0E0CA0E6CB49162004 /* Pods-AppearanceKit_Tests.release.xcconfig */,
+				8025643EB3766DAB67548F5C /* Pods-AppearanceKit_Tests.debug.xcconfig */,
+				9AD1D9FEB872C909F74DF870 /* Pods-AppearanceKit_Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		F581B505CD7FEE866F12CF80 /* Frameworks */ = {
+		6C69E77659DE1258DEC7AE12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EFD63EEEFC5517A8293CC99B /* Pods_AppearanceKit_Tests.framework */,
+				DFCEC97BD48E5273ED2F2593 /* Pods_AppearanceKit_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -105,12 +105,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "AppearanceKit_Tests" */;
 			buildPhases = (
-				767ED91464017797BE2BD974 /* [CP] Check Pods Manifest.lock */,
+				012C6F8A15636734C27EF8FF /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
-				DAB52471DD40B912C78BFBFF /* [CP] Embed Pods Frameworks */,
-				874B375FF762CFA2884A0550 /* [CP] Copy Pods Resources */,
+				DEEBA530C760638745EBAF40 /* [CP] Embed Pods Frameworks */,
+				4C69412336306DDCCF2D8E44 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,7 +167,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		767ED91464017797BE2BD974 /* [CP] Check Pods Manifest.lock */ = {
+		012C6F8A15636734C27EF8FF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -185,7 +185,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		874B375FF762CFA2884A0550 /* [CP] Copy Pods Resources */ = {
+		4C69412336306DDCCF2D8E44 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -200,7 +200,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AppearanceKit_Tests/Pods-AppearanceKit_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DAB52471DD40B912C78BFBFF /* [CP] Embed Pods Frameworks */ = {
+		DEEBA530C760638745EBAF40 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -339,7 +339,7 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0EF75635C7CA794064E2326E /* Pods-AppearanceKit_Tests.debug.xcconfig */;
+			baseConfigurationReference = 8025643EB3766DAB67548F5C /* Pods-AppearanceKit_Tests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -358,7 +358,7 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9CE8DB0E0CA0E6CB49162004 /* Pods-AppearanceKit_Tests.release.xcconfig */;
+			baseConfigurationReference = 9AD1D9FEB872C909F74DF870 /* Pods-AppearanceKit_Tests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
