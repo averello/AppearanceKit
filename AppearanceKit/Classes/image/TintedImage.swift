@@ -83,7 +83,7 @@ public final class TintedImage: ContentKit.Image {
     final private lazy var tintedImage: ContentKit.Image = {
         let color = self.color.color
         let blendMode = self.blendMode.cgBlendMode
-        let options = DrawnImage.Options(size: self.size) { (image: ContentKit.Image, bounds: CGRect, context: CGContext) in
+        let options = DrawnImage.Options(size: self.decorated.size) { (image: ContentKit.Image, bounds: CGRect, context: CGContext) in
             image.image.draw(in: bounds)
             color.set()
             UIRectFillUsingBlendMode(bounds, blendMode)
