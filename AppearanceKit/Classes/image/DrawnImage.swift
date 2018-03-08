@@ -35,6 +35,11 @@ final public class DrawnImage: ContentKit.Image {
     public struct Options {
         public let size: ContentKit.Size
         public let drawBlock: DrawBlock
+        
+        public init(size: ContentKit.Size, drawBlock: @escaping DrawBlock) {
+            self.size = size
+            self.drawBlock = drawBlock
+        }
     }
     
     final private let decorated: ContentKit.Image
