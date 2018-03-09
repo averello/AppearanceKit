@@ -43,4 +43,5 @@ public struct AnyUILabelAppearance: UILabelAppearance {
     
     public var backgroundColor: Color? { return self.appearance.backgroundColor }
     public var tintColor: Color? { return self.appearance.tintColor }
+    public var layerAppearance: CAContentAppearance? { return self.appearance.layerAppearance }
 }

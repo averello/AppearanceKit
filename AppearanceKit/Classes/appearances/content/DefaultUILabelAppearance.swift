@@ -39,5 +39,7 @@ public struct DefaultUILabelAppearance : UILabelAppearance {
     public var backgroundColor: Color? = ClearColor()
     public var tintColor: Color?
     
+    public var layerAppearance: CAContentAppearance?
+    
     public init() {}
 }

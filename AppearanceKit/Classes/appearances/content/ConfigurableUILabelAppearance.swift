@@ -36,6 +36,7 @@ public struct ConfigurableUILabelAppearance: UILabelAppearance {
     public var alignement : NSTextAlignment?
     public var backgroundColor: Color?
     public var tintColor: Color?
+    public var layerAppearance: CAContentAppearance?
     
     public init(appearance: UILabelAppearance = DefaultUILabelAppearance()) {
         self.init(font: appearance.font,
@@ -47,7 +48,8 @@ public struct ConfigurableUILabelAppearance: UILabelAppearance {
                   minimumScaleFactor: appearance.minimumScaleFactor,
                   alignement: appearance.alignement,
                   backgroundColor: appearance.backgroundColor,
-                  tintColor: appearance.tintColor)
+                  tintColor: appearance.tintColor,
+                  layerAppearance: appearance.layerAppearance)
     }
     
     public init(font: Font? = DefaultUILabelAppearance().font,
@@ -59,7 +61,8 @@ public struct ConfigurableUILabelAppearance: UILabelAppearance {
                 minimumScaleFactor: Float? = DefaultUILabelAppearance().minimumScaleFactor,
                 alignement : NSTextAlignment? = DefaultUILabelAppearance().alignement,
                 backgroundColor: Color? = DefaultUILabelAppearance().backgroundColor,
-                tintColor: Color? = DefaultUILabelAppearance().tintColor) {
+                tintColor: Color? = DefaultUILabelAppearance().tintColor,
+                layerAppearance: CAContentAppearance? = DefaultUILabelAppearance().layerAppearance) {
         self.font = font
         self.textColor = textColor
         self.shadowColor = shadowColor
@@ -70,5 +73,6 @@ public struct ConfigurableUILabelAppearance: UILabelAppearance {
         self.alignement = alignement
         self.backgroundColor = backgroundColor
         self.tintColor = tintColor
+        self.layerAppearance = layerAppearance
     }
 }

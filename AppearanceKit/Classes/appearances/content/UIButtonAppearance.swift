@@ -94,10 +94,13 @@ public struct DefaultUIButtonAppearance: UIButtonAppearance {
     public var backgroundColor: Color?
     public var tintColor: Color?
     
+    public var layerAppearance: CAContentAppearance?
+    
     public var shadowColor: TextColor?
     public var shadowOffset: AppearanceKit.Size?
     
     public var titleLabelAppearance: UILabelAppearance?
+    
     
     public init(font: Font? = SystemFont(),
                 titleColor: TextColor? = TextColor(normal: WhiteColor(), disabled: LightTextColor()),

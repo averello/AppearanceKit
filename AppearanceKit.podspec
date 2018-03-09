@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AppearanceKit'
-  s.version          = '2.7.2'
+  s.version          = '2.8'
   s.summary          = 'Change the appearance of UIKit elements.'
 
 # This description is used to generate tags and improve search results.

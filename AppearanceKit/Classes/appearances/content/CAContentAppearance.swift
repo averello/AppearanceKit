@@ -1,8 +1,8 @@
 //
-//  Types.swift
+//  CAContentAppearance.swift
 //  AppearanceKit
 //
-//  Created by Georges Boumis on 29/05/2017.
+//  Created by Georges Boumis on 09/03/2018.
 //
 //  Licensed to the Apache Software Foundation (ASF) under one
 //  or more contributor license agreements.  See the NOTICE file
@@ -25,33 +25,13 @@
 
 import Foundation
 
-public struct Size {
-    public let width: Float
-    public let height: Float
-    
-    public init(width: Float, height: Float) {
-        self.width = width
-        self.height = height
-    }
-    
-    public static let zero: Size = Size(width: 0, height: 0)
+public protocol CAContentAppearance: ContentAppearance {
+    var backgroundColor: Color? { get }
+    func configure(_ content: ConfigurableCAContent)
 }
 
-public extension Size {
-    
-    public init(size: CGSize) {
-        self.init(width: Float(size.width), height: Float(size.height))
-    }
-    
-    public var asCGSize: CGSize {
-        return CGSize(size: self)
+public extension CAContentAppearance {
+    public func configure(_ content: ConfigurableCAContent) {
+        content.layer.backgroundColor = self.backgroundColor?.color.cgColor
     }
 }
-
-public extension CGSize {
-    
-    public init(size: Size) {
-        self.init(width: CGFloat(size.width), height: CGFloat(size.height))
-    }
-}
-

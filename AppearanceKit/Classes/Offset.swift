@@ -1,8 +1,8 @@
 //
-//  Types.swift
+//  Offset.swift
 //  AppearanceKit
 //
-//  Created by Georges Boumis on 29/05/2017.
+//  Created by Georges Boumis on 09/03/2018.
 //
 //  Licensed to the Apache Software Foundation (ASF) under one
 //  or more contributor license agreements.  See the NOTICE file
@@ -25,33 +25,32 @@
 
 import Foundation
 
-public struct Size {
-    public let width: Float
-    public let height: Float
+public struct Offset {
+    public let horizontal: Float
+    public let vertical: Float
     
-    public init(width: Float, height: Float) {
-        self.width = width
-        self.height = height
+    public init(horizontal: Float, vertical: Float) {
+        self.horizontal = horizontal
+        self.vertical = vertical
     }
-    
-    public static let zero: Size = Size(width: 0, height: 0)
+    public static let zero: Offset = Offset(horizontal: 0, vertical: 0)
 }
 
-public extension Size {
+public extension Offset {
     
-    public init(size: CGSize) {
-        self.init(width: Float(size.width), height: Float(size.height))
+    public init(offset: UIOffset) {
+        self.init(horizontal: Float(offset.horizontal), vertical: Float(offset.vertical))
     }
-    
-    public var asCGSize: CGSize {
-        return CGSize(size: self)
-    }
-}
 
-public extension CGSize {
-    
-    public init(size: Size) {
-        self.init(width: CGFloat(size.width), height: CGFloat(size.height))
+    public var asUIOffset: UIOffset {
+        return UIOffset(offset: self)
     }
 }
 
+public extension UIOffset {
+    
+    public init(offset: Offset) {
+        self.init(horizontal: CGFloat(offset.horizontal),
+                  vertical: CGFloat(offset.vertical))
+    }
+}

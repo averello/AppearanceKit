@@ -28,19 +28,30 @@ import Foundation
 public protocol UIContentAppearance: ContentAppearance {
     var backgroundColor: Color? { get }
     var tintColor: Color? { get }
+    
+    var layerAppearance: CAContentAppearance? { get }
+    
     func configure(_ content: ConfigurableUIContent)
 }
 
 public extension UIContentAppearance {
+    
     public func configure(_ content: ConfigurableUIContent) {
         content.view.backgroundColor = self.backgroundColor?.color
         content.view.tintColor = self.tintColor?.color
+        
+        if let caContent = content as? ConfigurableCAContent,
+            let layerAppearance = self.layerAppearance {
+            caContent.configureContentAppearence(layerAppearance)
+        }
     }
 }
 
 public struct DefaultUIContentAppearance: UIContentAppearance {
     public var backgroundColor: Color?
     public var tintColor: Color?
+    
+    public var layerAppearance: CAContentAppearance?
 
     public init(backgroundColor: Color? = nil, tintColor: Color? = nil) {
         self.backgroundColor = backgroundColor
