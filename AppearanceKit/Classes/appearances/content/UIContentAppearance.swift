@@ -52,8 +52,8 @@ public struct DefaultUIContentAppearance: UIContentAppearance {
     public var tintColor: Color?
     
     public var layerAppearance: CAContentAppearance?
-
-    public init(backgroundColor: Color? = nil, tintColor: Color? = nil) {
+    
+    public init(backgroundColor: Color? = nil, tintColor: Color? = nil, layerAppearance: CAContentAppearance? = nil) {
         self.backgroundColor = backgroundColor
         self.tintColor = tintColor
     }
