@@ -43,6 +43,10 @@ public extension UILabelAppearance {
             self.configure(aLabel)
             return
         }
+        if let aTextField = content as? UITextField {
+            self.configure(aTextField)
+            return
+        }
         //assert(false)
     }
     
@@ -74,4 +78,22 @@ public extension UILabelAppearance {
         }
         
     }
+    
+    public func configure<T>(_ content: T) where T: UITextField {
+        let aContent = content
+        
+        aContent.backgroundColor = self.backgroundColor?.color
+        aContent.tintColor = self.tintColor?.color
+        
+        aContent.font = self.font?.font
+        aContent.textColor = self.textColor?.color
+        
+        if let alignement = self.alignement {
+            aContent.textAlignment = alignement
+        }
+        if let adjusts = self.adjustsFontSizeToFitWidth {
+            aContent.adjustsFontSizeToFitWidth = adjusts
+        }
+    }
 }
+
