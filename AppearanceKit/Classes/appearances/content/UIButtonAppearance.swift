@@ -115,6 +115,7 @@ public struct DefaultUIButtonAppearance: UIButtonAppearance {
         self.tintColor = tintColor
         self.shadowColor = shadowColor
         self.shadowOffset = shadowOffset
+        self.titleLabelAppearance = titleLabelAppearance
     }
 }
 
