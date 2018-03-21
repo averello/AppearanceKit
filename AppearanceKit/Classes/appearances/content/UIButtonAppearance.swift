@@ -55,6 +55,7 @@ public extension UIButtonAppearance {
             let textColor = titleLabelAppearance.textColor
             aContent.setTitleColor(textColor?.color, for: UIControlState.normal)
             aContent.setTitleColor(textColor?.highlighted?.color, for: UIControlState.highlighted)
+            aContent.setTitleColor(textColor?.highlighted?.color, for: [UIControlState.highlighted, UIControlState.selected])
             aContent.setTitleColor(textColor?.disabled?.color, for: UIControlState.disabled)
             aContent.setTitleColor(textColor?.selected?.color, for: UIControlState.selected)
             
@@ -70,11 +71,14 @@ public extension UIButtonAppearance {
         else {
             aContent.setTitleColor(self.titleColor?.color, for: UIControlState.normal)
             aContent.setTitleColor(self.titleColor?.highlighted?.color, for: UIControlState.highlighted)
+            aContent.setTitleColor(self.titleColor?.highlighted?.color, for: [UIControlState.highlighted, UIControlState.selected])
             aContent.setTitleColor(self.titleColor?.disabled?.color, for: UIControlState.disabled)
             aContent.setTitleColor(self.titleColor?.selected?.color, for: UIControlState.selected)
             
             aContent.setTitleShadowColor(self.shadowColor?.color, for: UIControlState.normal)
-            aContent.setTitleShadowColor(self.shadowColor?.highlighted?.color, for: UIControlState.normal)
+            aContent.setTitleShadowColor(self.shadowColor?.highlighted?.color, for: UIControlState.highlighted)
+            aContent.setTitleShadowColor(self.shadowColor?.highlighted?.color, for: [UIControlState.highlighted, UIControlState.selected])
+            
             aContent.setTitleColor(self.shadowColor?.disabled?.color, for: UIControlState.disabled)
             aContent.setTitleColor(self.shadowColor?.selected?.color, for: UIControlState.selected)
             
