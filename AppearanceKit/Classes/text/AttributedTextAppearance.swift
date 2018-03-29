@@ -52,6 +52,7 @@ public extension AttributedTextAppearance {
 }
 
 public struct DefaultAttributedTextAppearance: AttributedTextAppearance {
+    
     public var font: Font?
     public var color: Color?
     public var backgroundColor: Color?
@@ -67,7 +68,13 @@ public struct DefaultAttributedTextAppearance: AttributedTextAppearance {
                 strokeWidth: Float? = nil,
                 shadow: AttributedText.Shadow? = nil,
                 style: AttributedText.ParagraphStyle? = nil) {
-        
+        self.font            = font
+        self.color           = color
+        self.backgroundColor = backgroundColor
+        self.strokeColor     = strokeColor
+        self.strokeWidth     = strokeWidth
+        self.shadow          = shadow
+        self.style           = style
     }
     
     public init(labelAppearance: UILabelAppearance) {
