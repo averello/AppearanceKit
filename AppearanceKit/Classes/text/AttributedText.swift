@@ -513,11 +513,15 @@ public extension AttributedText.Shadow.Offset {
 
 public extension AttributedText {
     
-    public var customPlaygroundQuickLook: PlaygroundQuickLook {
-        return PlaygroundQuickLook.view(self.debugQuickLookObject() as! UILabel)
+    public var playgroundDescription: Any {
+        return self.__visualRepresentation
     }
     
     public func debugQuickLookObject() -> AnyObject? {
+        return self.__visualRepresentation
+    }
+    
+    private var __visualRepresentation: UIView {
         let label = UILabel(frame: CGRect.zero)
         label.customAttributedText = self
         label.sizeToFit()

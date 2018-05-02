@@ -34,14 +34,3 @@ public struct RandomColor: Color {
                              alpha: 0.75)
     }
 }
-
-extension RandomColor: CustomPlaygroundQuickLookable {
-    
-    public var customPlaygroundQuickLook: PlaygroundQuickLook {
-        return PlaygroundQuickLook.color(self.color)
-    }
-    
-    public func debugQuickLookObject() -> AnyObject? {
-        return self.color
-    }
-}

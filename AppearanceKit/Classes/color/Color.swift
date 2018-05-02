@@ -27,15 +27,15 @@ import Foundation
 import UIKit
 import QuartzCore
 
-public protocol Color: CustomPlaygroundQuickLookable {
+public protocol Color: CustomPlaygroundDisplayConvertible {
     var color: UIColor { get }
     func with(alpha: Float) -> Color
 }
 
 extension Color {
     
-    public var customPlaygroundQuickLook: PlaygroundQuickLook {
-        return PlaygroundQuickLook.color(self.color)
+    public var playgroundDescription: Any {
+        return self.color
     }
     
     public func debugQuickLookObject() -> AnyObject? {

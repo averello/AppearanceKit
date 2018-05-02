@@ -57,14 +57,3 @@ public struct AnyColor: Color {
         self._color = UIColor(white: CGFloat(white), alpha: CGFloat(alpha))
     }
 }
-
-public extension AnyColor {
-    
-    public var customPlaygroundQuickLook: PlaygroundQuickLook {
-        return PlaygroundQuickLook.color(self.color)
-    }
-    
-    public func debugQuickLookObject() -> AnyObject? {
-        return self.color
-    }
-}
