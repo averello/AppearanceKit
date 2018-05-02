@@ -67,7 +67,7 @@ extension AttributedText {
     public init(_ string: NSAttributedString) {
         self.content = string.string
         var attrs = Dictionary<String, Attribute>()
-        for (key,value) in string.attributes(at: 0, effectiveRange: nil).flatMap({ key,value -> (String,Attribute)? in
+        for (key,value) in string.attributes(at: 0, effectiveRange: nil).compactMap({ key,value -> (String,Attribute)? in
             guard let attribute = AttributedText.Attribute(string: string, attribute: key.rawValue, value: value) else { return nil }
             return (key.rawValue, attribute)
             }) {
