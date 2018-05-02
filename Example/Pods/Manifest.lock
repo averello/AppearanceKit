@@ -1,5 +1,5 @@
 PODS:
-  - AppearanceKit (2.10.1):
+  - AppearanceKit (2.11):
     - ContentKit
     - RepresentationKit
   - ContentKit (2.0):
@@ -13,7 +13,7 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   AppearanceKit:
-    :path: ../
+    :path: "../"
   ContentKit:
     :git: https://github.com/averello/ContentKit.git
   RepresentationKit:
@@ -28,10 +28,10 @@ CHECKOUT OPTIONS:
     :git: https://github.com/averello/RepresentationKit.git
 
 SPEC CHECKSUMS:
-  AppearanceKit: 2210c7df00464c7c9ae7380997db97487fb2aa07
+  AppearanceKit: 3d96fc896ac3768110c19c52dc694caf6c555514
   ContentKit: 1fd3e6e87cee63cc68e728d12bf9c0b764239249
   RepresentationKit: 13e70a642c8f6ff8ea045b76cbe7814d443e735d
 
 PODFILE CHECKSUM: 5f0af37e4fd8a2dad8b1e492fe96f4b33e7423d8
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

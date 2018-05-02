@@ -35,9 +35,13 @@ final public class DrawnImage: ContentKit.Image {
     public struct Options {
         public let size: ContentKit.Size
         public let drawBlock: DrawBlock
+        public let configuration: CGContext.Configuration?
         
-        public init(size: ContentKit.Size, drawBlock: @escaping DrawBlock) {
+        public init(size: ContentKit.Size,
+                    configuration: CGContext.Configuration? = nil,
+                    drawBlock: @escaping DrawBlock) {
             self.size = size
+            self.configuration = configuration
             self.drawBlock = drawBlock
         }
     }
@@ -45,7 +49,8 @@ final public class DrawnImage: ContentKit.Image {
     final private let decorated: ContentKit.Image
     final private let options: Options
     
-    public init(decorated: ContentKit.Image, options: Options) {
+    public init(decorated: ContentKit.Image,
+                options: Options) {
         self.decorated = decorated
         self.options = options
     }
@@ -58,10 +63,17 @@ final public class DrawnImage: ContentKit.Image {
             let draw  = self.options.drawBlock
             let scale = self.decorated.image.scale
             let image = self.decorated
+            let configuration = self.options.configuration
             if #available(iOS 10.0,  *) {
                 let renderer = UIGraphicsImageRenderer(size: size)
                 let image = renderer.image(actions: { (context: UIGraphicsImageRendererContext) in
-                    draw(image, rect, context.cgContext)
+                    let cgContext = context.cgContext
+                    cgContext.saveGState()
+                    defer { cgContext.restoreGState() }
+                    if let conf = configuration {
+                        conf.configure(context: cgContext)
+                    }
+                    draw(image, rect, cgContext)
                 })
                 return AnyImage(image: image)
             }
@@ -69,6 +81,11 @@ final public class DrawnImage: ContentKit.Image {
                 UIGraphicsBeginImageContextWithOptions(size, false, scale)
                 defer { UIGraphicsEndImageContext() }
                 guard let context = UIGraphicsGetCurrentContext() else { return self.decorated }
+                context.saveGState()
+                defer { context.restoreGState() }
+                if let conf = configuration {
+                    conf.configure(context: context)
+                }
                 draw(image, rect, context)
                 guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return self.decorated }
                 return AnyImage(image: result)
@@ -80,4 +97,3 @@ final public class DrawnImage: ContentKit.Image {
         return self.drawnImage.image
     }
 }
-
