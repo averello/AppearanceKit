@@ -25,7 +25,7 @@
 import Foundation
 import RepresentationKit
 
-public protocol Text: Content, Representable, LosslessStringConvertible {
+public protocol Text: Content, Representable, LosslessStringConvertible, CustomPlaygroundDisplayConvertible {
     var content: String { get }
     var empty: Bool { get }
 }
@@ -36,15 +36,18 @@ public extension Text {
         return self.content
     }
     
+    public var empty: Bool { return self.content.isEmpty }
+}
+
+public extension Text {
+    
     public func debugQuickLookObject() -> AnyObject? {
         return self.content as NSString
     }
     
-    public var customPlaygroundQuickLook: PlaygroundQuickLook {
-        return PlaygroundQuickLook.text(self.content)
+    public var playgroundDescription: Any {
+        return self.content
     }
-    
-    public var empty: Bool { return self.content.isEmpty }
 }
 
 public extension Text {

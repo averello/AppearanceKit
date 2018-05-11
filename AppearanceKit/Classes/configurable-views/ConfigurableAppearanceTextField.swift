@@ -30,10 +30,15 @@ open class ConfigurableAppearanceTextField: UITextField, ConfigurableUIContent {
     public final var backgroundView: UIView? {
         didSet {
             if let backgroundView = self.backgroundView {
+                if let oldBackgroundView = oldValue, oldBackgroundView !== backgroundView {
+                    oldBackgroundView.removeFromSuperview()
+                }
                 self.insertSubview(backgroundView, at: 0)
             }
-            if let oldBackgroundView = oldValue {
-                oldBackgroundView.removeFromSuperview()
+            else {
+                if let oldBackgroundView = oldValue {
+                    oldBackgroundView.removeFromSuperview()
+                }
             }
             DispatchQueue.main.async {
                 self.setNeedsLayout()

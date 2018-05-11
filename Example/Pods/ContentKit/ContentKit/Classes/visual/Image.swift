@@ -24,7 +24,7 @@
 
 import Foundation
 
-public protocol Image: VisualContent, CustomPlaygroundQuickLookable {
+public protocol Image: VisualContent, CustomPlaygroundDisplayConvertible {
     var image: UIImage { get }
     var size: Size { get }
     func scaled(_ scale: Float) -> Image
@@ -47,9 +47,10 @@ public extension Image {
 
 public extension Image {
     
-    public var customPlaygroundQuickLook: PlaygroundQuickLook {
-        return PlaygroundQuickLook.image(self.image)
+    public var playgroundDescription: Any {
+        return self.image
     }
+    
 }
 
 public extension Image {
