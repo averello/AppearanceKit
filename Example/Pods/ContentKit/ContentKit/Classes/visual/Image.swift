@@ -27,11 +27,6 @@ import Foundation
 public protocol Image: VisualContent, CustomPlaygroundDisplayConvertible {
     var image: UIImage { get }
     var size: Size { get }
-    func scaled(_ scale: Float) -> Image
-    
-    func configure(imageView: UIImageView)
-    func configure(button: UIButton)
-    func configureBackground(button: UIButton)
 }
 
 public extension Image {
@@ -71,7 +66,7 @@ public extension Image {
                         for: UIControlState.normal)
     }
     
-    func configureBackground(button: UIButton) {
+    public func configureBackground(button: UIButton) {
         button.setBackgroundImage(self.image,
                                   for: UIControlState.normal)
     }

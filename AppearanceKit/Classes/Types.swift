@@ -1,8 +1,8 @@
 //
-//  Offset.swift
+//  Types.swift
 //  AppearanceKit
 //
-//  Created by Georges Boumis on 09/03/2018.
+//  Created by Georges Boumis on 15/05/2018.
 //
 //  Licensed to the Apache Software Foundation (ASF) under one
 //  or more contributor license agreements.  See the NOTICE file
@@ -25,33 +25,19 @@
 
 import Foundation
 
-public struct Offset {
-    public let horizontal: Float
-    public let vertical: Float
-    
-    public init(horizontal: Float, vertical: Float) {
-        self.horizontal = horizontal
-        self.vertical = vertical
-    }
-    
-    public static let zero: Offset = Offset(horizontal: 0, vertical: 0)
-}
+public typealias Degrees = Float
+public typealias Radians = Float
 
-public extension Offset {
-    
-    public init(offset: UIOffset) {
-        self.init(horizontal: Float(offset.horizontal), vertical: Float(offset.vertical))
-    }
+internal extension Degrees {
 
-    public var asUIOffset: UIOffset {
-        return UIOffset(offset: self)
+    internal var asRadians: Radians {
+        return Radians((self / 180) * Degrees.pi)
     }
 }
 
-public extension UIOffset {
-    
-    public init(offset: Offset) {
-        self.init(horizontal: CGFloat(offset.horizontal),
-                  vertical: CGFloat(offset.vertical))
+internal extension Radians {
+
+    internal var asDegrees: Degrees {
+        return Degrees((self * 180) / Radians.pi)
     }
 }

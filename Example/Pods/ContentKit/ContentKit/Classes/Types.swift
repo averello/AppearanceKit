@@ -46,6 +46,7 @@ public extension Size {
 }
 
 public extension CGSize {
+    
     public init(size: Size) {
         self.init(width: CGFloat(size.width), height: CGFloat(size.height))
     }
