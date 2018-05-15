@@ -27,16 +27,16 @@ import Foundation
 import ContentKit
 import QuartzCore
 
-class RotatedImage: ContentKit.Image {
+public class RotatedImage: ContentKit.Image {
 
-    enum Rotation {
+    public enum Rotation {
         case right
         case left
         case arbitrary(AppearanceKit.Degrees)
     }
 
     final private let decorated: ContentKit.Image
-    final let rotation: RotatedImage.Rotation
+    final public let rotation: RotatedImage.Rotation
 
     public init(_ decorated: ContentKit.Image,
                 rotation: RotatedImage.Rotation) {
@@ -90,7 +90,7 @@ class RotatedImage: ContentKit.Image {
 
 fileprivate extension RotatedImage.Rotation {
 
-    var degrees: AppearanceKit.Degrees {
+    fileprivate var degrees: AppearanceKit.Degrees {
         switch self {
         case RotatedImage.Rotation.left:
             return Degrees(-90)
@@ -104,7 +104,7 @@ fileprivate extension RotatedImage.Rotation {
     }
 }
 
-final class MultipleStateRotatedImage: RotatedImage, MultipleStateImage {
+final public class MultipleStateRotatedImage: RotatedImage, MultipleStateImage {
 
     final private let decorated: AppearanceKit.MultipleStateImage
 
