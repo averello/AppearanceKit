@@ -72,7 +72,7 @@ public final class TintedImage: ContentKit.Image {
     final private let color: Color
     final private let blendMode: TintedImage.BlendMode
     
-    public init(decorated: ContentKit.Image,
+    public init(_ decorated: ContentKit.Image,
                 color: Color = TintedImage.DefaultTintColor(),
                 blendMode: TintedImage.BlendMode = TintedImage.BlendMode.sourceAtop) {
         self.decorated = decorated
@@ -100,7 +100,7 @@ public extension ContentKit.Image {
     
     public func tintedImage(withColor color: Color = TintedImage.DefaultTintColor(),
                             blendMode: TintedImage.BlendMode = TintedImage.BlendMode.sourceAtop) -> ContentKit.Image {
-        return TintedImage(decorated: self,
+        return TintedImage(self,
                            color: color,
                            blendMode: blendMode)
     }
