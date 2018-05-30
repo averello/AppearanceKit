@@ -32,10 +32,10 @@ public protocol MultipleStateImage: Image {
     var selected: Image? { get }
     var disabled: Image? { get }
     var original: UIImage? { get }
-
+    
     func configure(button: UIButton,
                    forStates states: [UIControlState])
-
+    
     func configureBackground(button: UIButton,
                              forStates states: [UIControlState])
     

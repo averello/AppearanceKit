@@ -37,7 +37,7 @@ public class RenderingModeImage: ContentKit.Image {
     final private let decorated: Image
     final fileprivate let mode: RenderingModeImage.Mode
     
-    public init(rendered image: Image,
+    public init(_ image: Image,
                 renderingMode: RenderingModeImage.Mode) {
         self.decorated = image
         self.mode = renderingMode
@@ -53,17 +53,17 @@ final public class MultipleStateRenderingModeImage: RenderingModeImage, Multiple
     
     final private let decorated: MultipleStateImage
     
-    public init(rendered image: MultipleStateImage,
+    public init(_ image: MultipleStateImage,
                 renderingMode: RenderingModeImage.Mode) {
         self.decorated = image
-        super.init(rendered: image,
+        super.init(image,
                    renderingMode: renderingMode)
     }
     
     final private func rendered(_ image: Image?) -> RenderingModeImage? {
         guard let img = image else { return nil }
-        return RenderingModeImage(rendered: img,
-                              renderingMode: self.mode)
+        return RenderingModeImage(img,
+                                  renderingMode: self.mode)
     }
     
     public var normal: Image? { return self.rendered(self.decorated.normal) }

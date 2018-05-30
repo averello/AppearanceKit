@@ -62,9 +62,9 @@ public class ResizableImage: Image {
     final fileprivate let insets: ResizableImage.Insets
     final fileprivate let mode: ResizableImage.Mode
     
-    public init(resizable image: Image,
-         withCapInsets insets: ResizableImage.Insets,
-         resizingMode: ResizableImage.Mode) {
+    public init(_ image: Image,
+                withCapInsets insets: ResizableImage.Insets,
+                resizingMode: ResizableImage.Mode) {
         self.decorated = image
         self.insets = insets
         self.mode = resizingMode
@@ -79,18 +79,19 @@ public class ResizableImage: Image {
 
 final public class MultipleStateResizableImage: ResizableImage, MultipleStateImage {
     final private let decorated: MultipleStateImage
-    public init(resizable image: MultipleStateImage,
-         withCapInsets insets: ResizableImage.Insets,
-         resizingMode: ResizableImage.Mode) {
+    
+    public init(_ image: MultipleStateImage,
+                withCapInsets insets: ResizableImage.Insets,
+                resizingMode: ResizableImage.Mode) {
         self.decorated = image
-        super.init(resizable: image,
+        super.init(image,
                    withCapInsets: insets,
                    resizingMode: resizingMode)
     }
     
     final private func resizable(_ image: Image?) -> ResizableImage? {
         guard let img = image else { return nil }
-        return ResizableImage(resizable: img,
+        return ResizableImage(img,
                               withCapInsets: self.insets,
                               resizingMode: self.mode)
     }

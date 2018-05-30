@@ -49,7 +49,7 @@ final public class DrawnImage: ContentKit.Image {
     final private let decorated: ContentKit.Image
     final private let options: Options
     
-    public init(decorated: ContentKit.Image,
+    public init(_ decorated: ContentKit.Image,
                 options: Options) {
         self.decorated = decorated
         self.options = options

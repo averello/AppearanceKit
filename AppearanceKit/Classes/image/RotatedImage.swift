@@ -34,7 +34,7 @@ public class RotatedImage: ContentKit.Image {
         case left
         case arbitrary(AppearanceKit.Degrees)
     }
-
+    
     final private let decorated: ContentKit.Image
     final public let rotation: RotatedImage.Rotation
 
@@ -79,7 +79,7 @@ public class RotatedImage: ContentKit.Image {
                                       size: imageRect.size)
                 context.draw(cgImage, in: drawRect)
             }
-            return DrawnImage(decorated: self.decorated, options: options)
+            return DrawnImage(self.decorated, options: options)
         }
     }()
 

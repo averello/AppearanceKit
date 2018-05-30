@@ -88,7 +88,7 @@ public final class TintedImage: ContentKit.Image {
             color.set()
             UIRectFillUsingBlendMode(bounds, blendMode)
         }
-        return DrawnImage(decorated: self.decorated, options: options)
+        return DrawnImage(self.decorated, options: options)
     }()
     
     final public var image: UIImage {

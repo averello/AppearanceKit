@@ -26,45 +26,41 @@ import Foundation
 import ContentKit
 
 final public class ScaledImage: ContentKit.Image {
-    final private let original: ContentKit.Image
+    final private let decorated: ContentKit.Image
     final public let horizontal: Float
     final public let vertical: Float
-
+    
     private lazy var drawnImage: ContentKit.Image = {
         return autoreleasepool {
-
-            let size = self.original.size
+            
+            let size = self.decorated.size
             let configuration = CGContext.Configuration(interpolationQuality: CGInterpolationQuality.high)
-
+            
             let options = DrawnImage.Options(size: size, configuration: configuration) { (image: ContentKit.Image, bounds: CGRect, context: CGContext) in
                 guard let cgImage = image.image.cgImage else { return }
-
-
+                
+                
                 context.scaleBy(x: CGFloat(self.horizontal),
                                 y: CGFloat(self.vertical))
                 context.draw(cgImage, in: bounds)
             }
-            return DrawnImage(decorated: self.original, options: options)
+            return DrawnImage(self.decorated, options: options)
         }
     }()
-
+    
     public var image: UIImage {
         return self.drawnImage.image
     }
-
-    public convenience init(original: ContentKit.Image, scale: Float) {
-        self.init(original: original,
+    
+    public convenience init(_ decorated: ContentKit.Image, scale: Float) {
+        self.init(decorated,
                   horizontal: scale,
                   vertical: scale)
     }
-
-    public init(original: ContentKit.Image, horizontal: Float, vertical: Float) {
-        self.original = original
+    
+    public init(_ decorated: ContentKit.Image, horizontal: Float, vertical: Float) {
+        self.decorated = decorated
         self.horizontal = horizontal
         self.vertical = vertical
-    }
-
-    public func scaled(_ scale: Float) -> ContentKit.Image {
-        return ScaledImage(original: self, scale: scale)
     }
 }
