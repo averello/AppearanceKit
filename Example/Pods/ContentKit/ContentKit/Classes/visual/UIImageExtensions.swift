@@ -28,17 +28,4 @@ extension UIImage: Image {
     public var image: UIImage {
         return self
     }
-    
-    public func scaled(_ scale: Float) -> Image {
-        let _scale = CGFloat(scale)
-        let newWidth = (self.size.width * _scale).rounded(FloatingPointRoundingRule.up)
-        let newHeight = (self.size.height * _scale).rounded(FloatingPointRoundingRule.up)
-        let newSize = CGSize(width: newWidth, height: newHeight)
-        
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-        self.draw(in: CGRect(origin: CGPoint.zero, size: newSize))
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return AnyImage(image: image!)
-    }
 }

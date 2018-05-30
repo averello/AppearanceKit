@@ -38,9 +38,4 @@ public final class CachedImage: Image {
     public init(image: Image) {
         self._imageToCache = image
     }
-
-    public func scaled(scale: Float) -> Image {
-        let scaled = ScaledImage(original: self, scale: scale)
-        return CachedImage(image: scaled)
-    }
 }

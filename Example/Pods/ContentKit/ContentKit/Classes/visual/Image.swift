@@ -34,10 +34,6 @@ public extension Image {
     public var size: Size {
         return Size(size: self.image.size)
     }
-    
-    public func scaled(_ scale: Float) -> Image {
-        return ScaledImage(original: self, scale: scale)
-    }
 }
 
 public extension Image {
