@@ -31,9 +31,12 @@ final public class FlippedImage: ContentKit.Image {
     public var image: UIImage {
         let image = self.decorated.image
         guard let cgImage = image.cgImage else { return image }
-        return UIImage(cgImage: cgImage,
-                       scale: image.scale,
-                       orientation: self.flip.imageOrientation)
+        let scale = image.scale
+        let orientation = self.flip.imageOrientation(fromCurrentOrientation: image.imageOrientation)
+        let flipped =  UIImage(cgImage: cgImage,
+                               scale: scale,
+                               orientation: orientation)
+        return flipped
     }
 
     public enum Flip {
@@ -51,13 +54,62 @@ final public class FlippedImage: ContentKit.Image {
 
 fileprivate extension FlippedImage.Flip {
 
-    fileprivate var imageOrientation: UIImageOrientation {
-        switch self {
-        case FlippedImage.Flip.horizontal:
+    fileprivate func imageOrientation(fromCurrentOrientation currentOrientation: UIImageOrientation) -> UIImageOrientation {
+        switch (self, currentOrientation) {
+
+        // horizontal - up
+        case (FlippedImage.Flip.horizontal, UIImageOrientation.up):
+            return UIImageOrientation.upMirrored
+
+        case (FlippedImage.Flip.horizontal, UIImageOrientation.upMirrored):
+            return UIImageOrientation.up
+
+        // horizontal - left
+        case (FlippedImage.Flip.horizontal, UIImageOrientation.left):
+            return UIImageOrientation.leftMirrored
+
+        case (FlippedImage.Flip.horizontal, UIImageOrientation.leftMirrored):
+            return UIImageOrientation.left
+
+        // horizontal - right
+        case (FlippedImage.Flip.horizontal, UIImageOrientation.right):
+            return UIImageOrientation.rightMirrored
+
+        case (FlippedImage.Flip.horizontal, UIImageOrientation.rightMirrored):
+            return UIImageOrientation.right
+
+        // horizontal - down
+        case (FlippedImage.Flip.horizontal, UIImageOrientation.down):
             return UIImageOrientation.downMirrored
 
-        case FlippedImage.Flip.vertical:
+        case (FlippedImage.Flip.horizontal, UIImageOrientation.downMirrored):
+            return UIImageOrientation.down
+
+        // vertical - up
+        case (FlippedImage.Flip.vertical, UIImageOrientation.up):
+            return UIImageOrientation.downMirrored
+
+        case (FlippedImage.Flip.vertical, UIImageOrientation.upMirrored):
+            return UIImageOrientation.up
+
+        // vertical - left
+        case (FlippedImage.Flip.vertical, UIImageOrientation.left):
+            return UIImageOrientation.rightMirrored
+
+        case (FlippedImage.Flip.vertical, UIImageOrientation.leftMirrored):
+            return UIImageOrientation.right
+
+        // vertical - right
+        case (FlippedImage.Flip.vertical, UIImageOrientation.right):
             return UIImageOrientation.leftMirrored
+        case (FlippedImage.Flip.vertical, UIImageOrientation.rightMirrored):
+            return UIImageOrientation.left
+
+        // vertical - down
+        case (FlippedImage.Flip.vertical, UIImageOrientation.down):
+            return UIImageOrientation.upMirrored
+        case (FlippedImage.Flip.vertical, UIImageOrientation.downMirrored):
+            return UIImageOrientation.up
 
         }
     }
