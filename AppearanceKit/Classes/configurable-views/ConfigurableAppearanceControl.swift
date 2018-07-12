@@ -105,7 +105,7 @@ open class ConfigurableAppearanceControl: UIControl, ConfigurableUIContent {
         return super.sizeThatFits(size)
     }
     
-    final public override func sendAction(_ action: Selector, to target: Any?, for event: UIEvent?) {
+    open override func sendAction(_ action: Selector, to target: Any?, for event: UIEvent?) {
         if self.isHidden { return }
         if self.isUserInteractionEnabled == false { return }
         if self.alpha <= 0 { return }
