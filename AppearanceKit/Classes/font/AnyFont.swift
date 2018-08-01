@@ -36,6 +36,6 @@ public struct AnyFont: Font {
     }
     
     public func with(size: Float) -> Font {
-        return self
+        return AnyFont(font: self.font.withSize(CGFloat(size)))
     }
 }
