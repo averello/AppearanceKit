@@ -28,7 +28,7 @@ import UIKit
 import ContentKit
 
 open class DecoratingMultipleStateImage: AppearanceKit.MultipleStateImage {
-    open let decorated: AppearanceKit.MultipleStateImage
+    public let decorated: AppearanceKit.MultipleStateImage
     
     public init(_ decorated: AppearanceKit.MultipleStateImage) {
         self.decorated = decorated
