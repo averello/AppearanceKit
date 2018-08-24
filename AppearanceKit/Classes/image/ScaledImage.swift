@@ -42,7 +42,9 @@ final public class ScaledImage: ContentKit.Image {
                 guard let cgImage = image.image.cgImage else { return }
                 context.draw(cgImage, in: bounds)
             }
-            return DrawnImage(self.decorated, options: options)
+            return RotatedImage(DrawnImage(self.decorated,
+                                           options: options),
+                                rotation: RotatedImage.Rotation.arbitrary(180))
         }
     }()
     

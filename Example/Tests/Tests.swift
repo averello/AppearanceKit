@@ -24,9 +24,19 @@ class Tests: XCTestCase {
             let cgContext = context.cgContext
             cgContext.saveGState()
             defer { cgContext.restoreGState() }
-            cgContext.setFillColor(UIColor.cyan.withAlphaComponent(0.65).cgColor)
+            
             let rect = CGRect(origin: CGPoint.zero, size: size)
-            cgContext.fill(rect)
+            
+            let r1 = rect.divided(atDistance: 80/3, from: CGRectEdge.minYEdge)
+            cgContext.setFillColor(UIColor.cyan.withAlphaComponent(0.65).cgColor)
+            cgContext.fill(r1.slice)
+            
+            let r2 = r1.remainder.divided(atDistance: 80/3, from: CGRectEdge.minYEdge)
+            cgContext.setFillColor(UIColor.magenta.withAlphaComponent(0.65).cgColor)
+            cgContext.fill(r2.slice)
+            
+            cgContext.setFillColor(UIColor.yellow.withAlphaComponent(0.65).cgColor)
+            cgContext.fill(r2.remainder)
         })
         let any = AnyImage(image: image)
         let scaled = ScaledImage(any, scale: 0.5)
