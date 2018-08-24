@@ -33,15 +33,13 @@ final public class ScaledImage: ContentKit.Image {
     private lazy var drawnImage: ContentKit.Image = {
         return autoreleasepool {
             
-            let size = self.decorated.size
+            let originalSize = self.decorated.size
+            let size = ContentKit.Size(width: originalSize.width * self.horizontal,
+                            height: originalSize.height * self.vertical)
             let configuration = CGContext.Configuration(interpolationQuality: CGInterpolationQuality.high)
             
             let options = DrawnImage.Options(size: size, configuration: configuration) { (image: ContentKit.Image, bounds: CGRect, context: CGContext) in
                 guard let cgImage = image.image.cgImage else { return }
-                
-                
-                context.scaleBy(x: CGFloat(self.horizontal),
-                                y: CGFloat(self.vertical))
                 context.draw(cgImage, in: bounds)
             }
             return DrawnImage(self.decorated, options: options)
@@ -62,5 +60,14 @@ final public class ScaledImage: ContentKit.Image {
         self.decorated = decorated
         self.horizontal = horizontal
         self.vertical = vertical
+    }
+    
+    public convenience init(_ decorated: ContentKit.Image, size: Size) {
+        let originalSize = decorated.size
+        let horizontal = size.width / originalSize.width
+        let vertical = size.height / originalSize.height
+        self.init(decorated,
+                  horizontal: horizontal,
+                  vertical: vertical)
     }
 }
