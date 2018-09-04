@@ -80,8 +80,8 @@ fileprivate extension UIImage {
             return rowSum[index] > 0
         }) ?? 0
         cropInsets.top = CGFloat(top)
-        
-        let bottom = rowRange.last(where: { (index: Int) -> Bool in
+
+        let bottom = rowRange.reversed().first(where: { (index: Int) -> Bool in
             return rowSum[index] > 0
         }) ?? 0
         cropInsets.bottom = CGFloat(rowRange.endIndex - bottom - 1)
@@ -91,8 +91,8 @@ fileprivate extension UIImage {
             return colSum[index] > 0
         }) ?? 0
         cropInsets.left = CGFloat(left)
-        
-        let right = colRange.last(where: { (index: Int) -> Bool in
+
+        let right = colRange.reversed().first(where: { (index: Int) -> Bool in
             return colSum[index] > 0
         }) ?? 0
         cropInsets.right = CGFloat(max(0, colRange.endIndex - right - 1))
