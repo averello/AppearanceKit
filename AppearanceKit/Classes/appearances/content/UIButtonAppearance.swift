@@ -25,7 +25,7 @@
 
 import Foundation
 
-public protocol UIButtonAppearance : UIContentAppearance {
+public protocol UIButtonAppearance: UIContentAppearance {
     var font: Font? { get }
     var titleColor: TextColor? { get }
     
@@ -38,6 +38,15 @@ public protocol UIButtonAppearance : UIContentAppearance {
 public extension UIButtonAppearance {
     
     public func configure(_ content: ConfigurableUIContent) {
+
+        content.view.backgroundColor = self.backgroundColor?.color
+        content.view.tintColor = self.tintColor?.color
+
+        if let caContent = content as? ConfigurableCAContent,
+            let layerAppearance = self.layerAppearance {
+            caContent.configureContentAppearence(layerAppearance)
+        }
+
         if let aContent = content as? UIButton {
             self.configure(aContent)
             return
@@ -47,9 +56,6 @@ public extension UIButtonAppearance {
     
     public func configure<B>(_ content: B) where B: UIButton {
         let aContent = content
-        
-        aContent.backgroundColor = self.backgroundColor?.color
-        aContent.tintColor = self.tintColor?.color
         
         if let titleLabelAppearance = self.titleLabelAppearance {
             let textColor = titleLabelAppearance.textColor
@@ -88,7 +94,6 @@ public extension UIButtonAppearance {
             
             aContent.titleLabel?.font = self.font?.font
         }
-        
     }
 }
 
@@ -105,14 +110,14 @@ public struct DefaultUIButtonAppearance: UIButtonAppearance {
     
     public var titleLabelAppearance: UILabelAppearance?
     
-    
     public init(font: Font? = SystemFont(),
                 titleColor: TextColor? = TextColor(normal: WhiteColor(), disabled: LightTextColor()),
                 backgroundColor: Color? = nil,
                 tintColor: Color? = nil,
                 shadowColor: TextColor? = nil,
                 shadowOffset: AppearanceKit.Size? = nil,
-                titleLabelAppearance: UILabelAppearance? = nil) {
+                titleLabelAppearance: UILabelAppearance? = nil,
+                layerAppearance: CAContentAppearance? = nil) {
         self.font = font
         self.titleColor = titleColor
         self.backgroundColor = backgroundColor
@@ -120,6 +125,7 @@ public struct DefaultUIButtonAppearance: UIButtonAppearance {
         self.shadowColor = shadowColor
         self.shadowOffset = shadowOffset
         self.titleLabelAppearance = titleLabelAppearance
+        self.layerAppearance = layerAppearance
     }
 }
 

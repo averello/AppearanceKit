@@ -25,6 +25,12 @@
 
 import Foundation
 
+public enum UIContentAppearanceField {
+    case backgroundColor(Color?)
+    case tintColor(Color?)
+    case layerAppearance(CAContentAppearance?)
+}
+
 public protocol UIContentAppearance: ContentAppearance {
     var backgroundColor: Color? { get }
     var tintColor: Color? { get }
@@ -47,14 +53,39 @@ public extension UIContentAppearance {
     }
 }
 
+public extension UIContentAppearance {
+
+    public func updating(field: UIContentAppearanceField) -> UIContentAppearance {
+        var appearance = DefaultUIContentAppearance(self)
+        switch field {
+        case UIContentAppearanceField.backgroundColor(let backgroundColor):
+            appearance.backgroundColor = backgroundColor
+        case UIContentAppearanceField.tintColor(let tintColor):
+            appearance.tintColor = tintColor
+        case UIContentAppearanceField.layerAppearance(let layerAppearance):
+            appearance.layerAppearance = layerAppearance
+        }
+        return appearance
+    }
+}
+
 public struct DefaultUIContentAppearance: UIContentAppearance {
     public var backgroundColor: Color?
     public var tintColor: Color?
     
     public var layerAppearance: CAContentAppearance?
     
-    public init(backgroundColor: Color? = nil, tintColor: Color? = nil, layerAppearance: CAContentAppearance? = nil) {
+    public init(backgroundColor: Color? = nil,
+                tintColor: Color? = nil,
+                layerAppearance: CAContentAppearance? = nil) {
         self.backgroundColor = backgroundColor
         self.tintColor = tintColor
+        self.layerAppearance = layerAppearance
+    }
+
+    public init(_ appearance: UIContentAppearance) {
+        self.init(backgroundColor: appearance.backgroundColor,
+                  tintColor: appearance.tintColor,
+                  layerAppearance: appearance.layerAppearance)
     }
 }

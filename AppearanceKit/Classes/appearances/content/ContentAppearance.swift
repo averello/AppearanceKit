@@ -25,4 +25,4 @@
 
 import Foundation
 
-public protocol ContentAppearance : Appearance {}
+public protocol ContentAppearance: Appearance {}

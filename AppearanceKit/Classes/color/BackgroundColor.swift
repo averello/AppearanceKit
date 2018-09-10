@@ -25,4 +25,4 @@
 
 import Foundation
 
-public protocol BackgroundColor : Color {}
+public protocol BackgroundColor: Color {}

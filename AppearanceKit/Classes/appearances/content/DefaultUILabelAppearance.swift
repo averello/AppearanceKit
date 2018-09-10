@@ -25,15 +25,15 @@
 
 import Foundation
 
-public struct DefaultUILabelAppearance : UILabelAppearance {
+public struct DefaultUILabelAppearance: UILabelAppearance {
     public var font: Font? = SystemFont()
     public var textColor: TextColor? = TextColor(normal: WhiteColor())
     public var shadowColor: Color?
     public var shadowOffset: AppearanceKit.Size?
-    public var numberOfLines : Int?
-    public var adjustsFontSizeToFitWidth : Bool? = true
-    public var minimumScaleFactor : Float? = 0.5
-    public var alignement : NSTextAlignment?
+    public var numberOfLines: Int?
+    public var adjustsFontSizeToFitWidth: Bool = true
+    public var minimumScaleFactor: Float? = 0.5
+    public var alignement: NSTextAlignment?
     
     
     public var backgroundColor: Color? = ClearColor()

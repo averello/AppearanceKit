@@ -30,10 +30,10 @@ public struct ConfigurableUILabelAppearance: UILabelAppearance {
     public var textColor: TextColor?
     public var shadowColor: Color?
     public var shadowOffset: AppearanceKit.Size?
-    public var numberOfLines : Int?
-    public var adjustsFontSizeToFitWidth : Bool?
+    public var numberOfLines: Int?
+    public var adjustsFontSizeToFitWidth: Bool
     public var minimumScaleFactor: Float?
-    public var alignement : NSTextAlignment?
+    public var alignement: NSTextAlignment?
     public var backgroundColor: Color?
     public var tintColor: Color?
     public var layerAppearance: CAContentAppearance?
@@ -56,10 +56,10 @@ public struct ConfigurableUILabelAppearance: UILabelAppearance {
                 textColor: TextColor? = DefaultUILabelAppearance().textColor,
                 shadowColor: Color?  = DefaultUILabelAppearance().shadowColor,
                 shadowOffset: Size? = DefaultUILabelAppearance().shadowOffset,
-                numberOfLines : Int? = DefaultUILabelAppearance().numberOfLines,
-                adjustsFontSizeToFitWidth : Bool? = DefaultUILabelAppearance().adjustsFontSizeToFitWidth,
+                numberOfLines: Int? = DefaultUILabelAppearance().numberOfLines,
+                adjustsFontSizeToFitWidth: Bool = DefaultUILabelAppearance().adjustsFontSizeToFitWidth,
                 minimumScaleFactor: Float? = DefaultUILabelAppearance().minimumScaleFactor,
-                alignement : NSTextAlignment? = DefaultUILabelAppearance().alignement,
+                alignement: NSTextAlignment? = DefaultUILabelAppearance().alignement,
                 backgroundColor: Color? = DefaultUILabelAppearance().backgroundColor,
                 tintColor: Color? = DefaultUILabelAppearance().tintColor,
                 layerAppearance: CAContentAppearance? = DefaultUILabelAppearance().layerAppearance) {

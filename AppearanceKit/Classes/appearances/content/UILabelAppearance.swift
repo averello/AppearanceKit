@@ -25,13 +25,24 @@
 
 import Foundation
 
+public enum UILabelAppearanceField {
+    case font(Font?)
+    case textColor(TextColor?)
+    case shadowColor(Color?)
+    case shadowOffset(AppearanceKit.Size?)
+    case numberOfLines(Int?)
+    case adjustsFontSizeToFitWidth(Bool)
+    case minimumScaleFactor(Float?)
+    case alignement(NSTextAlignment?)
+}
+
 public protocol UILabelAppearance: UIContentAppearance {
     var font: Font? { get }
     var textColor: TextColor? { get }
     var shadowColor: Color? { get }
     var shadowOffset: AppearanceKit.Size? { get }
     var numberOfLines: Int? { get }
-    var adjustsFontSizeToFitWidth: Bool? { get }
+    var adjustsFontSizeToFitWidth: Bool { get }
     var minimumScaleFactor: Float? { get }
     var alignement: NSTextAlignment? { get }
 }
@@ -39,6 +50,15 @@ public protocol UILabelAppearance: UIContentAppearance {
 public extension UILabelAppearance {
     
     public func configure(_ content: ConfigurableUIContent) {
+        // super
+        content.view.backgroundColor = self.backgroundColor?.color
+        content.view.tintColor = self.tintColor?.color
+
+        if let caContent = content as? ConfigurableCAContent,
+            let layerAppearance = self.layerAppearance {
+            caContent.configureContentAppearence(layerAppearance)
+        }
+
         if let aLabel = content as? UILabel {
             self.configure(aLabel)
             return
@@ -71,9 +91,7 @@ public extension UILabelAppearance {
         if let offset = self.shadowOffset {
             aContent.shadowOffset = CGSize(size: offset)
         }
-        if let adjusts = self.adjustsFontSizeToFitWidth {
-            aContent.adjustsFontSizeToFitWidth = adjusts
-        }
+        aContent.adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidth
         if let scaleFactor = self.minimumScaleFactor {
             aContent.minimumScaleFactor = CGFloat(scaleFactor)
         }
@@ -95,9 +113,7 @@ public extension UILabelAppearance {
         if let alignement = self.alignement {
             aContent.textAlignment = alignement
         }
-        if let adjusts = self.adjustsFontSizeToFitWidth {
-            aContent.adjustsFontSizeToFitWidth = adjusts
-        }
+        aContent.adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidth
     }
     
     public func configure<TV>(_ content: TV) where TV: UITextView {
@@ -115,3 +131,38 @@ public extension UILabelAppearance {
     }
 }
 
+public extension UILabelAppearance {
+
+    public var configurableAppearance: ConfigurableUILabelAppearance {
+        return ConfigurableUILabelAppearance(appearance: self)
+    }
+
+    public func updating(field: UILabelAppearanceField) -> UILabelAppearance {
+        var appearance = ConfigurableUILabelAppearance(appearance: self)
+        switch field {
+        case UILabelAppearanceField.font(let font):
+            appearance.font = font
+        case UILabelAppearanceField.textColor(let textColor):
+            appearance.textColor = textColor
+        case UILabelAppearanceField.shadowColor(let shadowColor):
+            appearance.shadowColor = shadowColor
+        case UILabelAppearanceField.shadowOffset(let offset):
+            appearance.shadowOffset = offset
+        case UILabelAppearanceField.numberOfLines(let numberOfLines):
+            appearance.numberOfLines = numberOfLines
+        case UILabelAppearanceField.adjustsFontSizeToFitWidth(let adjustsFontSizeToFitWidth):
+            appearance.adjustsFontSizeToFitWidth = adjustsFontSizeToFitWidth
+        case UILabelAppearanceField.minimumScaleFactor(let minimumScaleFactor):
+            appearance.minimumScaleFactor = minimumScaleFactor
+        case UILabelAppearanceField.alignement(let alignement):
+            appearance.alignement = alignement
+        }
+        return appearance
+    }
+
+    public func updating(fields: UILabelAppearanceField...) -> UILabelAppearance {
+        return fields.reduce(self, { (partial: UILabelAppearance, field: UILabelAppearanceField) -> UILabelAppearance in
+            return partial.updating(field: field)
+        })
+    }
+}

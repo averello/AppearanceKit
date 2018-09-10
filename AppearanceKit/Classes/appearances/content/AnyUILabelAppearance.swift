@@ -37,7 +37,7 @@ public struct AnyUILabelAppearance: UILabelAppearance {
     public var shadowColor: Color? { return self.appearance.shadowColor }
     public var shadowOffset: AppearanceKit.Size? { return self.appearance.shadowOffset }
     public var numberOfLines: Int? { return self.appearance.numberOfLines }
-    public var adjustsFontSizeToFitWidth: Bool? { return self.appearance.adjustsFontSizeToFitWidth }
+    public var adjustsFontSizeToFitWidth: Bool { return self.appearance.adjustsFontSizeToFitWidth }
     public var minimumScaleFactor: Float? { return self.appearance.minimumScaleFactor }
     public var alignement: NSTextAlignment? { return self.appearance.alignement }
     

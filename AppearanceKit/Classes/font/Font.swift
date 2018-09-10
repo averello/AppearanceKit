@@ -33,7 +33,7 @@ public protocol Font {
     var disabled: Font? { get }
     var selected: Font? { get }
 
-    var fontSize : Float { get }
+    var fontSize: Float { get }
     var family: String { get }
     var name: String { get }
     var pointSize: Float { get }
@@ -52,7 +52,7 @@ public protocol Font {
 public extension Font {
     public var font: UIFont { return self.normal.font }
 
-    public var fontSize : Float { return self.pointSize }
+    public var fontSize: Float { return self.pointSize }
     public var family: String { return self.font.familyName }
     public var name: String { return self.font.fontName }
     public var pointSize: Float { return Float(self.font.pointSize) }
