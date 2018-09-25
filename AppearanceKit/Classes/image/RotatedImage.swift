@@ -132,66 +132,66 @@ public class RotatedImage: ContentKit.Image {
 
 fileprivate extension RotatedImage.Rotation {
 
-    fileprivate func imageOrientation(fromCurrentImageOrientation currentOrientation: UIImageOrientation) -> UIImageOrientation {
+    fileprivate func imageOrientation(fromCurrentImageOrientation currentOrientation: UIImage.Orientation) -> UIImage.Orientation {
         switch (self, currentOrientation) {
             // left
-        case (RotatedImage.Rotation.left, UIImageOrientation.up):
-            return UIImageOrientation.left
+        case (RotatedImage.Rotation.left, UIImage.Orientation.up):
+            return UIImage.Orientation.left
 
-        case (RotatedImage.Rotation.left, UIImageOrientation.down):
-            return UIImageOrientation.right
+        case (RotatedImage.Rotation.left, UIImage.Orientation.down):
+            return UIImage.Orientation.right
 
-        case (RotatedImage.Rotation.left, UIImageOrientation.left):
-            return UIImageOrientation.down
+        case (RotatedImage.Rotation.left, UIImage.Orientation.left):
+            return UIImage.Orientation.down
 
-        case (RotatedImage.Rotation.left, UIImageOrientation.right):
-            return UIImageOrientation.up
+        case (RotatedImage.Rotation.left, UIImage.Orientation.right):
+            return UIImage.Orientation.up
 
             // right
-        case (RotatedImage.Rotation.right, UIImageOrientation.up):
-            return UIImageOrientation.right
+        case (RotatedImage.Rotation.right, UIImage.Orientation.up):
+            return UIImage.Orientation.right
 
-        case (RotatedImage.Rotation.right, UIImageOrientation.down):
-            return UIImageOrientation.left
+        case (RotatedImage.Rotation.right, UIImage.Orientation.down):
+            return UIImage.Orientation.left
 
-        case (RotatedImage.Rotation.right, UIImageOrientation.left):
-            return UIImageOrientation.up
+        case (RotatedImage.Rotation.right, UIImage.Orientation.left):
+            return UIImage.Orientation.up
 
-        case (RotatedImage.Rotation.right, UIImageOrientation.right):
-            return UIImageOrientation.down
+        case (RotatedImage.Rotation.right, UIImage.Orientation.right):
+            return UIImage.Orientation.down
 
 
             // left mirrored
-        case (RotatedImage.Rotation.left, UIImageOrientation.upMirrored):
-            return UIImageOrientation.leftMirrored
+        case (RotatedImage.Rotation.left, UIImage.Orientation.upMirrored):
+            return UIImage.Orientation.leftMirrored
 
-        case (RotatedImage.Rotation.left, UIImageOrientation.downMirrored):
-            return UIImageOrientation.rightMirrored
+        case (RotatedImage.Rotation.left, UIImage.Orientation.downMirrored):
+            return UIImage.Orientation.rightMirrored
 
-        case (RotatedImage.Rotation.left, UIImageOrientation.leftMirrored):
-            return UIImageOrientation.downMirrored
+        case (RotatedImage.Rotation.left, UIImage.Orientation.leftMirrored):
+            return UIImage.Orientation.downMirrored
 
-        case (RotatedImage.Rotation.left, UIImageOrientation.rightMirrored):
-            return UIImageOrientation.upMirrored
+        case (RotatedImage.Rotation.left, UIImage.Orientation.rightMirrored):
+            return UIImage.Orientation.upMirrored
 
             // right mirrored
-        case (RotatedImage.Rotation.right, UIImageOrientation.upMirrored):
-            return UIImageOrientation.rightMirrored
+        case (RotatedImage.Rotation.right, UIImage.Orientation.upMirrored):
+            return UIImage.Orientation.rightMirrored
 
-        case (RotatedImage.Rotation.right, UIImageOrientation.downMirrored):
-            return UIImageOrientation.leftMirrored
+        case (RotatedImage.Rotation.right, UIImage.Orientation.downMirrored):
+            return UIImage.Orientation.leftMirrored
 
-        case (RotatedImage.Rotation.right, UIImageOrientation.leftMirrored):
-            return UIImageOrientation.upMirrored
+        case (RotatedImage.Rotation.right, UIImage.Orientation.leftMirrored):
+            return UIImage.Orientation.upMirrored
 
-        case (RotatedImage.Rotation.right, UIImageOrientation.rightMirrored):
-            return UIImageOrientation.downMirrored
+        case (RotatedImage.Rotation.right, UIImage.Orientation.rightMirrored):
+            return UIImage.Orientation.downMirrored
 
             
 
 
         default:
-            return UIImageOrientation.up
+            return UIImage.Orientation.up
         }
     }
 }

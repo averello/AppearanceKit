@@ -159,10 +159,10 @@ public extension MultipleAttributedText {
     }
     
     public func configure(button: UIButton) {
-        self.configure(button: button, forStates: [UIControlState.normal])
+        self.configure(button: button, forStates: [UIControl.State.normal])
     }
     
-    public func configure(button: UIButton, forStates states: [UIControlState]) {
+    public func configure(button: UIButton, forStates states: [UIControl.State]) {
         let attributedString = self.attributedString
         for state in states {
             button.setAttributedTitle(attributedString, for: state)

@@ -54,62 +54,62 @@ final public class FlippedImage: ContentKit.Image {
 
 fileprivate extension FlippedImage.Flip {
 
-    fileprivate func imageOrientation(fromCurrentOrientation currentOrientation: UIImageOrientation) -> UIImageOrientation {
+    fileprivate func imageOrientation(fromCurrentOrientation currentOrientation: UIImage.Orientation) -> UIImage.Orientation {
         switch (self, currentOrientation) {
 
         // horizontal - up
-        case (FlippedImage.Flip.horizontal, UIImageOrientation.up):
-            return UIImageOrientation.upMirrored
+        case (FlippedImage.Flip.horizontal, UIImage.Orientation.up):
+            return UIImage.Orientation.upMirrored
 
-        case (FlippedImage.Flip.horizontal, UIImageOrientation.upMirrored):
-            return UIImageOrientation.up
+        case (FlippedImage.Flip.horizontal, UIImage.Orientation.upMirrored):
+            return UIImage.Orientation.up
 
         // horizontal - left
-        case (FlippedImage.Flip.horizontal, UIImageOrientation.left):
-            return UIImageOrientation.leftMirrored
+        case (FlippedImage.Flip.horizontal, UIImage.Orientation.left):
+            return UIImage.Orientation.leftMirrored
 
-        case (FlippedImage.Flip.horizontal, UIImageOrientation.leftMirrored):
-            return UIImageOrientation.left
+        case (FlippedImage.Flip.horizontal, UIImage.Orientation.leftMirrored):
+            return UIImage.Orientation.left
 
         // horizontal - right
-        case (FlippedImage.Flip.horizontal, UIImageOrientation.right):
-            return UIImageOrientation.rightMirrored
+        case (FlippedImage.Flip.horizontal, UIImage.Orientation.right):
+            return UIImage.Orientation.rightMirrored
 
-        case (FlippedImage.Flip.horizontal, UIImageOrientation.rightMirrored):
-            return UIImageOrientation.right
+        case (FlippedImage.Flip.horizontal, UIImage.Orientation.rightMirrored):
+            return UIImage.Orientation.right
 
         // horizontal - down
-        case (FlippedImage.Flip.horizontal, UIImageOrientation.down):
-            return UIImageOrientation.downMirrored
+        case (FlippedImage.Flip.horizontal, UIImage.Orientation.down):
+            return UIImage.Orientation.downMirrored
 
-        case (FlippedImage.Flip.horizontal, UIImageOrientation.downMirrored):
-            return UIImageOrientation.down
+        case (FlippedImage.Flip.horizontal, UIImage.Orientation.downMirrored):
+            return UIImage.Orientation.down
 
         // vertical - up
-        case (FlippedImage.Flip.vertical, UIImageOrientation.up):
-            return UIImageOrientation.downMirrored
+        case (FlippedImage.Flip.vertical, UIImage.Orientation.up):
+            return UIImage.Orientation.downMirrored
 
-        case (FlippedImage.Flip.vertical, UIImageOrientation.upMirrored):
-            return UIImageOrientation.up
+        case (FlippedImage.Flip.vertical, UIImage.Orientation.upMirrored):
+            return UIImage.Orientation.up
 
         // vertical - left
-        case (FlippedImage.Flip.vertical, UIImageOrientation.left):
-            return UIImageOrientation.rightMirrored
+        case (FlippedImage.Flip.vertical, UIImage.Orientation.left):
+            return UIImage.Orientation.rightMirrored
 
-        case (FlippedImage.Flip.vertical, UIImageOrientation.leftMirrored):
-            return UIImageOrientation.right
+        case (FlippedImage.Flip.vertical, UIImage.Orientation.leftMirrored):
+            return UIImage.Orientation.right
 
         // vertical - right
-        case (FlippedImage.Flip.vertical, UIImageOrientation.right):
-            return UIImageOrientation.leftMirrored
-        case (FlippedImage.Flip.vertical, UIImageOrientation.rightMirrored):
-            return UIImageOrientation.left
+        case (FlippedImage.Flip.vertical, UIImage.Orientation.right):
+            return UIImage.Orientation.leftMirrored
+        case (FlippedImage.Flip.vertical, UIImage.Orientation.rightMirrored):
+            return UIImage.Orientation.left
 
         // vertical - down
-        case (FlippedImage.Flip.vertical, UIImageOrientation.down):
-            return UIImageOrientation.upMirrored
-        case (FlippedImage.Flip.vertical, UIImageOrientation.downMirrored):
-            return UIImageOrientation.up
+        case (FlippedImage.Flip.vertical, UIImage.Orientation.down):
+            return UIImage.Orientation.upMirrored
+        case (FlippedImage.Flip.vertical, UIImage.Orientation.downMirrored):
+            return UIImage.Orientation.up
 
         }
     }

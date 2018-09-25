@@ -59,11 +59,11 @@ public extension Image {
     
     public func configure(button: UIButton) {
         button.setImage(self.image,
-                        for: UIControlState.normal)
+                        for: UIControl.State.normal)
     }
     
     public func configureBackground(button: UIButton) {
         button.setBackgroundImage(self.image,
-                                  for: UIControlState.normal)
+                                  for: UIControl.State.normal)
     }
 }

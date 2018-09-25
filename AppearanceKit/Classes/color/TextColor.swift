@@ -52,22 +52,22 @@ public extension TextColor {
 public extension TextColor {
     
     public func configure(button: UIButton,
-                          forStates states: [UIControlState]) {
+                          forStates states: [UIControl.State]) {
         states.forEach { state in
             button.setTitleColor(self.color(fromState: state)?.color,
                                  for: state)
         }
     }
     
-    public func color(fromState state: UIControlState) -> Color? {
+    public func color(fromState state: UIControl.State) -> Color? {
         switch state {
-        case UIControlState.disabled:
+        case UIControl.State.disabled:
             return self.disabled
-        case UIControlState.normal:
+        case UIControl.State.normal:
             return self
-        case UIControlState.highlighted:
+        case UIControl.State.highlighted:
             return self.highlighted
-        case UIControlState.selected:
+        case UIControl.State.selected:
             return self.selected
         default:
             return self.normal

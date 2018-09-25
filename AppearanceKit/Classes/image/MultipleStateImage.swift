@@ -34,39 +34,39 @@ public protocol MultipleStateImage: Image {
     var original: UIImage? { get }
     
     func configure(button: UIButton,
-                   forStates states: [UIControlState])
+                   forStates states: [UIControl.State])
     
     func configureBackground(button: UIButton,
-                             forStates states: [UIControlState])
+                             forStates states: [UIControl.State])
     
-    func image(fromState state: UIControlState) -> Image?
+    func image(fromState state: UIControl.State) -> Image?
 }
 
 public extension MultipleStateImage {
     
-    public func configure(button: UIButton, forStates states: [UIControlState]) {
+    public func configure(button: UIButton, forStates states: [UIControl.State]) {
         states.forEach { state in
             button.setImage(self.image(fromState: state)?.image,
                             for: state)
         }
     }
     
-    public func configureBackground(button: UIButton, forStates states: [UIControlState]) {
+    public func configureBackground(button: UIButton, forStates states: [UIControl.State]) {
         states.forEach { state in
             button.setBackgroundImage(self.image(fromState: state)?.image,
                                       for: state)
         }
     }
     
-    public func image(fromState state: UIControlState) -> Image? {
+    public func image(fromState state: UIControl.State) -> Image? {
         switch state {
-        case UIControlState.disabled:
+        case UIControl.State.disabled:
             return self.disabled
-        case UIControlState.normal:
+        case UIControl.State.normal:
             return self
-        case UIControlState.highlighted:
+        case UIControl.State.highlighted:
             return self.highlighted
-        case UIControlState.selected:
+        case UIControl.State.selected:
             return self.selected
         default:
             return self.normal

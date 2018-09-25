@@ -114,7 +114,7 @@ fileprivate extension UIImage {
         }
         else {
             let rect = CGRect(x: 0, y: 0, width: self.size.width * self.scale, height: self.size.height * self.scale)
-            let cropRect = UIEdgeInsetsInsetRect(rect, crop)
+            let cropRect = rect.inset(by: crop)
             if let cropped = self.cgImage?.cropping(to: cropRect) {
                 let image = UIImage(cgImage: cropped,
                                     scale: self.scale,
