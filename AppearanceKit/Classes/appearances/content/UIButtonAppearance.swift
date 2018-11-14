@@ -25,6 +25,14 @@
 
 import Foundation
 
+public enum UIButtonAppearanceField {
+    case font(Font?)
+    case titleColor(TextColor?)
+    case shadowColor(TextColor?)
+    case shadowOffset(AppearanceKit.Size?)
+    case titleLabelAppearance(UILabelAppearance?)
+}
+
 public protocol UIButtonAppearance: UIContentAppearance {
     var font: Font? { get }
     var titleColor: TextColor? { get }
@@ -97,35 +105,32 @@ public extension UIButtonAppearance {
     }
 }
 
-public struct DefaultUIButtonAppearance: UIButtonAppearance {
-    public var font: Font? = SystemFont()
-    public var titleColor: TextColor? = TextColor(normal: WhiteColor(), disabled: LightTextColor())
-    public var backgroundColor: Color?
-    public var tintColor: Color?
-    
-    public var layerAppearance: CAContentAppearance?
-    
-    public var shadowColor: TextColor?
-    public var shadowOffset: AppearanceKit.Size?
-    
-    public var titleLabelAppearance: UILabelAppearance?
-    
-    public init(font: Font? = SystemFont(),
-                titleColor: TextColor? = TextColor(normal: WhiteColor(), disabled: LightTextColor()),
-                backgroundColor: Color? = nil,
-                tintColor: Color? = nil,
-                shadowColor: TextColor? = nil,
-                shadowOffset: AppearanceKit.Size? = nil,
-                titleLabelAppearance: UILabelAppearance? = nil,
-                layerAppearance: CAContentAppearance? = nil) {
-        self.font = font
-        self.titleColor = titleColor
-        self.backgroundColor = backgroundColor
-        self.tintColor = tintColor
-        self.shadowColor = shadowColor
-        self.shadowOffset = shadowOffset
-        self.titleLabelAppearance = titleLabelAppearance
-        self.layerAppearance = layerAppearance
+public extension UIButtonAppearance {
+
+    public var configurableAppearance: ConfigurableUIButtonAppearance {
+        return ConfigurableUIButtonAppearance(appearance: self)
+    }
+
+    public func updating(field: UIButtonAppearanceField) -> UIButtonAppearance {
+        var appearance = self.configurableAppearance
+        switch field {
+        case UIButtonAppearanceField.font(let font):
+            appearance.font = font
+        case UIButtonAppearanceField.titleColor(let titleColor):
+            appearance.titleColor = titleColor
+        case UIButtonAppearanceField.shadowColor(let shadowColor):
+            appearance.shadowColor = shadowColor
+        case UIButtonAppearanceField.shadowOffset(let offset):
+            appearance.shadowOffset = offset
+        case UIButtonAppearanceField.titleLabelAppearance(let titleAppearance):
+            appearance.titleLabelAppearance = titleAppearance
+        }
+        return appearance
+    }
+
+    public func updating(fields: UIButtonAppearanceField...) -> UIButtonAppearance {
+        return fields.reduce(self, { (partial: UIButtonAppearance, field: UIButtonAppearanceField) -> UIButtonAppearance in
+            return partial.updating(field: field)
+        })
     }
 }
-
