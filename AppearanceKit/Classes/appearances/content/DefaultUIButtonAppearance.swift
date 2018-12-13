@@ -7,7 +7,11 @@
 
 import Foundation
 
+#if canImport(UIKit) && canImport(QuartzCore)
+import UIKit
+import QuartzCore
 
+/// A default `UIButtonAppearance`.
 public struct DefaultUIButtonAppearance: UIButtonAppearance {
     public var font: Font? = SystemFont()
     public var titleColor: TextColor? = TextColor(normal: WhiteColor(), disabled: LightTextColor())
@@ -39,3 +43,4 @@ public struct DefaultUIButtonAppearance: UIButtonAppearance {
         self.layerAppearance = layerAppearance
     }
 }
+#endif

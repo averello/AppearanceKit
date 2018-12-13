@@ -23,9 +23,20 @@
 //
 //
 
+#if canImport(UIKit)
 import UIKit
 
+/// A view that its appearance can be configured by a `UIContentAppearance`.
+///
+/// The default size of a `ConfigurableAppearanceView` is the same as its
+/// `backgroundView` if a provided. Otherwise, is the minimum size that can
+/// wrap the displayed text.
 open class ConfigurableAppearanceView: UIView, ConfigurableUIContent {
+
+    /// An optional background view for the view.
+    ///
+    /// The background view is always the first subviews of the receiver. Is
+    /// always centered and has the same size as the receiver.
     public final var backgroundView: UIView? {
         didSet {
             if let backgroundView = self.backgroundView {
@@ -68,14 +79,22 @@ open class ConfigurableAppearanceView: UIView, ConfigurableUIContent {
         self.didLoadSubviews()
     }
     
+    /// This load indicates that all `requiredSubviews` are loaded, inserted to
+    /// the receiver's hierarchy and have a default size.
+    open func didLoadSubviews() {
+
+    }
+
+    /// The required subviews of this class.
+    ///
+    /// The returned views are added to the receiver and `sizeToFit()` is
+    /// called upon them to attribute their default size.
     open func requiredSubviews() -> [UIView] {
         return []
     }
-    
-    open func didLoadSubviews() {
-        
-    }
-    
+
+    /// Reloads all required subviews by calling `requiredSubviews()` and
+    /// `didLoadSubviews()` subsequently.
     final public func setNeedsUpdateSubviews() {
         self._requiredSubviews.forEach { subview in
             subview.removeFromSuperview()
@@ -109,3 +128,4 @@ open class ConfigurableAppearanceView: UIView, ConfigurableUIContent {
         return super.sizeThatFits(size)
     }
 }
+#endif

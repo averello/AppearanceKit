@@ -24,7 +24,6 @@
 
 import Foundation
 
-
 /// This protocol describes possible representation of objects.
 /// The sole requirement of a `Representation` is to return a new `Representation`,
 /// probably enriched, with a given (key,value) pair.

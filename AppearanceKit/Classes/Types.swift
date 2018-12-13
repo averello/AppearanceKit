@@ -25,7 +25,9 @@
 
 import Foundation
 
+/// Degrees is a floating point number.
 public typealias Degrees = Float
+/// Radians is a floating point number.
 public typealias Radians = Float
 
 internal extension Degrees {

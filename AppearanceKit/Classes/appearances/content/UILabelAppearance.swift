@@ -25,32 +25,36 @@
 
 import Foundation
 
-public enum UILabelAppearanceField {
-    case font(Font?)
-    case textColor(TextColor?)
-    case shadowColor(Color?)
-    case shadowOffset(AppearanceKit.Size?)
-    case numberOfLines(Int?)
-    case adjustsFontSizeToFitWidth(Bool)
-    case minimumScaleFactor(Float?)
-    case alignement(NSTextAlignment?)
-}
+#if canImport(UIKit) && canImport(QuartzCore)
+import UIKit
+import QuartzCore
 
+/// An appearance for `UILabel`'s.
 public protocol UILabelAppearance: UIContentAppearance {
+    /// The font.
     var font: Font? { get }
+    /// The text color.
     var textColor: TextColor? { get }
+    /// The shadow color.
     var shadowColor: Color? { get }
+    /// The shadow offset.
     var shadowOffset: AppearanceKit.Size? { get }
+    /// The maximum number of lines to use for rendering text.
     var numberOfLines: Int? { get }
+    /// A Boolean value indicating whether the font size should be reduced in
+    /// order to fit the title string into the label’s bounding rectangle.
     var adjustsFontSizeToFitWidth: Bool { get }
+    /// The minimum scale factor supported for the appearance.
     var minimumScaleFactor: Float? { get }
+    /// The technique to use for aligning the text.
     var alignement: NSTextAlignment? { get }
 }
 
 public extension UILabelAppearance {
-    
+
+    /// Configures a `ConfigurableUIContent` with the receiver.
+    /// - parameter content: The `ConfigurableUIContent` to configure.
     public func configure(_ content: ConfigurableUIContent) {
-        // super
         content.view.backgroundColor = self.backgroundColor?.color
         content.view.tintColor = self.tintColor?.color
 
@@ -71,9 +75,10 @@ public extension UILabelAppearance {
             self.configure(aTextView)
             return
         }
-        //assert(false)
     }
-    
+
+    /// Configures any `UILabel` with the receiver.
+    /// - parameter content: The `UILabel` to configure.
     public func configure<L>(_ content: L) where L: UILabel {
         let aContent = content
         
@@ -100,7 +105,13 @@ public extension UILabelAppearance {
         }
         
     }
-    
+
+    /// Configures any `UITextField` with the receiver.
+    ///
+    /// As `UITextField` does not support `highlightedTextcolor`, `shadowColor`,
+    /// `minimumScaleFactor`, `numberOfLines` & `shadowOffset` those properties
+    /// are ignored.
+    /// - parameter content: The `UITextField` to configure.
     public func configure<TF>(_ content: TF) where TF: UITextField {
         let aContent = content
         
@@ -115,7 +126,13 @@ public extension UILabelAppearance {
         }
         aContent.adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidth
     }
-    
+
+    /// Configures any `UITextView` with the receiver.
+    ///
+    /// As `UITextView` does not support `highlightedTextcolor`, `shadowColor`,
+    /// `minimumScaleFactor`, `numberOfLines`, `shadowOffset`
+    /// & `adjustsFontSizeToFitWidth` those properties are ignored.
+    /// - parameter content: The `UITextView` to configure.
     public func configure<TV>(_ content: TV) where TV: UITextView {
         let aContent = content
         
@@ -131,12 +148,37 @@ public extension UILabelAppearance {
     }
 }
 
+/// The properties of `UILabelAppearance`.
+public enum UILabelAppearanceField {
+    /// The font property.
+    case font(Font?)
+    /// The text color property.
+    case textColor(TextColor?)
+    /// The shadow color property.
+    case shadowColor(Color?)
+    /// The shadow offset property.
+    case shadowOffset(AppearanceKit.Size?)
+    /// The number of lines property.
+    case numberOfLines(Int?)
+    /// The adjust font size to fit width property.
+    case adjustsFontSizeToFitWidth(Bool)
+    /// The minimum scale factor property.
+    case minimumScaleFactor(Float?)
+    /// The alignment property.
+    case alignement(NSTextAlignment?)
+}
+
 public extension UILabelAppearance {
 
+    /// Creates a `ConfigurableUILabelAppearance` from any `UILabelAppearance`.
     public var configurableAppearance: ConfigurableUILabelAppearance {
         return ConfigurableUILabelAppearance(appearance: self)
     }
 
+    /// Creates a derived `UILabelAppearance` that has the provided field.
+    ///
+    /// Immutability wins.
+    /// - parameter field: The field to be updated.
     public func updating(field: UILabelAppearanceField) -> UILabelAppearance {
         var appearance = ConfigurableUILabelAppearance(appearance: self)
         switch field {
@@ -160,9 +202,12 @@ public extension UILabelAppearance {
         return appearance
     }
 
+    /// Derives an appearance with the specified list of fields.
+    /// - parameter fields: The fields to be updated.
     public func updating(fields: UILabelAppearanceField...) -> UILabelAppearance {
         return fields.reduce(self, { (partial: UILabelAppearance, field: UILabelAppearanceField) -> UILabelAppearance in
             return partial.updating(field: field)
         })
     }
 }
+#endif

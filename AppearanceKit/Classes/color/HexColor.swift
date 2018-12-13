@@ -25,13 +25,20 @@
 
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+
+/// A hexadecimal color.
 public struct HexColor: Color, CustomStringConvertible {
     private let _color: UIColor
     private let _hex: String
     
     public var color: UIColor { return self._color }
-    
-    /// Takes hex in RGBA format (0xRRGGBBAA)
+
+    /// Attempts to create a `HexColor` from a hex string.
+    ///
+    /// - parameter hex: Accepts hex in RGBA (0xRRGGBBAA) format
+    /// - returns: The hex color or `nil` if the hex fails to convert.
     public init?(hex: UInt32) {
         var string = String(hex, radix: 16)
         
@@ -44,7 +51,10 @@ public struct HexColor: Color, CustomStringConvertible {
         self.init(hex: string)
     }
     
-    /// Accepts strings in "0xRRGGBBAA" and "RRGGBBAA" format
+    /// Attempts to create a `HexColor` from a hex string.
+    ///
+    /// - parameter hex: Accepts strings in "0xRRGGBBAA" and "RRGGBBAA" format.
+    /// - returns: The hex color or `nil` if the hex string fails to convert.
     public init?(hex: String) {
         var _hex = hex
         if _hex.hasPrefix("0x") {
@@ -135,3 +145,4 @@ fileprivate extension UIColor {
                        alpha: cgFloatComponents[3])
     }
 }
+#endif

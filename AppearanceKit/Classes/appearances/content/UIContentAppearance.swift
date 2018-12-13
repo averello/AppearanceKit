@@ -25,23 +25,33 @@
 
 import Foundation
 
-public enum UIContentAppearanceField {
-    case backgroundColor(Color?)
-    case tintColor(Color?)
-    case layerAppearance(CAContentAppearance?)
-}
+#if canImport(UIKit) && canImport(QuartzCore)
+import UIKit
+import QuartzCore
 
+/// An apperance for `UIContent`s.
 public protocol UIContentAppearance: ContentAppearance {
+    /// The background color.
     var backgroundColor: Color? { get }
+    /// The tint color.
     var tintColor: Color? { get }
-    
+
+    /// An optional layer appearance for configuring the layer.
     var layerAppearance: CAContentAppearance? { get }
-    
+
+    /// Configures a `ConfigurableUIContent` with the current appearance.
     func configure(_ content: ConfigurableUIContent)
 }
 
 public extension UIContentAppearance {
-    
+
+    /// Configures a `ConfigurableUIContent` with the current appearance.
+    ///
+    /// The default implementation sets the `backgroundColor` & `tintColor`
+    /// properties. If `content` is a `ConfigurableCAContent` and
+    /// then configures the content's layer with the `layerAppearance` if
+    /// provided.
+    /// - parameter content: The content to be configured by the appearance.
     public func configure(_ content: ConfigurableUIContent) {
         content.view.backgroundColor = self.backgroundColor?.color
         content.view.tintColor = self.tintColor?.color
@@ -53,8 +63,22 @@ public extension UIContentAppearance {
     }
 }
 
+/// The properties of `UIContentAppearance`.
+public enum UIContentAppearanceField {
+    /// The background color property.
+    case backgroundColor(Color?)
+    /// The tint color property.
+    case tintColor(Color?)
+    /// The layer appearance property.
+    case layerAppearance(CAContentAppearance?)
+}
+
 public extension UIContentAppearance {
 
+    /// Creates a derived `UIContentAppearance` that has the provided field.
+    ///
+    /// Immutability wins.
+    /// - parameter field: The field to be updated.
     public func updating(field: UIContentAppearanceField) -> UIContentAppearance {
         var appearance = DefaultUIContentAppearance(self)
         switch field {
@@ -67,8 +91,17 @@ public extension UIContentAppearance {
         }
         return appearance
     }
+
+    /// Derives an appearance with the specified list of fields.
+    /// - parameter fields: The fields to be updated.
+    public func updating(fields: UIContentAppearanceField...) -> UIContentAppearance {
+        return fields.reduce(self, { (partial: UIContentAppearance, field: UIContentAppearanceField) -> UIContentAppearance in
+            return partial.updating(field: field)
+        })
+    }
 }
 
+/// A default `UIContentAppearance`.
 public struct DefaultUIContentAppearance: UIContentAppearance {
     public var backgroundColor: Color?
     public var tintColor: Color?
@@ -89,3 +122,5 @@ public struct DefaultUIContentAppearance: UIContentAppearance {
                   layerAppearance: appearance.layerAppearance)
     }
 }
+
+#endif

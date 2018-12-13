@@ -24,7 +24,6 @@
 
 import Foundation
 
-
 /// The conforming class can be represented as a JSON string
 final public class JSONRepresentationBuilder: JSONRepresentation {
 	final private let builder: DictionaryRepresentationBuilder

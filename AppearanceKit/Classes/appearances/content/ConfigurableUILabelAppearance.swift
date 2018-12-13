@@ -25,6 +25,11 @@
 
 import Foundation
 
+#if canImport(UIKit) && canImport(QuartzCore)
+import UIKit
+import QuartzCore
+
+/// A configurable `UILabelAppearance`.
 public struct ConfigurableUILabelAppearance: UILabelAppearance {
     public var font: Font?
     public var textColor: TextColor?
@@ -76,3 +81,4 @@ public struct ConfigurableUILabelAppearance: UILabelAppearance {
         self.layerAppearance = layerAppearance
     }
 }
+#endif

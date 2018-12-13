@@ -25,6 +25,11 @@
 
 import Foundation
 
+#if canImport(UIKit) && canImport(QuartzCore)
+import UIKit
+import QuartzCore
+
+/// A default `UILabelAppearance`.
 public struct DefaultUILabelAppearance: UILabelAppearance {
     public var font: Font? = SystemFont()
     public var textColor: TextColor? = TextColor(normal: WhiteColor())
@@ -43,3 +48,4 @@ public struct DefaultUILabelAppearance: UILabelAppearance {
     
     public init() {}
 }
+#endif

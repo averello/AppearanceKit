@@ -25,8 +25,11 @@
 
 import Foundation
 
+#if canImport(UIKit)
+/// A Random Color.
 public struct RandomColor: Color {
     public let color: UIColor
+
     public init() {
         self.color = UIColor(red: CGFloat(arc4random_uniform(UInt32(255)))/255.0,
                              green: CGFloat(arc4random_uniform(UInt32(255)))/255.0,
@@ -34,3 +37,4 @@ public struct RandomColor: Color {
                              alpha: 0.75)
     }
 }
+#endif

@@ -25,8 +25,13 @@
 
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+
+/// Adapts any `UIColor` as a `Color`.
 public struct AnyColor: Color {
     private let _color: UIColor
+
     public var color: UIColor { return self._color }
     
     public init(color: UIColor) {
@@ -43,7 +48,10 @@ public struct AnyColor: Color {
                                 alpha: CGFloat(alpha))
     }
     
-    public init(hexRed red: Float, hexGreen green: Float, hexBlue blue: Float, hexAlpha alpha: Float = 0xff) {
+    public init(hexRed red: Float,
+                hexGreen green: Float,
+                hexBlue blue: Float,
+                hexAlpha alpha: Float = 0xff) {
         let valid: (Float) -> Bool = { v -> Bool in v >= 0.0 && v <= 0xff }
         guard valid(red) && valid(green) && valid(blue) && valid(alpha) else { fatalError("invalid values") }
         let twoFiveFive = Float(0xff)
@@ -57,3 +65,4 @@ public struct AnyColor: Color {
         self._color = UIColor(white: CGFloat(white), alpha: CGFloat(alpha))
     }
 }
+#endif

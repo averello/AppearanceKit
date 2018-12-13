@@ -25,24 +25,39 @@
 
 import Foundation
 
+/// An offset on the two dimensional plane.
 public struct Offset {
+    /// The horizontal offset
     public let horizontal: Float
+    /// The vertical offset
     public let vertical: Float
     
     public init(horizontal: Float, vertical: Float) {
         self.horizontal = horizontal
         self.vertical = vertical
     }
-    
+
+    /// The zero offset.
     public static let zero: Offset = Offset(horizontal: 0, vertical: 0)
 }
+
+#if canImport(UIKit)
+import UIKit
+
+// MARK: - Convert from and to UIOffset
 
 public extension Offset {
     
     public init(offset: UIOffset) {
         self.init(horizontal: Float(offset.horizontal), vertical: Float(offset.vertical))
     }
+}
 
+
+#if canImport(CoreGraphics)
+import CoreGraphics
+
+public extension Offset {
     public var asUIOffset: UIOffset {
         return UIOffset(offset: self)
     }
@@ -55,3 +70,6 @@ public extension UIOffset {
                   vertical: CGFloat(offset.vertical))
     }
 }
+#endif /* CoreGraphics */
+
+#endif /* UIKit */

@@ -25,13 +25,28 @@
 
 import Foundation
 
+#if canImport(QuartzCore)
+import QuartzCore
+
+/// Appearance specific to Core Animation Content.
 public protocol CAContentAppearance: ContentAppearance {
+    /// Specifies the `backgroundColor` of a `ConfigurableCAContent`
     var backgroundColor: Color? { get }
+
+    /// Configures a `ConfigurableCAContent` with the current appearance.
     func configure(_ content: ConfigurableCAContent)
 }
 
 public extension CAContentAppearance {
+
+    /// Configures a `ConfigurableCAContent` with the given appearance.
+    ///
+    /// The default implementation just sets the `backgroundColor` property
+    /// of the content's layer to the appearance's `backgroundColor`.
+    /// - parameter content: The content co configure.
     public func configure(_ content: ConfigurableCAContent) {
         content.layer.backgroundColor = self.backgroundColor?.color.cgColor
     }
 }
+
+#endif

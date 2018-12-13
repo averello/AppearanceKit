@@ -25,4 +25,5 @@
 
 import Foundation
 
+/// The base protocol tha describes an Appearance.
 public protocol Appearance {}

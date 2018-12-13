@@ -1,8 +1,8 @@
 //
-//  DictionaryRepresentationBuilder.swift
+//  DataFromJSONRepresentation.swift
 //  RepresentationKit
 //
-//  Created by Georges Boumis on 20/6/2016.
+//  Created by Georges Boumis on 19/11/2018.
 //
 //  Licensed to the Apache Software Foundation (ASF) under one
 //  or more contributor license agreements.  See the NOTICE file
@@ -11,9 +11,9 @@
 //  to you under the Apache License, Version 2.0 (the
 //  "License"); you may not use this file except in compliance
 //  with the License.  You may obtain a copy of the License at
-//  
+//
 //    http://www.apache.org/licenses/LICENSE-2.0
-//  
+//
 //  Unless required by applicable law or agreed to in writing,
 //  software distributed under the License is distributed on an
 //  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -24,22 +24,21 @@
 
 import Foundation
 
-/// Building a Dictionary Representation of a conforming object
-final public class DictionaryRepresentationBuilder: DictionaryRepresentation {
-	final public let dictionary: [String : Any]
+public struct DataFromJSONRepresentation: DataRepresentation  {
+    public var data: Data {
+        return self.json.jsonData!
+    }
+    private let json: JSONRepresentationBuilder
 
-	public convenience init() {
-		self.init(dictionary: [:])
-	}
+    public func with<Key, Value>(key: Key, value: Value) -> Representation where Key : Hashable, Key : LosslessStringConvertible {
+        return DataFromJSONRepresentation(builder: self.json.with(key: key, value: value))
+    }
 
-	public init(dictionary: [String: Any]) {
-		self.dictionary = dictionary
-	}
+    public init() {
+        self.init(builder: JSONRepresentationBuilder())
+    }
 
-	final public func with<Key,Value>(key: Key, value: Value) -> Representation where Key: LosslessStringConvertible & Hashable {
-        var dictionary  = self.dictionary
-        dictionary[String(key)] = value
-		return DictionaryRepresentationBuilder(dictionary: dictionary)
-	}
-	
+    private init(builder: JSONRepresentationBuilder) {
+        self.json = builder
+    }
 }

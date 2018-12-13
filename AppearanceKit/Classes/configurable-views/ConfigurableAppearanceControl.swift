@@ -23,9 +23,25 @@
 //
 //
 
+#if canImport(UIKit)
 import UIKit
 
+/// An control that its appearance can be configured by a `UIContentAppearance`.
+///
+/// The default size of a `ConfigurableAppearanceControl` is the same as its
+/// `backgroundView` if a provided. Otherwise it's zero.
+///
+/// By default `ConfigurableAppearanceControl` is exclusive to touch.
+///
+/// A `ConfigurableAppearanceControl` will not trigger any action if it's not
+/// visible (`alpha` is equal to `0.0`, or `isHidden` is `true`) or when its
+/// `isUserInteractionEnabled` is set to `false`.
 open class ConfigurableAppearanceControl: UIControl, ConfigurableUIContent {
+
+    /// An optional background view for the control.
+    ///
+    /// The background view is always the first subviews of the receiver. Is
+    /// always centered and has the same size as the receiver.
     public final var backgroundView: UIView? {
         didSet {
             if let backgroundView = self.backgroundView {
@@ -47,7 +63,8 @@ open class ConfigurableAppearanceControl: UIControl, ConfigurableUIContent {
     }
     private final var _requiredSubviews: [UIView] = []
 
-    public init(frame: CGRect = CGRect.zero, appearance: UIContentAppearance = DefaultUIContentAppearance()) {
+    public init(frame: CGRect = CGRect.zero,
+                appearance: UIContentAppearance = DefaultUIContentAppearance()) {
         super.init(frame: frame)
         self.configureContentAppearence(appearance)
         
@@ -66,15 +83,23 @@ open class ConfigurableAppearanceControl: UIControl, ConfigurableUIContent {
         }
         self.didLoadSubviews()
     }
-    
+
+    /// This load indicates that all `requiredSubviews` are loaded, inserted to
+    /// the receiver's hierarchy and have a default size.
     open func didLoadSubviews() {
         self.isExclusiveTouch = true
     }
-    
+
+    /// The required subviews of this class.
+    ///
+    /// The returned views are added to the receiver and `sizeToFit()` is
+    /// called upon them to attribute their default size.
     open func requiredSubviews() -> [UIView] {
         return []
     }
-    
+
+    /// Reloads all required subviews by calling `requiredSubviews()` and
+    /// `didLoadSubviews()` subsequently.
     final public func setNeedsUpdateSubviews() {
         self._requiredSubviews.forEach { subview in
             subview.removeFromSuperview()
@@ -112,3 +137,4 @@ open class ConfigurableAppearanceControl: UIControl, ConfigurableUIContent {
         super.sendAction(action, to: target, for: event)
     }
 }
+#endif

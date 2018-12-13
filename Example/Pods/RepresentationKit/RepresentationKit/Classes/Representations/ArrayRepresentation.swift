@@ -24,7 +24,6 @@
 
 import Foundation
 
-
 /// Describes an array representation. Also the conforming class can be
 /// represented itself.
 ///

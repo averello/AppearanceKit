@@ -25,4 +25,5 @@
 
 import Foundation
 
+/// A specific color that is intended to be used as a background color.
 public protocol BackgroundColor: Color {}

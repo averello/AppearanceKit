@@ -24,12 +24,29 @@
 //
 
 import Foundation
+
+
+#if canImport(UIKit) && canImport(QuartzCore)
 import UIKit
 import QuartzCore
 
+/// A Color.
 public protocol Color: CustomPlaygroundDisplayConvertible {
+    /// The backing `UIKit` color.
     var color: UIColor { get }
+
+    /// returns the "same" color with the specified alpha.
+    /// - parameter alpha: A Normalized value describing the alpha component of
+    /// the color.
     func with(alpha: Float) -> Color
+}
+
+extension UIColor: Color {
+
+    /// Conformance to `Color`.
+    public var color: UIColor {
+        return self
+    }
 }
 
 extension Color {
@@ -41,8 +58,9 @@ extension Color {
     public func debugQuickLookObject() -> AnyObject? {
         return self.color
     }
-    
+
     public func with(alpha: Float) -> Color {
         return AnyColor(color: self.color.withAlphaComponent(CGFloat(alpha)))
     }
 }
+#endif

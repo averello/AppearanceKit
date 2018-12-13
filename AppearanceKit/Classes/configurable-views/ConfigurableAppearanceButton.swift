@@ -23,12 +23,22 @@
 //
 //
 
+#if canImport(UIKit)
 import UIKit
 
+/// An button that its appearance can be configured by a `UIButtonAppearance`.
+///
+///
+/// By default `ConfigurableAppearanceButton` is exclusive to touch.
+///
+/// A `ConfigurableAppearanceButton` will not trigger any action if it's not
+/// visible (`alpha` is equal to `0.0`, or `isHidden` is `true`) or when its
+/// `isUserInteractionEnabled` is set to `false`.
 open class ConfigurableAppearanceButton: UIButton, ConfigurableUIContent {
     private final var _requiredSubviews: [UIView] = []
     
-    public init(frame: CGRect = CGRect.zero, appearance: UIButtonAppearance = DefaultUIButtonAppearance()) {
+    public init(frame: CGRect = CGRect.zero,
+                appearance: UIButtonAppearance = DefaultUIButtonAppearance()) {
         super.init(frame: frame)
         self.configureContentAppearence(appearance)
         self._loadSubviews()
@@ -47,15 +57,24 @@ open class ConfigurableAppearanceButton: UIButton, ConfigurableUIContent {
         }
         self.didLoadSubviews()
     }
-    
+
+
+    /// This load indicates that all `requiredSubviews` are loaded, inserted to
+    /// the receiver's hierarchy and have a default size.
     open func didLoadSubviews() {
         self.isExclusiveTouch = true
     }
-    
+
+    /// The required subviews of this class.
+    ///
+    /// The returned views are added to the receiver and `sizeToFit()` is
+    /// called upon them to attribute their default size.
     open func requiredSubviews() -> [UIView] {
         return []
     }
-    
+
+    /// Reloads all required subviews by calling `requiredSubviews()` and
+    /// `didLoadSubviews()` subsequently.
     final public func setNeedsUpdateSubviews() {
         self._requiredSubviews.forEach { subview in
             subview.removeFromSuperview()
@@ -69,5 +88,5 @@ open class ConfigurableAppearanceButton: UIButton, ConfigurableUIContent {
         if self.alpha <= 0 { return }
         super.sendAction(action, to: target, for: event)
     }
-
 }
+#endif

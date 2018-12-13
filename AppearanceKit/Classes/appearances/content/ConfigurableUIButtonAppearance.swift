@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A configurable `UIButtonApperanace`.
 public struct ConfigurableUIButtonAppearance: UIButtonAppearance {
     public var font: Font?
     public var titleColor: TextColor?

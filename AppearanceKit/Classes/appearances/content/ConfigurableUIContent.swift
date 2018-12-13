@@ -26,12 +26,21 @@
 import Foundation
 import ContentKit
 
+#if canImport(UIKit)
+/// A Configurable `UIContent` by an `UIContentAppearance`.
 public protocol ConfigurableUIContent: UIContent {
+    /// Results in the receiver to be configured by the appearance.
     func configureContentAppearence(_ appearance: UIContentAppearance)
 }
 
 public extension ConfigurableUIContent {
+
+    /// Configures a `UIContentAppearance` with the given appearance.
+    ///
+    /// The default implementation asks the appearance to configure the receiver.
+    /// - parameter appearance: The appearance to configure the receiver.
     public func configureContentAppearence(_ appearance: UIContentAppearance) {
         appearance.configure(self)
     }
 }
+#endif

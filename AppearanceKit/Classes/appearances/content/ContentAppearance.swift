@@ -25,4 +25,5 @@
 
 import Foundation
 
+/// Appearance specific to content.
 public protocol ContentAppearance: Appearance {}

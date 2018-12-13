@@ -25,27 +25,50 @@
 
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+
+/// A font.
 public protocol Font {
+    /// The backing `UIKit` font.
     var font: UIFont { get }
 
+    /// The normal font.
     var normal: Font { get }
+    /// The highlighted font.
     var hightlighted: Font? { get }
+    /// The disabled font.
     var disabled: Font? { get }
+    /// The selected font.
     var selected: Font? { get }
 
+    /// The font's size.
     var fontSize: Float { get }
+    /// The font's family.
     var family: String { get }
+    /// The font's name.
     var name: String { get }
+    /// The font's point size.
     var pointSize: Float { get }
+    /// The font's ascender.
     var ascender: Float { get }
+    /// The font's descender.
     var descender: Float { get }
+    /// The font's capHeight.
     var capHeight: Float { get }
+    /// The font's xHeight.
     var xHeight: Float { get }
+    /// The font's lineHeight.
     var lineHeight: Float { get }
+    /// The font's leading.
     var leading: Float { get }
 
+    /// The bold variance fo the font, if any.
     var bold: Font? { get }
-    
+
+    /// Derive a font similar to the receiver with the provided `size`.
+    /// - parameter size: The new size.
+    /// - returns: A different size font.
     func with(size: Float) -> Font
 }
 
@@ -69,8 +92,10 @@ public extension Font {
 }
 
 public extension Font {
-    
+
+    /// Configures a `UIButton`.
     public func configure(button: UIButton) {
         button.titleLabel?.font = self.font
     }
 }
+#endif

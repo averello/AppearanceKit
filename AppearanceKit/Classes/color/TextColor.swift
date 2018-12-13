@@ -25,10 +25,18 @@
 
 import Foundation
 
+/// A Color specific for Text.
+///
+/// A structure that contains the colors a text can have in its different
+/// states.
 public struct TextColor: Color {
+    /// The normal state color.
     public var normal: Color
+    /// The hightlighted state color.
     public var highlighted: Color? = nil
+    /// The disabled state color.
     public var disabled: Color? = nil
+    /// The selected state color.
     public var selected: Color? = nil
     
     public init(normal: Color,
@@ -42,15 +50,25 @@ public struct TextColor: Color {
     }
 }
 
+// MARK: - UIKit
+
+#if canImport(UIKit)
+import UIKit
+
 public extension TextColor {
-    
+
+    /// Conformance to `Color`.
     public var color: UIColor {
         return self.normal.color
     }
 }
 
 public extension TextColor {
-    
+
+    /// Configures a button with the colors described by the receiver for the
+    /// given states.
+    /// - parameter button: the button to configure.
+    /// - parameter states: the states to configure the button for.
     public func configure(button: UIButton,
                           forStates states: [UIControl.State]) {
         states.forEach { state in
@@ -58,7 +76,10 @@ public extension TextColor {
                                  for: state)
         }
     }
-    
+
+    /// Retrieves the Color from the given UIControl.State.
+    /// - parameter state: The control state.
+    /// - returns: the color for the given state if any.
     public func color(fromState state: UIControl.State) -> Color? {
         switch state {
         case UIControl.State.disabled:
@@ -74,4 +95,4 @@ public extension TextColor {
         }
     }
 }
-
+#endif
