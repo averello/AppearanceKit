@@ -26,6 +26,7 @@ import Foundation
 
 // default textual content key
 
+/// The key that is used by Text when is asked to be represented.
 public struct TextKey: LosslessStringConvertible, Hashable {
     private let value: String = "content"
     

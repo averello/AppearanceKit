@@ -6,12 +6,17 @@
 //
 
 import Foundation
+
+#if canImport(ContentKit)
 import ContentKit
 
+/// An image that trims all empty pixels on all edges.
 final public class TrimmedImage: ContentKit.Image {
-    
+
     final private let decorated: ContentKit.Image
-    
+
+    /// Creates a `TrimmedImage` from the provided image.
+    /// - parameter decorated: The image to trim.
     public init(_ decorated: ContentKit.Image) {
         self.decorated = decorated
     }
@@ -125,3 +130,4 @@ fileprivate extension UIImage {
         return self
     }
 }
+#endif

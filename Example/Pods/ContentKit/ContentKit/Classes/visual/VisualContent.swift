@@ -24,5 +24,5 @@
 
 import Foundation
 
-public protocol VisualContent: Content {
-}
+/// A content that has visual representation.
+public protocol VisualContent: Content {}

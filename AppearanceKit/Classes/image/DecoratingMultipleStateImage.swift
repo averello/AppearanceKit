@@ -24,9 +24,13 @@
 //
 
 import Foundation
+
+#if canImport(UIKit) && canImport(ContentKit)
 import UIKit
 import ContentKit
 
+/// An abstract class for creating `AppearanceKit.MultipleStateImage`s that will
+/// decorate other `AppearanceKit.MultipleStateImage`s.
 open class DecoratingMultipleStateImage: AppearanceKit.MultipleStateImage {
     public let decorated: AppearanceKit.MultipleStateImage
     
@@ -41,3 +45,4 @@ open class DecoratingMultipleStateImage: AppearanceKit.MultipleStateImage {
     open var disabled: ContentKit.Image? { return self.decorated.disabled }
     open var original: UIImage? { return self.decorated.original }
 }
+#endif

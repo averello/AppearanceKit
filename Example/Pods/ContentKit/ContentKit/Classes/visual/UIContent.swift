@@ -24,13 +24,23 @@
 
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+
+/// A `UIContent` is `UIKit`'s visual content.
+///
+/// A `UIContent` is related to/provides access to a `UIView`.
 public protocol UIContent: VisualContent {
+    /// The related `UIView`.
     var view: UIView { get }
 }
 
 
 extension UIView: UIContent {
+
+    /// Conformance to `UIContent`.
     public var view: UIView {
         return self
     }
 }
+#endif

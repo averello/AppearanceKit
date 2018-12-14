@@ -24,10 +24,15 @@
 
 import Foundation
 
+/// An audio that can is guaranteed to play once.
+///
+/// Calling multiple times `play()` on the same instance will result to only
+/// play once the audio.
 final public class OnceAudio: ContentKit.Audio {
     final fileprivate let audio: ContentKit.Audio
     final fileprivate var notPlayed = true
-    
+
+    /// - parameter audio: The audio to play only once.
     public init(audio: ContentKit.Audio) {
         self.audio = audio
     }
@@ -35,7 +40,9 @@ final public class OnceAudio: ContentKit.Audio {
     final public var duration: TimeInterval {
         return self.audio.duration
     }
-    
+
+    /// Begins playback of the receiver only if the `play()` was never called
+    /// before.
     final public func play() {
         guard self.notPlayed else { return }
         self.audio.play()
@@ -48,6 +55,7 @@ final public class OnceAudio: ContentKit.Audio {
 }
 
 extension OnceAudio: CustomStringConvertible {
+
     public var description: String {
         return "<"
             + String(describing: type(of: self))

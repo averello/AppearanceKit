@@ -24,23 +24,35 @@
 //
 
 import Foundation
+
+#if canImport(ContentKit) && canImport(QuartzCore) && canImport(UIKit)
 import ContentKit
 import QuartzCore
+import UIKit
 
+/// An image that is rotated either left/right (90°) or at arbitratry degrees.
 public class RotatedImage: ContentKit.Image {
 
+    /// The possible rotations for the image.
     public enum Rotation {
+        /// Right rotation of 90°.
         case right
+        /// Left rotation of 90°.
         case left
+        /// Arbitratry rotation of the given degrees.
         case arbitrary(AppearanceKit.Degrees)
     }
     
     final private let decorated: ContentKit.Image
     final public let rotation: RotatedImage.Rotation
 
-    public init(_ decorated: ContentKit.Image,
+    /// Creates a `RotatedImage` based on the provided image rotated by the
+    /// given rotation.
+    /// - parameter image: The image to rotate.
+    /// - parameter rotation: The rotation to apply.
+    public init(_ image: ContentKit.Image,
                 rotation: RotatedImage.Rotation) {
-        self.decorated = decorated
+        self.decorated = image
         self.rotation = rotation
     }
 
@@ -196,7 +208,7 @@ fileprivate extension RotatedImage.Rotation {
     }
 }
 
-extension RotatedImage.Direction {
+fileprivate extension RotatedImage.Direction {
 
     init(degrees: AppearanceKit.Degrees) {
         self = (degrees < 0)
@@ -215,10 +227,16 @@ extension RotatedImage.Direction {
     }
 }
 
+/// A multiple state image that is rotated either left/right (90°) or at
+/// arbitratry degrees.
 final public class MultipleStateRotatedImage: RotatedImage, MultipleStateImage {
 
     final private let decorated: AppearanceKit.MultipleStateImage
 
+    /// Creates a `MultipleStateRotatedImage` based on the provided image
+    /// rotated by the given rotation.
+    /// - parameter image: The image to rotate.
+    /// - parameter rotation: The rotation to apply.
     public init(_ decorated: AppearanceKit.MultipleStateImage,
                 rotation: RotatedImage.Rotation) {
         self.decorated = decorated
@@ -242,3 +260,4 @@ final public class MultipleStateRotatedImage: RotatedImage, MultipleStateImage {
         return self.decorated.original
     }
 }
+#endif

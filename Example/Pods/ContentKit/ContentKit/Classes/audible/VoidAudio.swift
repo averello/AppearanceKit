@@ -24,7 +24,8 @@
 
 import Foundation
 
-open class VoidAudio: Audio {
+/// The void audio. Nothing is ever heard from the void.
+open class VoidAudio: ContentKit.Audio {
     
     public init() {}
     

@@ -24,4 +24,5 @@
 
 import Foundation
 
+/// A Content.
 public protocol Content {}

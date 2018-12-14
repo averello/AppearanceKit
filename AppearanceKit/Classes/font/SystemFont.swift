@@ -25,6 +25,10 @@
 
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+
+/// The system font.
 public struct SystemFont: Font {
     private let size: Float
     
@@ -51,3 +55,4 @@ public struct SystemFont: Font {
         return SystemFont(size: size)
     }
 }
+#endif

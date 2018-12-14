@@ -24,9 +24,13 @@
 
 import Foundation
 
-public final class CachedImage: Image {
+#if canImport(UIKit) && canImport(CoreGraphics)
+import UIKit
+
+/// An image that caches the backing image upon its first usage.
+public final class CachedImage: ContentKit.Image {
     private var _image: UIImage?
-    private let _imageToCache: Image
+    private let _imageToCache: ContentKit.Image
 
     public var image: UIImage {
         if self._image == nil {
@@ -35,7 +39,8 @@ public final class CachedImage: Image {
         return self._image!
     }
 
-    public init(image: Image) {
+    public init(image: ContentKit.Image) {
         self._imageToCache = image
     }
 }
+#endif

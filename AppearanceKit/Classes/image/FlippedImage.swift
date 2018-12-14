@@ -23,8 +23,11 @@
 //
 
 import Foundation
+
+#if canImport(ContentKit)
 import ContentKit
 
+/// An image that is flipped either horizontally or vertically.
 final public class FlippedImage: ContentKit.Image {
     final private let decorated: ContentKit.Image
 
@@ -39,13 +42,23 @@ final public class FlippedImage: ContentKit.Image {
         return flipped
     }
 
+    /// The flip operation to perform.
     public enum Flip {
+        /// Flip horizontally, along the vertical axis that goes through the
+        /// center.
         case horizontal
+        /// Flip vertical, along the hortical axis that goes through the
+        /// center.
         case vertical
     }
 
+    /// The flip operation to perform.
     final public let flip: Flip
 
+    /// Creates a `FlippedImage` based on the provided image using the given
+    /// flip operation.
+    /// - parameter decorated: The image to flip.
+    /// - parameter filp: The flip mode.
     public init(_ decorated: ContentKit.Image, flip: Flip) {
         self.flip = flip
         self.decorated = decorated
@@ -114,3 +127,4 @@ fileprivate extension FlippedImage.Flip {
         }
     }
 }
+#endif

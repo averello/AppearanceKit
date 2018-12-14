@@ -24,22 +24,44 @@
 //
 
 import Foundation
-import ContentKit
 
-public protocol MultipleStateImage: Image {
-    var normal: Image? { get }
-    var highlighted: Image? { get }
-    var selected: Image? { get }
-    var disabled: Image? { get }
+#if canImport(ContentKit) && canImport(UIKit)
+import ContentKit
+import UIKit
+
+/// A `MultipleStateImage` represents an image that can have multiple states.
+/// The feasible states are: normal, highlighted, selected, disabled.
+///
+/// As an image may not have all of its states available the accessors return
+/// optional values.
+public protocol MultipleStateImage: ContentKit.Image {
+    /// The normal state image.
+    var normal: ContentKit.Image? { get }
+    /// The highlighted state image.
+    var highlighted: ContentKit.Image? { get }
+    /// The selected state image.
+    var selected: ContentKit.Image? { get }
+    /// The disabled state image.
+    var disabled: ContentKit.Image? { get }
+    /// Always returns the backing `UIKit` original image.
     var original: UIImage? { get }
-    
+
+    /// Configures a button with the receiver for the given states.
+    /// - parameter button: The button to set its image.
+    /// - parameter states: The states to configure the button with.
     func configure(button: UIButton,
                    forStates states: [UIControl.State])
-    
+
+    /// Configures the background of a button with the receiver for the given
+    /// states.
+    /// - parameter button: The button to set its background image.
+    /// - parameter states: The states to configure the button with.
     func configureBackground(button: UIButton,
                              forStates states: [UIControl.State])
-    
-    func image(fromState state: UIControl.State) -> Image?
+
+    /// Returns the image corresponding the requested state, if any.
+    /// - parameter state: The state.
+    func image(fromState state: UIControl.State) -> ContentKit.Image?
 }
 
 public extension MultipleStateImage {
@@ -58,7 +80,7 @@ public extension MultipleStateImage {
         }
     }
     
-    public func image(fromState state: UIControl.State) -> Image? {
+    public func image(fromState state: UIControl.State) -> ContentKit.Image? {
         switch state {
         case UIControl.State.disabled:
             return self.disabled
@@ -73,3 +95,4 @@ public extension MultipleStateImage {
         }
     }
 }
+#endif

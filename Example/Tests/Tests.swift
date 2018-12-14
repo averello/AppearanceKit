@@ -40,7 +40,7 @@ class Tests: XCTestCase {
         })
         let any = AnyImage(image: image)
         let scaled = ScaledImage(any, scale: 0.5)
-        let scaled2 = ScaledImage(any, size: AppearanceKit.Size(width: 10, height: 8))
+        let scaled2 = ScaledImage(any, toSize: AppearanceKit.Size(width: 10, height: 8))
         XCTAssertTrue(scaled.size.width == 50 && scaled.size.height == 40)
         XCTAssertTrue(scaled2.size.width == 10 && scaled2.size.height == 8)
     }

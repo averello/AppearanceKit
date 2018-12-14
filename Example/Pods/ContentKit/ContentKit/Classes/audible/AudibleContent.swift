@@ -24,4 +24,5 @@
 
 import Foundation
 
+/// An audible content.
 public protocol AudibleContent: Content {}

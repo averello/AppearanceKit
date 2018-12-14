@@ -24,9 +24,10 @@
 //
 
 import Foundation
+
+#if canImport(UIKit) && canImport(ContentKit)
 import ContentKit
 
-#if canImport(UIKit)
 /// A Configurable `UIContent` by an `UIContentAppearance`.
 public protocol ConfigurableUIContent: UIContent {
     /// Results in the receiver to be configured by the appearance.

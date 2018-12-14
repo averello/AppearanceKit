@@ -25,6 +25,7 @@
 
 import Foundation
 
+/// The Bold system font.
 public struct BoldSystemFont: Font {
     private let size: Float
     

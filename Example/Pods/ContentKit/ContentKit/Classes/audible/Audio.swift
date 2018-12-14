@@ -24,8 +24,16 @@
 
 import Foundation
 
+/// Audio is an audible content that can be played and stopped.
 public protocol Audio: AudibleContent {
+    /// The duration of the receiver.
     var duration: TimeInterval { get }
+
+    /// Begins playback of the receiver.
     func play()
+
+    /// Stops the playback of the receiver.
+    /// - parameter fadeOut: A Boolean indicating wether a face out should
+    /// occur.
     func stop(fadeOut: Bool)
 }

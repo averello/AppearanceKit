@@ -24,9 +24,11 @@
 
 import Foundation
 
+/// Adapts any String to Text.
 public struct AnyText: Text {
     public private(set) var content: String
-    
+
+    /// - parameter string: The string to adapt.
     public init(_ string: String) {
         self.content = string
     }

@@ -25,6 +25,10 @@
 
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+
+/// Adapts any `UIFont` to act as `Font`.
 public struct AnyFont: Font {
     public private(set) var font: UIFont
     
@@ -39,3 +43,4 @@ public struct AnyFont: Font {
         return AnyFont(font: self.font.withSize(CGFloat(size)))
     }
 }
+#endif

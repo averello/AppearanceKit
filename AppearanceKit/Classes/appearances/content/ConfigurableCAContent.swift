@@ -24,10 +24,10 @@
 //
 
 import Foundation
-import ContentKit
 
-#if canImport(QuartzCore)
+#if canImport(QuartzCore) && canImport(ContentKit)
 import QuartzCore
+import ContentKit
 
 /// A Core Animation Content.
 ///
@@ -61,5 +61,4 @@ public extension ConfigurableCAContent {
         appearance.configure(self)
     }
 }
-
 #endif

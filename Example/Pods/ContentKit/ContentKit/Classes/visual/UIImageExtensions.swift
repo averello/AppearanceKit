@@ -24,8 +24,14 @@
 
 import Foundation
 
-extension UIImage: Image {
+#if canImport(UIKit)
+import UIKit
+
+extension UIImage: ContentKit.Image {
+    
+    /// Conformance to `Image`.
     public var image: UIImage {
         return self
     }
 }
+#endif

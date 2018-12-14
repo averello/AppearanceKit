@@ -29,7 +29,7 @@ import Foundation
 import UIKit
 import QuartzCore
 
-/// An appearance for `UILabel`'s.
+/// An appearance for `UILabel`s.
 public protocol UILabelAppearance: UIContentAppearance {
     /// The font.
     var font: Font? { get }

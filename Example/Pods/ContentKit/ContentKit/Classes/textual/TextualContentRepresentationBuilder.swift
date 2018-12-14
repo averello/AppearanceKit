@@ -23,6 +23,7 @@
 //
 
 import Foundation
+#if canImport(RepresentationKit)
 import RepresentationKit
 
 /// Use this to create a ServerMessage from a json string
@@ -51,3 +52,4 @@ public struct TextRepresentationBuilder: TextRepresentation {
         return TextRepresentationBuilder(string)!
     }
 }
+#endif

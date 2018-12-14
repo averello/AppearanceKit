@@ -24,11 +24,23 @@
 
 import Foundation
 
-final public class DynamicallyDisablingAudio: Audio {
-    final private let audio: Audio
+/// An audio that can be dynamically be enabled or disabled.
+///
+/// A disabled audio results to a `noop` when `play()` or `stop()` is invoked.
+///
+/// There is a known gray behaviour area: When a started audio gets dynamically
+/// disabled then the `stop(fadeOut:)` has no effect. You should re-enable the
+/// receiver in order to effectively stop it.
+final public class DynamicallyDisablingAudio: ContentKit.Audio {
+    final private let audio: ContentKit.Audio
+
+    /// A Boolean value indicating whether the audio is enabled.
     final public var enabled: Bool
-    
-    public init(audio: Audio, enabled: Bool = true) {
+
+    /// - parameter audio: The audio to decorate with dynamic behaviour.
+    /// - parameter enabled: A Boolean indiacating the initial state of the
+    /// receiver.
+    public init(audio: ContentKit.Audio, enabled: Bool = true) {
         self.audio = audio
         self.enabled = enabled
     }
@@ -36,12 +48,14 @@ final public class DynamicallyDisablingAudio: Audio {
     final public var duration: TimeInterval {
         return self.audio.duration
     }
-    
+
+    /// Begins playback of the receiver if enabled otherwise nothing happens.
     final public func play() {
         guard self.enabled else { return }
         self.audio.play()
     }
-    
+
+    /// Begins playback of the receiver if enabled otherwise nothing happens.
     final public func stop(fadeOut: Bool) {
         guard self.enabled else { return }
         self.audio.stop(fadeOut: fadeOut)

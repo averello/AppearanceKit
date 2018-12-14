@@ -23,13 +23,18 @@
 //
 
 import Foundation
+
+#if canImport(RepresentationKit)
 import RepresentationKit
 
-public protocol TextRepresentation: Representation, Text {
-}
+/// A Text representation is a Text & a Representation.
+public protocol TextRepresentation: Representation, Text {}
 
 public extension DictionaryRepresentation {
+
+    /// Returns a Textual Representation.
     public var textualRepresentation: TextRepresentation {
         return self.represent(using: TextRepresentationBuilder()) as! TextRepresentation
     }
 }
+#endif

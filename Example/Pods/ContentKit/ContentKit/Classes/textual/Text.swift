@@ -23,12 +23,26 @@
 //
 
 import Foundation
+
+#if canImport(RepresentationKit)
 import RepresentationKit
 
+/// Text is some Content.
 public protocol Text: Content, Representable, LosslessStringConvertible, CustomPlaygroundDisplayConvertible {
+    /// The content of the text.
     var content: String { get }
+    /// A Boolean indicating wether the receiver is empty.
     var empty: Bool { get }
 }
+#else
+/// Text is some Content.
+public protocol Text: Content, LosslessStringConvertible, CustomPlaygroundDisplayConvertible {
+    /// The content of the text.
+    var content: String { get }
+    /// A Boolean indicating wether the receiver is empty.
+    var empty: Bool { get }
+}
+#endif
 
 public extension Text {
     
@@ -76,7 +90,9 @@ extension String: Text {
         return self
     }
 
+    #if canImport(RepresentationKit)
     public func represent(using representation: Representation) -> Representation {
         return representation.with(key: TextKey(), value: self)
     }
+    #endif
 }

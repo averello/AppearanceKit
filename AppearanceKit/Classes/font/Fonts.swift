@@ -25,6 +25,9 @@
 
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+
 public struct PassionBoldFont: Font {
     private let size: Float
     
@@ -144,3 +147,4 @@ struct AleoFont: Font {
         return AleoFont(size: size)
     }
 }
+#endif

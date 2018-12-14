@@ -24,10 +24,10 @@
 //
 
 import Foundation
-import ContentKit
 
-#if canImport(UIKit)
+#if canImport(UIKit) && canImport(ContentKit)
 import UIKit
+import ContentKit
 
 /// An image view that its appearance can be configured by a `UIContentAppearance`.
 open class ConfigurableAppearanceImageView: UIImageView, ConfigurableUIContent {

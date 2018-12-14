@@ -23,11 +23,19 @@
 //
 
 import Foundation
+
+#if canImport(UIKit) && canImport(ContentKit)
+import UIKit
 import ContentKit
 
+/// An image that can be scaled either using a scale factor or per axis
+/// scale factors.
 final public class ScaledImage: ContentKit.Image {
     final private let decorated: ContentKit.Image
+
+    /// The horizontal axis scale factor.
     final public let horizontal: Float
+    /// The vertical axis scale factor.
     final public let vertical: Float
     
     private lazy var drawnImage: ContentKit.Image = {
@@ -51,20 +59,33 @@ final public class ScaledImage: ContentKit.Image {
     public var image: UIImage {
         return self.drawnImage.image
     }
-    
+
+    /// Creates a `ScaledImage` based on the provided image scaled by the given
+    /// scale factor.
+    /// - parameter decorated: The image to scale.
+    /// - parameter scale: The scale factor to use on both axis.
     public convenience init(_ decorated: ContentKit.Image, scale: Float) {
         self.init(decorated,
                   horizontal: scale,
                   vertical: scale)
     }
-    
+
+    /// Creates a `ScaledImage` based on the provided image scaled by the given
+    /// scale factors.
+    /// - parameter decorated: The image to scale.
+    /// - parameter horizontal: The scale factor to use on the horizontal axis.
+    /// - parameter vertical: The scale factor to use on the vertical axis.
     public init(_ decorated: ContentKit.Image, horizontal: Float, vertical: Float) {
         self.decorated = decorated
         self.horizontal = horizontal
         self.vertical = vertical
     }
-    
-    public convenience init(_ decorated: ContentKit.Image, size: Size) {
+
+    /// Creates a `ScaledImage` based on the provided image scaled to the given
+    /// size.
+    /// - parameter decorated: The image to scale.
+    /// - parameter size: The final size the scaled image should have.
+    public convenience init(_ decorated: ContentKit.Image, toSize size: Size) {
         let originalSize = decorated.size
         let horizontal = size.width / originalSize.width
         let vertical = size.height / originalSize.height
@@ -73,3 +94,4 @@ final public class ScaledImage: ContentKit.Image {
                   vertical: vertical)
     }
 }
+#endif
