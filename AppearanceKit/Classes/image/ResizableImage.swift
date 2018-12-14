@@ -25,7 +25,7 @@
 
 import Foundation
 
-#if canImport(UIKit) && canImport(ContentKit) && (QuartzCore)
+#if canImport(UIKit) && canImport(ContentKit) && canImport(QuartzCore)
 import UIKit
 import ContentKit
 import QuartzCore
