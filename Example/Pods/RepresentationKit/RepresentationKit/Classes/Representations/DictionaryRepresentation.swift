@@ -54,7 +54,7 @@ public protocol DictionaryRepresentation: Representation, Representable {
 
 public extension DictionaryRepresentation {
     
-    public func represent(using representation: Representation) -> Representation {
+    func represent(using representation: Representation) -> Representation {
         return self.dictionary.reduce(representation) { (rep, pair) -> Representation in
             rep.with(key: pair.0, value: pair.1)
         }

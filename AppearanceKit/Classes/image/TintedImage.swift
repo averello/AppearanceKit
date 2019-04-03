@@ -31,7 +31,7 @@ import ContentKit
 
 /// An image that can be tinted with a color using specific blend mode.
 public final class TintedImage: ContentKit.Image {
-
+    
     /// Compositing operations for images.
     ///
     /// These blend mode constants represent the Porter-Duff blend modes. The
@@ -159,7 +159,7 @@ public final class TintedImage: ContentKit.Image {
         /// R = MIN(1, S + D)
         case plusLighter
     }
-
+    
     /// The default tint color for `TintedImage` is black with 1/3 opacity.
     public struct DefaultTintColor: Color {
         public let color: UIColor
@@ -172,7 +172,7 @@ public final class TintedImage: ContentKit.Image {
     final private let decorated: ContentKit.Image
     final private let color: Color
     final private let blendMode: TintedImage.BlendMode
-
+    
     /// Creates a `TintedImage` based on the provided image that will be blended
     /// with the given mode using the provided color.
     /// - parameter decorated: The image to tint.
@@ -203,13 +203,13 @@ public final class TintedImage: ContentKit.Image {
 }
 
 public extension ContentKit.Image {
-
+    
     /// Returns a tinted image of the receiver with the provided color using
     /// the given blend mode.
     /// - parameter color: The color to use for tinting.
     /// - parameter blendMode: The blend mode to use for the tint process.
-    public func tintedImage(withColor color: Color = TintedImage.DefaultTintColor(),
-                            blendMode: TintedImage.BlendMode = TintedImage.BlendMode.sourceAtop) -> ContentKit.Image {
+    func tintedImage(withColor color: Color = TintedImage.DefaultTintColor(),
+                     blendMode: TintedImage.BlendMode = TintedImage.BlendMode.sourceAtop) -> ContentKit.Image {
         return TintedImage(self,
                            color: color,
                            blendMode: blendMode)

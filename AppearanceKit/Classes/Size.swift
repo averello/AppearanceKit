@@ -27,7 +27,7 @@ import Foundation
 
 /// A two dimensional size.
 public struct Size {
-
+    
     /// The width.
     public let width: Float
     /// The height.
@@ -37,7 +37,7 @@ public struct Size {
         self.width = width
         self.height = height
     }
-
+    
     /// The zero size.
     public static let zero: Size = Size(width: 0, height: 0)
 }
@@ -47,18 +47,18 @@ import CoreGraphics
 
 public extension Size {
     
-    public init(size: CGSize) {
+    init(size: CGSize) {
         self.init(width: Float(size.width), height: Float(size.height))
     }
     
-    public var asCGSize: CGSize {
+    var asCGSize: CGSize {
         return CGSize(size: self)
     }
 }
 
 public extension CGSize {
     
-    public init(size: Size) {
+    init(size: Size) {
         self.init(width: CGFloat(size.width), height: CGFloat(size.height))
     }
 }

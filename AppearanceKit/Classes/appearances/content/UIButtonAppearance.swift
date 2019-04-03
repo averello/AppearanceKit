@@ -35,40 +35,40 @@ public protocol UIButtonAppearance: UIContentAppearance {
     var font: Font? { get }
     /// The title color.
     var titleColor: TextColor? { get }
-
+    
     /// The shadow color.
     var shadowColor: TextColor? { get }
     /// The shadow offset.
     var shadowOffset: AppearanceKit.Size? { get }
-
+    
     /// An optional label appearance for configuring the `titleLabel`.
     var titleLabelAppearance: UILabelAppearance? { get }
 }
 
 public extension UIButtonAppearance {
-
+    
     /// Configures a `ConfigurableUIContent` with the receiver.
     /// - parameter content: The `ConfigurableUIContent` to configure.
-    public func configure(_ content: ConfigurableUIContent) {
-
+    func configure(_ content: ConfigurableUIContent) {
+        
         content.view.backgroundColor = self.backgroundColor?.color
         content.view.tintColor = self.tintColor?.color
-
+        
         if let caContent = content as? ConfigurableCAContent,
             let layerAppearance = self.layerAppearance {
             caContent.configureContentAppearence(layerAppearance)
         }
-
+        
         if let aContent = content as? UIButton {
             self.configure(aContent)
             return
         }
         assert(false)
     }
-
+    
     /// Configures any `UIButton` with the receiver.
     /// - parameter content: The `UIButton` to configure.
-    public func configure<B>(_ content: B) where B: UIButton {
+    func configure<B>(_ content: B) where B: UIButton {
         let aContent = content
         
         if let titleLabelAppearance = self.titleLabelAppearance {
@@ -126,17 +126,17 @@ public enum UIButtonAppearanceField {
 }
 
 public extension UIButtonAppearance {
-
+    
     /// Creates a `ConfigurableUIButtonAppearance` from any `UIButtonAppearance`.
-    public var configurableAppearance: ConfigurableUIButtonAppearance {
+    var configurableAppearance: ConfigurableUIButtonAppearance {
         return ConfigurableUIButtonAppearance(appearance: self)
     }
-
+    
     /// Creates a derived `UIButtonAppearance` that has the provided field.
     ///
     /// Immutability wins.
     /// - parameter field: The field to be updated.
-    public func updating(field: UIButtonAppearanceField) -> UIButtonAppearance {
+    func updating(field: UIButtonAppearanceField) -> UIButtonAppearance {
         var appearance = self.configurableAppearance
         switch field {
         case UIButtonAppearanceField.font(let font):
@@ -152,10 +152,10 @@ public extension UIButtonAppearance {
         }
         return appearance
     }
-
+    
     /// Derives an appearance with the specified list of fields.
     /// - parameter fields: The fields to be updated.
-    public func updating(fields: UIButtonAppearanceField...) -> UIButtonAppearance {
+    func updating(fields: UIButtonAppearanceField...) -> UIButtonAppearance {
         return fields.reduce(self, { (partial: UIButtonAppearance, field: UIButtonAppearanceField) -> UIButtonAppearance in
             return partial.updating(field: field)
         })

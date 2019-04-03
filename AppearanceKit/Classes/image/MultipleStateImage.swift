@@ -45,20 +45,20 @@ public protocol MultipleStateImage: ContentKit.Image {
     var disabled: ContentKit.Image? { get }
     /// Always returns the backing `UIKit` original image.
     var original: UIImage? { get }
-
+    
     /// Configures a button with the receiver for the given states.
     /// - parameter button: The button to set its image.
     /// - parameter states: The states to configure the button with.
     func configure(button: UIButton,
                    forStates states: [UIControl.State])
-
+    
     /// Configures the background of a button with the receiver for the given
     /// states.
     /// - parameter button: The button to set its background image.
     /// - parameter states: The states to configure the button with.
     func configureBackground(button: UIButton,
                              forStates states: [UIControl.State])
-
+    
     /// Returns the image corresponding the requested state, if any.
     /// - parameter state: The state.
     func image(fromState state: UIControl.State) -> ContentKit.Image?
@@ -66,21 +66,21 @@ public protocol MultipleStateImage: ContentKit.Image {
 
 public extension MultipleStateImage {
     
-    public func configure(button: UIButton, forStates states: [UIControl.State]) {
+    func configure(button: UIButton, forStates states: [UIControl.State]) {
         states.forEach { state in
             button.setImage(self.image(fromState: state)?.image,
                             for: state)
         }
     }
     
-    public func configureBackground(button: UIButton, forStates states: [UIControl.State]) {
+    func configureBackground(button: UIButton, forStates states: [UIControl.State]) {
         states.forEach { state in
             button.setBackgroundImage(self.image(fromState: state)?.image,
                                       for: state)
         }
     }
     
-    public func image(fromState state: UIControl.State) -> ContentKit.Image? {
+    func image(fromState state: UIControl.State) -> ContentKit.Image? {
         switch state {
         case UIControl.State.disabled:
             return self.disabled

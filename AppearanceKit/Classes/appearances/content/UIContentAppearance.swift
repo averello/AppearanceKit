@@ -35,16 +35,16 @@ public protocol UIContentAppearance: ContentAppearance {
     var backgroundColor: Color? { get }
     /// The tint color.
     var tintColor: Color? { get }
-
+    
     /// An optional layer appearance for configuring the layer.
     var layerAppearance: CAContentAppearance? { get }
-
+    
     /// Configures a `ConfigurableUIContent` with the current appearance.
     func configure(_ content: ConfigurableUIContent)
 }
 
 public extension UIContentAppearance {
-
+    
     /// Configures a `ConfigurableUIContent` with the current appearance.
     ///
     /// The default implementation sets the `backgroundColor` & `tintColor`
@@ -52,7 +52,7 @@ public extension UIContentAppearance {
     /// then configures the content's layer with the `layerAppearance` if
     /// provided.
     /// - parameter content: The content to be configured by the appearance.
-    public func configure(_ content: ConfigurableUIContent) {
+    func configure(_ content: ConfigurableUIContent) {
         content.view.backgroundColor = self.backgroundColor?.color
         content.view.tintColor = self.tintColor?.color
         
@@ -74,12 +74,12 @@ public enum UIContentAppearanceField {
 }
 
 public extension UIContentAppearance {
-
+    
     /// Creates a derived `UIContentAppearance` that has the provided field.
     ///
     /// Immutability wins.
     /// - parameter field: The field to be updated.
-    public func updating(field: UIContentAppearanceField) -> UIContentAppearance {
+    func updating(field: UIContentAppearanceField) -> UIContentAppearance {
         var appearance = DefaultUIContentAppearance(self)
         switch field {
         case UIContentAppearanceField.backgroundColor(let backgroundColor):
@@ -91,10 +91,10 @@ public extension UIContentAppearance {
         }
         return appearance
     }
-
+    
     /// Derives an appearance with the specified list of fields.
     /// - parameter fields: The fields to be updated.
-    public func updating(fields: UIContentAppearanceField...) -> UIContentAppearance {
+    func updating(fields: UIContentAppearanceField...) -> UIContentAppearance {
         return fields.reduce(self, { (partial: UIContentAppearance, field: UIContentAppearanceField) -> UIContentAppearance in
             return partial.updating(field: field)
         })
@@ -115,7 +115,7 @@ public struct DefaultUIContentAppearance: UIContentAppearance {
         self.tintColor = tintColor
         self.layerAppearance = layerAppearance
     }
-
+    
     public init(_ appearance: UIContentAppearance) {
         self.init(backgroundColor: appearance.backgroundColor,
                   tintColor: appearance.tintColor,

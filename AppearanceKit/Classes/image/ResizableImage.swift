@@ -32,7 +32,7 @@ import QuartzCore
 
 /// An image that can be resized using either a tile or stretch technique.
 public class ResizableImage: ContentKit.Image {
-
+    
     /// The possible resizing modes for the image.
     public enum Mode {
         /// The image is tiled when it is resized. In other words, the interior
@@ -44,7 +44,7 @@ public class ResizableImage: ContentKit.Image {
         /// interior region of the newly resized imaged.
         case stretch
     }
-
+    
     /// The cap insets to cap the image.
     ///
     /// Cap inset values are applied to a rectangle to shrink or expand the
@@ -58,7 +58,7 @@ public class ResizableImage: ContentKit.Image {
         public let bottom: Float
         /// The right edge inset value.
         public let right: Float
-
+        
         /// Creates a cap inset.
         /// - parameter top: The top edge inset value.
         /// - parameter left: The left edge inset value.
@@ -73,7 +73,7 @@ public class ResizableImage: ContentKit.Image {
             self.bottom = bottom
             self.right = right
         }
-
+        
         /// Returns the `UIKit` equivalent.
         public var asUIEdgeInsets: UIEdgeInsets {
             return UIEdgeInsets(top: CGFloat(self.top),
@@ -82,14 +82,14 @@ public class ResizableImage: ContentKit.Image {
                                 right: CGFloat(self.right))
         }
     }
-
+    
     /// The decorated image to make resizable.
     final private let decorated: ContentKit.Image
     /// The cap insets to use.
     final fileprivate let insets: ResizableImage.CapInsets
     /// The resizing mode to use.
     final fileprivate let mode: ResizableImage.Mode
-
+    
     /// Creates a `ResizableImage` based on the given image, with the given
     /// cap insets using the provided resizing mode.
     /// - parameter image: The image to make resizable.
@@ -114,7 +114,7 @@ public class ResizableImage: ContentKit.Image {
 /// technique.
 final public class MultipleStateResizableImage: ResizableImage, MultipleStateImage {
     final private let decorated: MultipleStateImage
-
+    
     /// Creates a `MultipleStateResizableImage` based on the given image, with
     /// the given cap insets using the provided resizing mode.
     /// - parameter image: The image to make resizable.
@@ -152,7 +152,7 @@ final public class MultipleStateResizableImage: ResizableImage, MultipleStateIma
 
 fileprivate extension ResizableImage.Mode {
     
-    fileprivate var resizingMode: UIImage.ResizingMode {
+    var resizingMode: UIImage.ResizingMode {
         switch self {
         case ResizableImage.Mode.tile:
             return UIImage.ResizingMode.tile

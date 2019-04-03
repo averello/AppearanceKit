@@ -81,7 +81,7 @@ final public class MultipleStateRenderingModeImage: RenderingModeImage, Multiple
 
 fileprivate extension RenderingModeImage.Mode {
     
-    fileprivate var renderingMode: UIImage.RenderingMode {
+    var renderingMode: UIImage.RenderingMode {
         switch self {
         case RenderingModeImage.Mode.automatic:
             return UIImage.RenderingMode.automatic

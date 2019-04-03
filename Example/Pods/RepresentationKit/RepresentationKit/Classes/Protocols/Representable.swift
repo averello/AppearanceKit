@@ -42,20 +42,20 @@ public extension Representable {
     /// this instance.
     /// This is a strongly typed alternative
     /// - Parameter representation: the representation to fill
-    public func represent<Rep>(using representation: Rep) -> Rep where Rep: Representation {
+    func represent<Rep>(using representation: Rep) -> Rep where Rep: Representation {
         return self.represent(using: representation) as! Rep
     }
 
     /// Default empty representation. This default implementation does nothing.
     /// - Parameter representation: the representation to fill
-	public func represent(using representation: Representation) -> Representation {
+	func represent(using representation: Representation) -> Representation {
 		return representation
 	}
 }
 
 public extension CustomStringConvertible where Self : Representable {
     
-    public func represent(using representation: Representation) -> Representation {
+    func represent(using representation: Representation) -> Representation {
         return representation.with(key: "description", value: self.description)
     }
 }

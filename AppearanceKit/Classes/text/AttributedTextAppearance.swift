@@ -77,7 +77,7 @@ public protocol AttributedTextAppearance: ContentAppearance {
     /// attributes, as returned by the `default` method of
     /// `AttributedText.ParagraphStyle`.
     var style: AttributedText.ParagraphStyle? { get }
-
+    
     /// Configures an `AttributedText` with the receiver.
     /// - parameter text: The `AttributedText` to configure.
     func configure(_ text: inout AttributedText)
@@ -85,7 +85,7 @@ public protocol AttributedTextAppearance: ContentAppearance {
 
 public extension AttributedTextAppearance {
     
-    public func configure(_ text: inout AttributedText) {
+    func configure(_ text: inout AttributedText) {
         text.font = self.font
         text.color = self.color
         text.backgroundColor = self.backgroundColor

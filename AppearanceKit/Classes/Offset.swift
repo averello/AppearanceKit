@@ -48,7 +48,7 @@ import UIKit
 
 public extension Offset {
     
-    public init(offset: UIOffset) {
+    init(offset: UIOffset) {
         self.init(horizontal: Float(offset.horizontal), vertical: Float(offset.vertical))
     }
 }
@@ -58,14 +58,14 @@ public extension Offset {
 import CoreGraphics
 
 public extension Offset {
-    public var asUIOffset: UIOffset {
+    var asUIOffset: UIOffset {
         return UIOffset(offset: self)
     }
 }
 
 public extension UIOffset {
     
-    public init(offset: Offset) {
+    init(offset: Offset) {
         self.init(horizontal: CGFloat(offset.horizontal),
                   vertical: CGFloat(offset.vertical))
     }

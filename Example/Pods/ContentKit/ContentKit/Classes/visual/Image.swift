@@ -37,14 +37,14 @@ public protocol Image: VisualContent, CustomPlaygroundDisplayConvertible {
 
 public extension Image {
     
-    public var size: ContentKit.Size {
+    var size: ContentKit.Size {
         return ContentKit.Size(size: self.image.size)
     }
 }
 
 public extension Image {
     
-    public var playgroundDescription: Any {
+    var playgroundDescription: Any {
         return self.image
     }
     
@@ -52,7 +52,7 @@ public extension Image {
 
 public extension Image {
     
-    public func debugQuickLookObject() -> AnyObject? {
+    func debugQuickLookObject() -> AnyObject? {
         return self.image
     }
 }
@@ -61,20 +61,20 @@ public extension Image {
 
     /// Configures an image view with the receiver.
     /// - parameter imageView: The image view.
-    public func configure(imageView: UIImageView) {
+    func configure(imageView: UIImageView) {
         imageView.image = self.image
     }
 
     /// Configures a button with the receiver.
     /// - parameter button: The button.
-    public func configure(button: UIButton) {
+    func configure(button: UIButton) {
         button.setImage(self.image,
                         for: UIControl.State.normal)
     }
 
     /// Configures the background of the receiver.
     /// - parameter button: The button.
-    public func configureBackground(button: UIButton) {
+    func configureBackground(button: UIButton) {
         button.setBackgroundImage(self.image,
                                   for: UIControl.State.normal)
     }

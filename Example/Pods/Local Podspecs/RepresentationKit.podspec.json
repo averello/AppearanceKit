@@ -1,6 +1,6 @@
 {
   "name": "RepresentationKit",
-  "version": "2.3.1",
+  "version": "2.5",
   "summary": "Create representation of objects.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/averello/RepresentationKit",
@@ -13,10 +13,12 @@
   },
   "source": {
     "git": "https://github.com/averello/RepresentationKit.git",
-    "tag": "2.3.1"
+    "tag": "2.5"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "8.0",
+    "osx": "10.9"
   },
-  "source_files": "RepresentationKit/Classes/**/*"
+  "source_files": "RepresentationKit/Classes/**/*",
+  "frameworks": "Foundation"
 }

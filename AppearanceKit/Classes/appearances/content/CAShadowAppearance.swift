@@ -38,25 +38,25 @@ public protocol CAShadowAppearance: CAContentAppearance {
     var opacity: Float? { get }
     /// The offset (in points) of the shadow.
     var offset: Offset? { get }
-
+    
     /// The shape of the shadow.
     var path: CGPath? { get }
 }
 
 public extension CAShadowAppearance {
-
+    
     /// Configures a `ConfigurableCAContent` with the receiver.
     /// - parameter content: The `ConfigurableCAContent` to configure.
-    public func configure(_ content: ConfigurableCAContent) {
+    func configure(_ content: ConfigurableCAContent) {
         if let aLayer = content as? CALayer {
             self.configure(aLayer)
             return
         }
     }
-
+    
     /// Configures any `CALayer` with the receiver.
     /// - parameter content: The `CALayer` to configure.
-    public func configure<L>(_ content: L) where L: CALayer {
+    func configure<L>(_ content: L) where L: CALayer {
         let aContent = content
         
         if let color = self.backgroundColor?.color.cgColor {

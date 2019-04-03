@@ -11,10 +11,10 @@ import Foundation
 import CoreGraphics
 
 public extension CGContext {
-
+    
     /// A `CGContext`'s configuration.
-    final public class Configuration {
-
+    final class Configuration {
+        
         /// The shadow the context should use.
         public struct Shadow {
             /// The shadow offset in base-space.
@@ -62,7 +62,7 @@ public extension CGContext {
             /// value.
             public let colorComponents: [CGFloat]
         }
-
+        
         /// Sets the line width for a graphics context.
         ///
         /// The default line width is 1 unit. When stroked, the line straddles
@@ -142,10 +142,10 @@ public extension CGContext {
         /// appropriate initial value to the fill color, based on the specified
         /// color space.
         final public let fillColorSpace: CGColorSpace?
-
+        
         /// Sets the platform font in a graphics context.
         final public let font: Font?
-
+        
         /// Enables shadowing with color a graphics context.
         final public let shadow: Shadow?
         /// Sets the stroke pattern in the specified graphics context.
@@ -169,7 +169,7 @@ public extension CGContext {
         /// moving the start of pattern cell tiling to the point (2,3) in
         /// default user space.
         final public let patternPhase: CGSize?
-
+        
         /// Sets the location at which text is drawn.
         ///
         /// A point that specifies the x and y values at which text is to be
@@ -184,7 +184,7 @@ public extension CGContext {
         final public let textDrawingMode: CGTextDrawingMode?
         /// Sets the current text matrix.
         final public let textMatrix: CGAffineTransform?
-
+        
         /// Sets the rendering intent in the current graphics state.
         ///
         /// The rendering intent specifies how to handle colors that are not
@@ -194,7 +194,7 @@ public extension CGContext {
         /// images and relative colorimetric rendering intent for all other
         /// drawing.
         final public let renderingIntent: CGColorRenderingIntent?
-
+        
         /// Sets antialiasing on or off for a graphics context.
         final public let shouldAntialias: Bool?
         /// Sets whether or not to allow antialiasing for a graphics context.
@@ -203,7 +203,7 @@ public extension CGContext {
         /// the allowsAntialiasing parameter and the graphics state parameter
         /// shouldAntialias are `true`.
         final public let allowsAntialiasing: Bool?
-
+        
         /// Enables or disables font smoothing in a graphics context.
         ///
         /// There are cases, such as rendering to a bitmap, when font smoothing is not appropriate and should be disabled. Note that some contexts (such as PostScript contexts) do not support font smoothing.
@@ -220,7 +220,7 @@ public extension CGContext {
         /// not usually necessary to make changes to both parameters at the same
         /// time; either can be used to disable font smoothing.
         final public let allowsFontSmoothing: Bool?
-
+        
         /// Enables or disables subpixel positioning in a graphics context.
         ///
         /// When enabled, the graphics context may position glyphs on
@@ -234,7 +234,7 @@ public extension CGContext {
         /// For information on how to enable subpixel positioning, see the
         /// `shouldSubpixelPositionFonts` property.
         final public let allowsFontSubpixelPositioning: Bool?
-
+        
         /// Enables or disables subpixel quantization in a graphics context.
         ///
         /// When enabled, the graphics context may quantize the subpixel
@@ -335,9 +335,9 @@ public extension CGContext {
 }
 
 public extension CGContext.Configuration {
-
+    
     /// Configures a `CGContext` with the receiver.
-    public func configure(context: CGContext) {
+    func configure(context: CGContext) {
         if let textDrawingMode = self.textDrawingMode {
             context.setTextDrawingMode(textDrawingMode)
         }

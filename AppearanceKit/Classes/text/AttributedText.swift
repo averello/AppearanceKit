@@ -33,7 +33,7 @@ public struct AttributedText: Text {
     /// The backing `Foundation` string.
     public fileprivate(set) var content: String
     fileprivate var _attributes: [String: Attribute]
-
+    
     /// The current attributes associated with the receiver.
     public var attributes: [Attribute] {
         get { return Array(self._attributes.values) }
@@ -43,13 +43,13 @@ public struct AttributedText: Text {
 // MARK: - Initializers
 
 extension AttributedText {
-
+    
     /// Creates an `AttributedText` from a `String` with no attributes.
     /// - parameter content: The string of the text.
     public init(_ content: String) {
         self.init(content, attributes: [])
     }
-
+    
     /// Creates an `AttributedText` from any `Text` with the given attributes.
     /// - parameter text: The content.
     /// - parameter attributes: The dispaly attributes of the text.
@@ -75,12 +75,12 @@ extension AttributedText {
         for (key,value) in string
             .attributes(at: 0, effectiveRange: nil)
             .compactMap({ (key: NSAttributedString.Key, value: Any) -> (String,AttributedText.Attribute)? in
-            guard let attribute = AttributedText.Attribute(string: string,
-                                                           attribute: key,
-                                                           value: value) else { return nil }
-            return (key.rawValue, attribute)
-        }) {
-            attrs[key] = value
+                guard let attribute = AttributedText.Attribute(string: string,
+                                                               attribute: key,
+                                                               value: value) else { return nil }
+                return (key.rawValue, attribute)
+            }) {
+                attrs[key] = value
         }
         self._attributes = attrs
     }
@@ -89,7 +89,7 @@ extension AttributedText {
 // MARK: - Manipulators
 
 extension AttributedText {
-
+    
     /// Sets the given attribute to the entirety of the receiver.
     ///
     /// - parameter attribute: The attribute to set. If the attribute exists it
@@ -98,7 +98,7 @@ extension AttributedText {
     public mutating func set(attribute: AttributedText.Attribute) {
         self._attributes[attribute.key.rawValue] = attribute
     }
-
+    
     /// Gets an `NSAttributedString` from the receiver.
     public var attributedString: NSAttributedString {
         return { () -> NSAttributedString in
@@ -116,7 +116,7 @@ extension AttributedText {
 // MARK: - Attributed Text Types
 
 extension AttributedText {
-
+    
     /// The alignement of an `AttributedText`.
     public enum Alignment {
         /// Text is visually left aligned.
@@ -145,10 +145,10 @@ import AppKit
 #endif
 
 public extension AttributedText.Alignment {
-
+    
     /// Creates a `AttributedText.Alignment` instance from the `UIKit` or
     /// `AppKit` equivalent.
-    public init(textAlignment: NSTextAlignment) {
+    init(textAlignment: NSTextAlignment) {
         self = { () -> AttributedText.Alignment in
             switch textAlignment {
             case NSTextAlignment.left:
@@ -161,13 +161,15 @@ public extension AttributedText.Alignment {
                 return AttributedText.Alignment.justified
             case NSTextAlignment.natural:
                 return AttributedText.Alignment.natural
+            @unknown default:
+                return AttributedText.Alignment.left
             }
         }()
     }
 }
 
 fileprivate extension AttributedText.Alignment {
-
+    
     /// The equivalent `UIKit` or `AppKit` text alignment.
     var textAlignment: NSTextAlignment {
         switch self {
@@ -187,7 +189,7 @@ fileprivate extension AttributedText.Alignment {
 #endif
 
 extension AttributedText {
-
+    
     /// Attributes that you can apply to an attributed text.
     public enum Attribute {
         /// The font.
@@ -209,7 +211,7 @@ extension AttributedText {
         case strokeWidth(Float)
         /// The shadow.
         case shadow(AttributedText.Shadow)
-
+        
         #if canImport(UIKit) || canImport(AppKit)
         /// The paragragh style.
         case style(AttributedText.ParagraphStyle)
@@ -218,7 +220,7 @@ extension AttributedText {
 }
 
 extension AttributedText {
-
+    
     /// The shadow of an `AttributedText`.
     public struct Shadow {
         /// The offset of the shadow in user space points.
@@ -240,7 +242,7 @@ extension AttributedText {
             self.radius = radius
             self.color = color
         }
-
+        
         /// Creates a shadow with the given attributes.
         /// - parameter offset: A couple describing the shadow offset.
         /// - parameter radius: The blur radius (in points) of the shadow.
@@ -258,14 +260,14 @@ extension AttributedText {
 }
 
 public extension AttributedText.Shadow {
-
+    
     /// Defines a structure that specifies an amount to offset a shadow.
-    public struct Offset {
+    struct Offset {
         /// The horizontal offset in user space points.
         public let horizontal: Float
         /// The vertical offset in user space points.
         public let vertical: Float
-
+        
         /// Creates a shadow offest with the given values.
         /// - parameter horizontal: The horizontal offset in user space points.
         /// - parameter vertical: The vertical offset in user space points.
@@ -286,10 +288,10 @@ import AppKit
 #endif
 
 public extension AttributedText.Shadow {
-
+    
     /// Creates a `AttributedText.Shadow` from the equivalent `UIKit`/`AppKit`
     /// `NSShadow`.
-    public init(shadow: NSShadow) {
+    init(shadow: NSShadow) {
         self.offset = AttributedText.Shadow.Offset(size: shadow.shadowOffset)
         self.radius = Float(shadow.shadowBlurRadius)
         if let color = shadow.shadowColor as? UIColor {
@@ -299,7 +301,7 @@ public extension AttributedText.Shadow {
             self.color = BlackColor().with(alpha: 0.333)
         }
     }
-
+    
     /// Creates an equivalent `UIKit`/`AppKit` `NSShadow` from the receiver.
     fileprivate var shadow: NSShadow {
         let shadow = NSShadow()
@@ -315,18 +317,18 @@ public extension AttributedText.Shadow {
 import QuartzCore
 
 public extension CGSize {
-
+    
     /// Creates a `CGSize` from an `AttributedText.Shadow.Offset`.
-    public init(offset: AttributedText.Shadow.Offset) {
+    init(offset: AttributedText.Shadow.Offset) {
         self.init(width: Double(offset.horizontal),
                   height: Double(offset.vertical))
     }
 }
 
 public extension AttributedText.Shadow.Offset {
-
+    
     /// Creates an `AttributedText.Shadow.Offset` from a `CGSize`.
-    public init(size: CGSize) {
+    init(size: CGSize) {
         self.init(horizontal: Float(size.width),
                   vertical: Float(size.height))
     }
@@ -343,10 +345,10 @@ import AppKit
 #endif
 
 extension AttributedText {
-
+    
     /// The paragraph attributes used by an attributed text.
     public struct ParagraphStyle {
-
+        
         /// Specifies what happens when a line is too long for its container.
         public enum LineBreakMode {
             /// Wrapping occurs at word boundaries, unless the word itself
@@ -372,7 +374,7 @@ extension AttributedText {
             /// it with multiline text truncates the text into a single line.
             case byTruncatingMiddle // Truncate middle of line:  "ab...yz"
         }
-
+        
         /// Specifies the writing directions.
         public enum WritingDirection {
             /// The writing direction is determined using the Unicode Bidi
@@ -383,7 +385,7 @@ extension AttributedText {
             /// The writing direction is right to left.
             case rightToLeft // Right to left writing direction
         }
-
+        
         /// The distance in points between the bottom of one line fragment and
         /// the top of the next.
         ///
@@ -481,7 +483,7 @@ extension AttributedText {
         /// user-selected language by examining the first item in
         /// `preferredLanguages`.
         public var hyphenationFactor: Float
-
+        
         /// Creates a paragraph style.
         /// - parameter lineSpacing: The line spacing.
         /// - parameter paragraphSpacing: The paragraph spacing.
@@ -527,10 +529,10 @@ extension AttributedText {
 }
 
 public extension AttributedText.ParagraphStyle.LineBreakMode {
-
+    
     /// Creates an `AttributedText.ParagraphStyle.LineBreakMode` from the
     /// equivalent `UIKit`/`AppKit` `NSLineBreakMode`.
-    public init(_ mode: NSLineBreakMode) {
+    init(_ mode: NSLineBreakMode) {
         self = { () -> AttributedText.ParagraphStyle.LineBreakMode in
             switch mode {
             case NSLineBreakMode.byWordWrapping:
@@ -545,29 +547,31 @@ public extension AttributedText.ParagraphStyle.LineBreakMode {
                 return AttributedText.ParagraphStyle.LineBreakMode.byTruncatingTail
             case NSLineBreakMode.byTruncatingMiddle:
                 return AttributedText.ParagraphStyle.LineBreakMode.byTruncatingMiddle
+            @unknown default:
+                return AttributedText.ParagraphStyle.LineBreakMode.byTruncatingTail
             }
         }()
     }
-
+    
     /// Creates the equivalent `UIKit`/`AppKit` `NSLineBreakMode` from a
     /// `AttributedText.ParagraphStyle.LineBreakMode`.
     fileprivate var lineBreakMode: NSLineBreakMode {
         switch self {
         case AttributedText.ParagraphStyle.LineBreakMode.byWordWrapping:
             return NSLineBreakMode.byWordWrapping
-
+            
         case AttributedText.ParagraphStyle.LineBreakMode.byCharWrapping:
             return NSLineBreakMode.byCharWrapping
-
+            
         case AttributedText.ParagraphStyle.LineBreakMode.byClipping:
             return NSLineBreakMode.byClipping
-
+            
         case AttributedText.ParagraphStyle.LineBreakMode.byTruncatingHead:
             return NSLineBreakMode.byTruncatingHead
-
+            
         case AttributedText.ParagraphStyle.LineBreakMode.byTruncatingTail:
             return NSLineBreakMode.byTruncatingTail
-
+            
         case AttributedText.ParagraphStyle.LineBreakMode.byTruncatingMiddle:
             return NSLineBreakMode.byTruncatingMiddle
         }
@@ -575,10 +579,10 @@ public extension AttributedText.ParagraphStyle.LineBreakMode {
 }
 
 public extension AttributedText.ParagraphStyle.WritingDirection {
-
+    
     /// Creates an `AttributedText.ParagraphStyle.WritingDirection` from the
     /// equivalent `UIKit`/`AppKit` `NSWritingDirection`.s
-    public init(_ direction: NSWritingDirection) {
+    init(_ direction: NSWritingDirection) {
         self = { () -> AttributedText.ParagraphStyle.WritingDirection in
             switch direction {
             case NSWritingDirection.natural:
@@ -587,10 +591,12 @@ public extension AttributedText.ParagraphStyle.WritingDirection {
                 return AttributedText.ParagraphStyle.WritingDirection.leftToRight
             case NSWritingDirection.rightToLeft:
                 return AttributedText.ParagraphStyle.WritingDirection.rightToLeft
+            @unknown default:
+                return AttributedText.ParagraphStyle.WritingDirection.natural
             }
         }()
     }
-
+    
     /// Creates the equivalent `UIKit`/`AppKit` `NSWritingDirection` from a
     /// `AttributedText.ParagraphStyle.WritingDirection`.
     fileprivate var writingDirection: NSWritingDirection {
@@ -606,12 +612,12 @@ public extension AttributedText.ParagraphStyle.WritingDirection {
 }
 
 extension AttributedText.ParagraphStyle {
-
+    
     /// Creates the default paragraph style.
     public init() {
         self.init(style: NSParagraphStyle.default)
     }
-
+    
     /// Creates an `AttributedText.ParagraphStyle` from the
     /// equivalent `UIKit`/`AppKit` `NSParagraphStyle`.s
     public init(style: NSParagraphStyle) {
@@ -629,7 +635,7 @@ extension AttributedText.ParagraphStyle {
         self.paragraphSpacingBefore = Float(style.paragraphSpacingBefore)
         self.hyphenationFactor = style.hyphenationFactor
     }
-
+    
     /// Creates the equivalent `UIKit`/`AppKit` `NSParagraphStyle` from a
     /// `AttributedText.ParagraphStyle`.
     fileprivate var style: NSParagraphStyle {
@@ -653,7 +659,7 @@ extension AttributedText.ParagraphStyle {
 #endif
 
 extension AttributedText.Attribute {
-
+    
     /// Creates an `AttributedText.Attribute` from a given attributed string
     /// attribute and value
     public init?(string: NSAttributedString,
@@ -700,7 +706,7 @@ extension AttributedText.Attribute {
 
 fileprivate extension AttributedText.Attribute {
     
-    fileprivate var key: NSAttributedString.Key {
+    var key: NSAttributedString.Key {
         switch self {
         case AttributedText.Attribute.font:
             return NSAttributedString.Key.font
@@ -725,7 +731,7 @@ fileprivate extension AttributedText.Attribute {
         }
     }
     
-    fileprivate var value: Any {
+    var value: Any {
         switch self {
         case let AttributedText.Attribute.font(font):
             return font.font
@@ -749,19 +755,19 @@ fileprivate extension AttributedText.Attribute {
 
 
 extension AttributedText {
-
+    
     /// Makes a `UILabel` display the receiver.
     /// - parameter label: The `UILabel` to display the receiver.
     public func configure(label: UILabel) {
         label.customAttributedText = self
     }
-
+    
     /// Makes a `UIButton` display the receiver.
     /// - parameter button: The `UIButton` to display the receiver.
     public func configure(button: UIButton) {
         self.configure(button: button, forStates: [UIControl.State.normal])
     }
-
+    
     /// Makes a `UIButton` display the receiver for the given states.
     /// - parameter button: The `Button` to display the receiver.
     /// - parameter states: The state to configure.
@@ -774,7 +780,7 @@ extension AttributedText {
 }
 
 extension UILabel {
-
+    
     /// Retrieve/sets an `AttributedText` from/to a label.
     public var customAttributedText: AttributedText? {
         get {
@@ -791,11 +797,11 @@ extension UILabel {
 
 public extension AttributedText {
     
-    public var playgroundDescription: Any {
+    var playgroundDescription: Any {
         return self.__visualRepresentation
     }
     
-    public func debugQuickLookObject() -> AnyObject? {
+    func debugQuickLookObject() -> AnyObject? {
         return self.__visualRepresentation
     }
     
@@ -809,22 +815,22 @@ public extension AttributedText {
 
 extension AttributedText.Attribute: Hashable {
     
-    public var hashValue: Int {
+    public func hash(into hasher: inout Hasher) {
         switch self {
         case let AttributedText.Attribute.font(font):
-            return font.font.hashValue
+            font.font.hash(into: &hasher)
         case let AttributedText.Attribute.color(color):
-            return color.color.hashValue
+            color.color.hash(into: &hasher)
         case let AttributedText.Attribute.backgroundColor(color):
-            return color.color.hashValue
+            color.color.hash(into: &hasher)
         case let AttributedText.Attribute.strokeColor(color):
-            return color.color.hashValue
+            color.color.hash(into: &hasher)
         case let AttributedText.Attribute.strokeWidth(width):
-            return NSNumber(value: width).hashValue
+            NSNumber(value: width).hash(into: &hasher)
         case let AttributedText.Attribute.shadow(shadow):
-            return shadow.shadow.hashValue
+            shadow.shadow.hash(into: &hasher)
         case let AttributedText.Attribute.style(style):
-            return style.style.hashValue
+            style.style.hash(into: &hasher)
         }
     }
     
@@ -845,8 +851,8 @@ extension AttributedText: Equatable {
 
 extension AttributedText: Hashable {
     
-    public var hashValue: Int {
-        return self.attributedString.hashValue
+    public func hash(into hasher: inout Hasher) {
+        self.attributedString.hash(into: &hasher)
     }
 }
 
@@ -890,9 +896,9 @@ extension AttributedText: CustomReflectable {
     
     public var customMirror: Mirror {
         let children =
-            DictionaryLiteral<String, Any>(dictionaryLiteral: ("content", self.content),
-                                           ("attributes", self.attributes),
-                                           ("attributedString", self.attributedString)
+            KeyValuePairs<String, Any>(dictionaryLiteral: ("content", self.content),
+                                       ("attributes", self.attributes),
+                                       ("attributedString", self.attributedString)
         )
         return Mirror(AttributedText.self,
                       children: children,
@@ -903,11 +909,11 @@ extension AttributedText: CustomReflectable {
 
 
 public extension AttributedText {
-
+    
     private func attribute(name: String) -> AttributedText.Attribute? {
         return self._attributes.filter { $0.key == name }.first?.value
     }
-
+    
     /// The font of the text.
     ///
     /// The value of this attribute is a `AppearanceKit.Font` object. Use this
@@ -923,7 +929,7 @@ public extension AttributedText {
             self.set(attribute: AttributedText.Attribute.font(font))
         }
     }
-
+    
     /// The foreground color to display the text.
     ///
     /// The value of this attribute is a `AppearanceKit.Color` object. Use this
@@ -939,7 +945,7 @@ public extension AttributedText {
             self.set(attribute: AttributedText.Attribute.color(color))
         }
     }
-
+    
     /// The background color of the text.
     ///
     /// The value of this attribute is a `ApperanceKit.Color` object. Use this
@@ -955,7 +961,7 @@ public extension AttributedText {
             self.set(attribute: AttributedText.Attribute.backgroundColor(color))
         }
     }
-
+    
     /// The stroke color of the text.
     ///
     /// The value of this parameter is a `AppearanceKit.Color` object. If it is
@@ -972,7 +978,7 @@ public extension AttributedText {
             self.set(attribute: AttributedText.Attribute.strokeColor(color))
         }
     }
-
+    
     /// The stroke width.
     ///
     /// This value represents the amount to change the
@@ -991,7 +997,7 @@ public extension AttributedText {
             self.set(attribute: AttributedText.Attribute.strokeWidth(width))
         }
     }
-
+    
     /// The shadow of the text.
     ///
     /// The value of this attribute is an `AttributedText.Shadow` object. The
@@ -1006,7 +1012,7 @@ public extension AttributedText {
             self.set(attribute: AttributedText.Attribute.shadow(shadow))
         }
     }
-
+    
     /// The paragraph style.
     ///
     /// The value of this attribute is an `AttributedText.ParagraphStyle`

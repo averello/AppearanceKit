@@ -47,7 +47,7 @@ public extension Representation {
     /// - Parameters:
     ///   - key: a key to identify the value
     ///   - value: a value
-    public func with<Key,Value,Rep>(key: Key, value: Value) -> Rep
+    func with<Key,Value,Rep>(key: Key, value: Value) -> Rep
         where Key: LosslessStringConvertible & Hashable, Rep: Representation {
         return self.with(key: key, value: value) as! Rep
     }
@@ -59,7 +59,7 @@ public extension Representation {
     ///   - value: a value
     ///   - validate: a closure that takes the value and returns the value if 
     ///     to validate or `nil` to invalidate. - parameter: a
-    public func potentiallyWith<Key, Value, Validated>(key: Key, value: Value, _ validate: (Value) -> Validated?) -> Representation where Key: LosslessStringConvertible & Hashable {
+    func potentiallyWith<Key, Value, Validated>(key: Key, value: Value, _ validate: (Value) -> Validated?) -> Representation where Key: LosslessStringConvertible & Hashable {
         guard let v = validate(value) else { return self }
         return self.with(key: key, value: v)
     }

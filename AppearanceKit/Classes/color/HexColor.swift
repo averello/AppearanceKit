@@ -34,7 +34,7 @@ public struct HexColor: Color, CustomStringConvertible {
     private let _hex: String
     
     public var color: UIColor { return self._color }
-
+    
     /// Attempts to create a `HexColor` from a hex string.
     ///
     /// - parameter hex: Accepts hex in RGBA (0xRRGGBBAA) format
@@ -79,7 +79,7 @@ public struct HexColor: Color, CustomStringConvertible {
 
 fileprivate extension UIColor {
     
-    fileprivate static func _color(fromHexString hex: String) -> UIColor? {
+    static func _color(fromHexString hex: String) -> UIColor? {
         guard hex.count > 1 else { return nil }
         
         

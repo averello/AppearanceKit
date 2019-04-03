@@ -55,7 +55,7 @@ public protocol ArrayRepresentation: Representation, Representable {
 
 public extension ArrayRepresentation {
     
-    public func represent<Rep>(using representation: Rep) -> Rep where Rep: Representation {
+    func represent<Rep>(using representation: Rep) -> Rep where Rep: Representation {
         var r = representation
         
         for (index,element) in self.array.enumerated() {
