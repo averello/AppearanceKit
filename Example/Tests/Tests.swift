@@ -1,6 +1,8 @@
 import UIKit
 import XCTest
 import AppearanceKit
+
+#if canImport(ContentKit)
 import ContentKit
 
 class Tests: XCTestCase {
@@ -74,3 +76,4 @@ class Tests: XCTestCase {
         print(trimmedImage)
     }
 }
+#endif /* ContentKit */

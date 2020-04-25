@@ -5,6 +5,11 @@ describe the appearance.
 
 AppearanceKit values immutability.
 
+AppearanceKit is (optionally) dependent on
+[ContentKit](https://github.com/averello/ContentKit) and
+[RepresentationKit](https://github.com/averello/RepresentationKit). It is
+recommended to include those dependencies. If you do not want to import them
+then comment out those dependencies in the AppearanceKit.podspec file.
 
 ## Example
 

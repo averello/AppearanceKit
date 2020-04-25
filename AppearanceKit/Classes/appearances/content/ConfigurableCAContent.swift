@@ -25,8 +25,10 @@
 
 import Foundation
 
-#if canImport(QuartzCore) && canImport(ContentKit)
+#if canImport(QuartzCore)
 import QuartzCore
+
+#if  canImport(ContentKit)
 import ContentKit
 
 /// A Core Animation Content.
@@ -36,6 +38,18 @@ public protocol CAContent: VisualContent {
     /// The related `CALayer`.
     var layer: CALayer { get }
 }
+
+#else
+
+/// A Core Animation Content.
+///
+/// A Core Animation Content is related to/provides access to a `CALayer`.
+public protocol CAContent {
+    /// The related `CALayer`.
+    var layer: CALayer { get }
+}
+
+#endif /* ContentKit */
 
 public extension CALayer {
     
@@ -61,4 +75,5 @@ public extension ConfigurableCAContent {
         appearance.configure(self)
     }
 }
-#endif
+
+#endif /* QuartzCore */
