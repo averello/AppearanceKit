@@ -27,21 +27,34 @@ import Foundation
 
 #if canImport(UIKit)
 
-/// A Configurable `UIContent` by an `UIContentAppearance`.
 #if canImport(ContentKit)
 import ContentKit
+
+/// A Configurable `UIContent` by an `UIContentAppearance`.
 public protocol ConfigurableUIContent: UIContent {
     /// Results in the receiver to be configured by the appearance.
     func configureContentAppearence(_ appearance: UIContentAppearance)
 }
+
 #else
-public protocol ConfigurableUIContent {
+
+/// A `UIContent` is `UIKit`'s visual content.
+///
+/// A `UIContent` is related to/provides access to a `UIView`.
+public protocol UIContent {
     /// The related `UIView`.
     var view: UIView { get }
-    
+}
+
+/// A Configurable `UIContent` by an `UIContentAppearance`.
+public protocol ConfigurableUIContent: UIContent {
+    /// The related `UIView`.
+    var view: UIView { get }
+
     /// Results in the receiver to be configured by the appearance.
     func configureContentAppearence(_ appearance: UIContentAppearance)
 }
+
 #endif /* ContentKit */
 
 
@@ -60,11 +73,13 @@ public extension ConfigurableUIContent {
 
 
 #if !canImport(ContentKit)
-extension UIView: ConfigurableUIContent {
+
+extension UIView: UIContent {
 
     /// Conformance to `ConfigurableUIContent`.
     public var view: UIView {
         return self
     }
 }
-#endif
+
+#endif /* ContentKit */

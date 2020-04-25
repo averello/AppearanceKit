@@ -6,5 +6,4 @@ target 'AppearanceKit_Tests' do
   
   pod 'ContentKit', :git => 'https://github.com/averello/ContentKit.git'
   pod 'RepresentationKit', :git => 'https://github.com/averello/RepresentationKit.git'
-  
 end
