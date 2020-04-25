@@ -30,6 +30,8 @@ import UIKit
 import QuartzCore
 
 /// A configurable `UILabelAppearance`.
+///
+/// A mutable `UILabelAppearance`.
 public struct ConfigurableUILabelAppearance: UILabelAppearance {
     public var font: Font?
     public var textColor: TextColor?

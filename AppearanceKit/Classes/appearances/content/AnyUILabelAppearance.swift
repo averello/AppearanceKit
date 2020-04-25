@@ -25,7 +25,9 @@
 
 import Foundation
 
+/// UILabelApperaance type eraser.
 public struct AnyUILabelAppearance: UILabelAppearance {
+    /// The decorated appearance.
     private let appearance: UILabelAppearance
     
     public init(appearance: UILabelAppearance) {
