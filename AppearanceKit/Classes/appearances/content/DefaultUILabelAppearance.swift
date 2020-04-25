@@ -30,6 +30,8 @@ import UIKit
 import QuartzCore
 
 /// A default `UILabelAppearance`.
+///
+/// Pre-filled with the `SystemFont` and `WhiteColor`.
 public struct DefaultUILabelAppearance: UILabelAppearance {
     public var font: Font? = SystemFont()
     public var textColor: TextColor? = TextColor(normal: WhiteColor())
