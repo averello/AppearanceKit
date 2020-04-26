@@ -56,18 +56,22 @@ public class RotatedImage: ContentKit.Image {
         self.rotation = rotation
     }
     
-    final private func simpleRotation(ofImage img: ContentKit.Image, rotation: RotatedImage.Rotation) -> ContentKit.Image {
+    final private func simpleRotation(ofImage img: ContentKit.Image,
+                                      rotation: RotatedImage.Rotation) -> ContentKit.Image {
         let image = img.image
         guard let cgImage = image.cgImage else { return image }
         let scale = image.scale
-        let orientation = rotation.imageOrientation(fromCurrentImageOrientation: image.imageOrientation)
+        let orientation = rotation
+            .imageOrientation(fromCurrentImageOrientation: image.imageOrientation)
         let rotated =  UIImage(cgImage: cgImage,
                                scale: scale,
                                orientation: orientation)
         return rotated
     }
     
-    final private func compositeRotation(ofImage image: ContentKit.Image, times: UInt, direction: Direction) -> ContentKit.Image {
+    final private func compositeRotation(ofImage image: ContentKit.Image,
+                                         times: UInt,
+                                         direction: Direction) -> ContentKit.Image {
         guard times == 0 else {
             return self.compositeRotation(ofImage: RotatedImage(image, rotation: direction.rotation),
                                           times: times-1,
@@ -76,7 +80,8 @@ public class RotatedImage: ContentKit.Image {
         return image
     }
     
-    final private func arbitraryRotation(ofImage image: ContentKit.Image, by degrees: AppearanceKit.Degrees) -> ContentKit.Image {
+    final private func arbitraryRotation(ofImage image: ContentKit.Image,
+                                         by degrees: AppearanceKit.Degrees) -> ContentKit.Image {
         
         let originalCGSize = image.size.asCGSize
         let size = { () -> ContentKit.Size in

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AppearanceKit'
-  s.version          = '2.20'
+  s.version          = '2.21'
   s.summary          = 'Change the appearance of UIKit elements.'
 
   s.description      = <<-DESC

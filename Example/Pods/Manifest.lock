@@ -1,5 +1,5 @@
 PODS:
-  - AppearanceKit (2.20):
+  - AppearanceKit (2.21):
     - ContentKit
     - RepresentationKit
   - ContentKit (2.5):
@@ -28,7 +28,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/averello/RepresentationKit.git
 
 SPEC CHECKSUMS:
-  AppearanceKit: a07e30a5bb1b65db22b2be13c088b9f5669159f4
+  AppearanceKit: 54520efd81107167193475188abd126ad5b9daf2
   ContentKit: d252d91ec1dd20217ba4dd42f62fd00e417094cd
   RepresentationKit: 0fe41d8bfeb1ead248592cc0478b4c5f39c3749d
 

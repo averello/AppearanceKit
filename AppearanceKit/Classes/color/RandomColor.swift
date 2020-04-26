@@ -26,7 +26,9 @@
 import Foundation
 
 #if canImport(UIKit)
-/// A Random Color.
+import UIKit
+
+/// A random color with a default 0.75 opacity.
 public struct RandomColor: Color {
     public let color: UIColor
 
@@ -37,4 +39,5 @@ public struct RandomColor: Color {
                              alpha: 0.75)
     }
 }
-#endif
+
+#endif /* UIKit */

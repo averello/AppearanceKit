@@ -31,17 +31,6 @@ import ContentKit
 final public class FlippedImage: ContentKit.Image {
     final private let decorated: ContentKit.Image
     
-    public var image: UIImage {
-        let image = self.decorated.image
-        guard let cgImage = image.cgImage else { return image }
-        let scale = image.scale
-        let orientation = self.flip.imageOrientation(fromCurrentOrientation: image.imageOrientation)
-        let flipped =  UIImage(cgImage: cgImage,
-                               scale: scale,
-                               orientation: orientation)
-        return flipped
-    }
-    
     /// The flip operation to perform.
     public enum Flip {
         /// Flip horizontally, along the vertical axis that goes through the
@@ -63,9 +52,20 @@ final public class FlippedImage: ContentKit.Image {
         self.flip = flip
         self.decorated = decorated
     }
+
+    public var image: UIImage {
+        let image = self.decorated.image
+        guard let cgImage = image.cgImage else { return image }
+        let scale = image.scale
+        let orientation = self.flip.imageOrientation(fromCurrentOrientation: image.imageOrientation)
+        let flipped =  UIImage(cgImage: cgImage,
+                               scale: scale,
+                               orientation: orientation)
+        return flipped
+    }
 }
 
-fileprivate extension FlippedImage.Flip {
+public extension FlippedImage.Flip {
     
     func imageOrientation(fromCurrentOrientation currentOrientation: UIImage.Orientation) -> UIImage.Orientation {
         switch (self, currentOrientation) {
@@ -129,4 +129,5 @@ fileprivate extension FlippedImage.Flip {
         }
     }
 }
+
 #endif

@@ -25,6 +25,10 @@
 
 import Foundation
 
+#if canImport(UIKit)
+
+// same named colors
+
 public struct BlackColor: Color {
     public init() {}
     public var color: UIColor { return UIColor.black }
@@ -206,3 +210,5 @@ public struct NeonGreenColor: Color {
     public init() {}
     public var color: UIColor { return UIColor(red:0.23, green:0.98, blue:0.22, alpha:1.00) }
 }
+
+#endif /* UIKit */
