@@ -43,4 +43,5 @@ public struct AnyFont: Font {
         return AnyFont(font: self.font.withSize(CGFloat(size)))
     }
 }
-#endif
+
+#endif /* UIKit */

@@ -25,8 +25,9 @@
 
 import Foundation
 
-#if canImport(ContentKit)
+#if canImport(ContentKit) && canImport(UIKit)
 import ContentKit
+import UIKit
 
 public class RenderingModeImage: ContentKit.Image {
     
@@ -92,4 +93,5 @@ fileprivate extension RenderingModeImage.Mode {
         }
     }
 }
-#endif
+
+#endif /* UIKit & ContentKit */

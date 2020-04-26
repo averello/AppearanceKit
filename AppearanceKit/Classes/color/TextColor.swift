@@ -30,6 +30,7 @@ import Foundation
 /// A structure that contains the colors a text can have in its different
 /// states.
 public struct TextColor: Color {
+    
     /// The normal state color.
     public var normal: Color
     /// The hightlighted state color.

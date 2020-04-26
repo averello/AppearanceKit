@@ -63,4 +63,4 @@ extension Color {
         return AnyColor(color: self.color.withAlphaComponent(CGFloat(alpha)))
     }
 }
-#endif
+#endif /* UIKIt & QuartCore */
